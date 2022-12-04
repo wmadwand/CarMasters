@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float acceleration;
+    Rigidbody _rigidbody;
+
+    private void Awake()
     {
-        
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        _rigidbody.MovePosition(transform.position + transform.forward * acceleration * Time.deltaTime);
     }
 }

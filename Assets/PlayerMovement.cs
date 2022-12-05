@@ -15,10 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkDecelleration = 1;
     public float airAccMod = .5f;
     float walkDecX;
-
     float walkDecY;
-
-
     float walkDecZ;
     public bool grounded = true;
     public float grav = 750;
@@ -37,43 +34,44 @@ public class PlayerMovement : MonoBehaviour
     float diffY;
     public int layerNumber;
 
-    Rigidbody rigidbody;
 
-    // Use this for initialization
     void Start()
     {
         //cameraMouseLook = (MouseLookFpsScript)cameraObject.GetComponent("MouseLookFpsScript");
-        
     }
+
+    Rigidbody rigidbody;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-
     // Update is called once per frame
     void FixedUpdate()
     {
 
         //Setting limit to Rigidbody velocity
-        horizontalMovement = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y, rigidbody.velocity.z);
+        horizontalMovement = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y,
+                                                                    rigidbody.velocity.z);
         if (horizontalMovement.magnitude > maxWalkSpeed)
         {
             horizontalMovement = horizontalMovement.normalized;
             horizontalMovement *= maxWalkSpeed;
             print("kittens");
         }
-        rigidbody.velocity = new Vector3(horizontalMovement.x, horizontalMovement.y, horizontalMovement.z);
+        rigidbody.velocity = new Vector3(horizontalMovement.x, horizontalMovement.y,
+                                                               horizontalMovement.z);
 
 
 
         //Adding friction
         if (grounded)
         {
-            rigidbody.velocity = new Vector3(Mathf.SmoothDamp(rigidbody.velocity.x, 0, ref walkDecX, walkDecelleration),
-                Mathf.SmoothDamp(rigidbody.velocity.y, 0, ref walkDecY, walkDecelleration),
-                Mathf.SmoothDamp(rigidbody.velocity.z, 0, ref walkDecZ, walkDecelleration));
+            rigidbody.velocity = new Vector3(Mathf.SmoothDamp(rigidbody.velocity.x, 0, ref
+                                                                                        walkDecX, walkDecelleration),
+             Mathf.SmoothDamp(rigidbody.velocity.y, 0, ref walkDecY, walkDecelleration),
+             Mathf.SmoothDamp(rigidbody.velocity.z, 0, ref walkDecZ, walkDecelleration));
         }
 
 
@@ -83,10 +81,11 @@ public class PlayerMovement : MonoBehaviour
         bool hitGround = Physics.Raycast(transform.position, -1 * transform.up, out groundRay);
 
 
-        //Rotating player based on grounds normal, looking for specific LayerMask that the player is gravited towards.
+
+        //Rotating player based on grounds normal
         int gravLayMask = (1 << layerNumber);
-        print(gravLayMask);
-        if (Physics.Raycast(transform.position, -1 * transform.up, out groundRay, 100, gravLayMask))
+        if (Physics.Raycast(transform.position, -1 * transform.up, out groundRay, 100,
+      gravLayMask))
         {
             Quaternion temp = Quaternion.FromToRotation(transform.up, groundRay.normal);
             temp = temp * transform.rotation;
@@ -95,10 +94,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        //Rotate the player to look, change "y"
+        //Rotate the player to look, change "y" 
         yRotation += Input.GetAxis("Mouse X") * xLookSensitivity;
         diffY = yRotation - diffY;
-        currYRotation = Mathf.SmoothDamp(currYRotation, diffY, ref yRotationVel, lookSmoothDamp);
+        currYRotation = Mathf.SmoothDamp(currYRotation, diffY, ref yRotationVel,
+                                                                                   lookSmoothDamp);
         transform.Rotate(0, currYRotation * Time.deltaTime, 0);
         diffY = yRotation;
 
@@ -115,13 +115,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetButtonDown("Jump")  && grounded){
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
             rigidbody.AddRelativeForce(0, jumpVelocity, 0);
         }
 
     }
 
-    //Checks if the collider is touching ground beneath the player.
+    //Checks if the collider is touching ground beneath the player. 
     void OnCollisionStay(Collision collision)
     {
         foreach (ContactPoint contact in collision.contacts)

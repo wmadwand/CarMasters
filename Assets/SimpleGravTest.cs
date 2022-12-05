@@ -13,9 +13,9 @@ public class SimpleGravTest : MonoBehaviour
 
     private void Update()
     {
-        var xInput = Input.GetAxis("Vertical");
+        //var xInput = Input.GetAxis("Vertical");
 
-        rigidbody.MovePosition(transform.position + transform.forward * xInput);
+        //rigidbody.MovePosition(rigidbody.position + transform.forward * xInput);
 
         Physics.Raycast(transform.position, -transform.up, out RaycastHit hit);
 

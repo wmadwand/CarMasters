@@ -16,6 +16,19 @@ public class PlayerController : MonoBehaviour
     bool isMoveButtonPressed = false;
 
 
+
+    /*Auto adjust to track surface parameters*/
+    public float hover_height = 3f;     //Distance to keep from the ground
+    public float height_smooth = 10f;   //How fast the ship will readjust to "hover_height"
+    public float pitch_smooth = 5f;     //How fast the ship will adjust its rotation to match track normal
+
+    /*We will use all this stuff later*/
+    private Vector3 prev_up;
+    public float yaw;
+    private float smooth_y;
+    private float current_speed;
+
+
     public void Move()
     {
         if (isMoveButtonPressed)
@@ -63,6 +76,28 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log($"currentSpeed {currentSpeed}");
 
+
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -prev_up, out hit))
+        {
+            Debug.DrawLine(transform.position, hit.point);
+
+            /*Here are the meat and potatoes: first we calculate the new up vector for the ship using lerp so that it is smoothed*/
+            Vector3 desired_up = Vector3.Lerp(prev_up, hit.normal, Time.deltaTime * pitch_smooth);
+            /*Then we get the angle that we have to rotate in quaternion format*/
+            Quaternion tilt = Quaternion.FromToRotation(transform.up, desired_up);
+            /*Now we apply it to the ship with the quaternion product property*/
+            _rigidbody.rotation = tilt * _rigidbody.rotation;
+
+            /*Smoothly adjust our height*/
+            smooth_y = Mathf.Lerp(smooth_y, hover_height - hit.distance, Time.deltaTime * height_smooth);
+            transform.localPosition += prev_up * smooth_y;
+        }
+
+        /*Finally we move the ship forward according to the speed we calculated before*/
+        transform.position += transform.forward * (current_speed * Time.deltaTime);
+
     }
 
     Quaternion newRot;
@@ -95,13 +130,6 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody.MovePosition(transform.position + transform.forward * currentSpeed);
         //_rigidbody.MoveRotation(newRot);
-        //_rigidbody.rotation = Quaternion.Euler(0, currentAngle, 0);
-
-
-        Physics.Raycast(transform.position, -transform.up, out RaycastHit hit);
-
-        Vector3 interpolatedNormal = BarycentricCoordinateInterpolator.GetInterpolatedNormal(hit);
-
-        _rigidbody.MoveRotation(Quaternion.FromToRotation(transform.up, interpolatedNormal) * _rigidbody.rotation);
+        _rigidbody.rotation = Quaternion.Euler(0, currentAngle, 0);
     }
 }

@@ -38,6 +38,12 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        //Physics.gravity = new Vector3(0, 9.81f, 0);
+        //_rigidbody.useGravity
+    }
+
     private void Update()
     {
         if (isMoveButtonPressed)
@@ -49,7 +55,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (!isMoveButtonPressed && currentSpeed > 0)
         {
-            currentSpeed -= acceleration * Time.deltaTime;
+            currentSpeed -= acceleration * 2 * Time.deltaTime;
         }
 
 
@@ -60,7 +66,7 @@ public class PlayerController : MonoBehaviour
     }
 
     Quaternion newRot;
-    float currdegr;
+    float currentAngle;
 
     private void Rotation()
     {
@@ -71,9 +77,9 @@ public class PlayerController : MonoBehaviour
         var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
 
         var startRot = _rigidbody.rotation;
-        var degreesRes = degrees * rotationSpeed * Time.deltaTime;
-        var newB = currdegr + degreesRes;
-        currdegr = Mathf.Clamp(newB, -35, 35);
+        var inputAngle = degrees * rotationSpeed * Time.deltaTime;
+        var newAngle = currentAngle + inputAngle;
+        currentAngle = Mathf.Clamp(newAngle, -35, 35);
         //newRot = startRot * Quaternion.Euler(0, degreesRes, 0);
 
         //var startRot = _rigidbody.rotation;
@@ -89,6 +95,13 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody.MovePosition(transform.position + transform.forward * currentSpeed);
         //_rigidbody.MoveRotation(newRot);
-        _rigidbody.rotation = Quaternion.Euler(0, currdegr, 0);
+        //_rigidbody.rotation = Quaternion.Euler(0, currentAngle, 0);
+
+
+        Physics.Raycast(transform.position, -transform.up, out RaycastHit hit);
+
+        Vector3 interpolatedNormal = BarycentricCoordinateInterpolator.GetInterpolatedNormal(hit);
+
+        _rigidbody.MoveRotation(Quaternion.FromToRotation(transform.up, interpolatedNormal) * _rigidbody.rotation);
     }
 }

@@ -40,41 +40,47 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //if (isMoveButtonPressed)
-        //{
-        //    currentSpeed += acceleration * Time.deltaTime;
+        if (isMoveButtonPressed)
+        {
+            currentSpeed += acceleration * Time.deltaTime;
+
+            Rotation();
+            //var clamp
+        }
+        else if (!isMoveButtonPressed && currentSpeed > 0)
+        {
+            currentSpeed -= acceleration * Time.deltaTime;
+        }
 
 
-        //    //var clamp
-        //}
-        //else if (!isMoveButtonPressed && currentSpeed > 0)
-        //{
-        //    currentSpeed -= acceleration * Time.deltaTime;
-        //}
-
-        Rotation();
 
 
         Debug.Log($"currentSpeed {currentSpeed}");
 
     }
 
+    Quaternion newRot;
+    float currdegr;
+
     private void Rotation()
     {
-        inputHorizontal = Input.GetAxis("Mouse X") * rotationSpeed;
+        inputHorizontal = Input.GetAxis("Mouse X");
 
         Debug.Log($"inputHorizontal {inputHorizontal}");
 
         var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
-        //var targetRot = transform.rotation * Quaternion.AngleAxis(degrees * Time.deltaTime, Vector3.up);
-        //var targetRot = Quaternion.Euler(0, degrees * Time.deltaTime, 0) * transform.rotation;
-        //_rigidbody.MoveRotation(targetRot);
 
-        var originRot = _rigidbody.rotation;
-        var targetRot = Quaternion.AngleAxis(degrees, Vector3.up);
-        var resRot = Quaternion.Slerp(originRot, targetRot, smoothRotation * Time.deltaTime);
-        _rigidbody.MoveRotation(resRot);
-        //_rigidbody.rotation = resRot;
+        var startRot = _rigidbody.rotation;
+        var degreesRes = degrees * rotationSpeed * Time.deltaTime;
+        var newB = currdegr + degreesRes;
+        currdegr = Mathf.Clamp(newB, -35, 35);
+        //newRot = startRot * Quaternion.Euler(0, degreesRes, 0);
+
+        //var startRot = _rigidbody.rotation;
+        //var deegreesRes = degrees * rotationSpeed /** Time.deltaTime*/;
+        //var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
+        //newRot = Quaternion.Slerp(startRot, targetRot, smoothRotation * Time.deltaTime);
+        //_rigidbody.MoveRotation(newRot);
 
         Debug.Log($"currentRotation degrees {degrees}");
     }
@@ -82,6 +88,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody.MovePosition(transform.position + transform.forward * currentSpeed);
-
+        //_rigidbody.MoveRotation(newRot);
+        _rigidbody.rotation = Quaternion.Euler(0, currdegr, 0);
     }
 }

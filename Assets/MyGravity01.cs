@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MyGravity01 : MonoBehaviour
+public interface IPlayer
+{
+   void PressMoveButton(bool isActive);
+}
+
+public class MyGravity01 : MonoBehaviour, IPlayer
 {
     Rigidbody rigidbody;
     public float smoothRotation;
@@ -52,6 +57,8 @@ public class MyGravity01 : MonoBehaviour
 
     private void Update()
     {
+
+        //TODO: cast down 3 rays: face, center, back
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit))
         {

@@ -13,7 +13,8 @@ public class MyGravity01 : MonoBehaviour, IPlayer
     public float smoothRotation;
     public float gravity = -10;
     public float moveSpeed = 10;
-
+    public int groundLayer;
+    public float rayLength = 10;
 
     public float acceleration = 1;
     public float maxSpeed = 100;
@@ -57,12 +58,13 @@ public class MyGravity01 : MonoBehaviour, IPlayer
 
     private void Update()
     {
+        int layerMask = 1 << groundLayer;
 
         //TODO: cast down 3 rays: face, center, back
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, rayLength, layerMask))
         {
-            Debug.DrawRay(transform.position, -hit.normal * 50, Color.red);
+            Debug.DrawRay(transform.position, -hit.normal * rayLength, Color.red);
 
             var targetRot = Quaternion.FromToRotation(transform.up, hit.normal.normalized);
             targetRot *= rigidbody.rotation;

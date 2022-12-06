@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SpeedButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public PlayerController player;
+    public MyGravity01 player;
 
     public void OnPointerDown(PointerEventData eventData)
     {

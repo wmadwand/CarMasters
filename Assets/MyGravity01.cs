@@ -35,6 +35,8 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         if (isMoveButtonPressed)
         {
             currentSpeed += acceleration * Time.deltaTime;
+
+            currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
         }
         else if (!isMoveButtonPressed && currentSpeed > 0)
         {
@@ -73,20 +75,27 @@ public class MyGravity01 : MonoBehaviour, IPlayer
             targetRot *= rigidbody.rotation;
             var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, Time.deltaTime * smoothRotation);
 
+            
+            //TODO: move all the physics to FixedUpdate
             rigidbody.MoveRotation(newRot);
             rigidbody.AddForce(hit.normal.normalized * gravity);
         }
 
+        
+
+        if (Input.GetKeyDown("space"))
+        {
+            rigidbody.AddForce(hit.normal.normalized * -gravity, ForceMode.Impulse);
+        }
+    }
+
+    private void FixedUpdate()
+    {
         Move();
 
         if (isMoveButtonPressed)
         {
             Rotation2();
-        }
-
-        if (Input.GetKeyDown("space"))
-        {
-            rigidbody.AddForce(hit.normal.normalized * -gravity, ForceMode.Impulse);
         }
     }
 

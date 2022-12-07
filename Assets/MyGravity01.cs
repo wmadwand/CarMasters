@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IPlayer
 {
-   void PressMoveButton(bool isActive);
+    void PressMoveButton(bool isActive);
 }
 
 public class MyGravity01 : MonoBehaviour, IPlayer
@@ -54,11 +54,14 @@ public class MyGravity01 : MonoBehaviour, IPlayer
     {
         rigidbody.useGravity = false;
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        rigidbody.maxDepenetrationVelocity = 1000;
     }
 
     private void Update()
     {
         int layerMask = 1 << groundLayer;
+
+        Debug.DrawRay(transform.position, -transform.up * rayLength, Color.green);
 
         //TODO: cast down 3 rays: face, center, back
         RaycastHit hit;

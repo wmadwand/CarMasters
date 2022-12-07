@@ -590,10 +590,11 @@ MonoBehaviour:
   gravity: -10
   moveSpeed: 10
   groundLayer: 6
-  rayLength: 5
+  rayLength: 15
+  jumpPower: 2
   acceleration: 10
   maxSpeed: 20
-  rotationSpeed: 70
+  rotationSpeed: 30
 --- !u!1 &590661793
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +842,7 @@ MonoBehaviour:
   moveSpeed: 20
   groundLayer: 0
   rayLength: 5
+  jumpPower: 2
   acceleration: 10
   maxSpeed: 100
   rotationSpeed: 50
@@ -1647,7 +1649,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 660f2fed69b64d140864744825f75162, type: 3}
   m_Name: 
@@ -1772,7 +1774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1099983983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2978,7 +2980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1362616584
 Transform:
   m_ObjectHideFlags: 0

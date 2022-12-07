@@ -15,6 +15,7 @@ public class MyGravity01 : MonoBehaviour, IPlayer
     public float moveSpeed = 10;
     public int groundLayer;
     public float rayLength = 10;
+    public float jumpPower = 2;
 
     public float acceleration = 1;
     public float maxSpeed = 100;
@@ -85,7 +86,7 @@ public class MyGravity01 : MonoBehaviour, IPlayer
 
         if (Input.GetKeyDown("space"))
         {
-            rigidbody.AddForce(hit.normal.normalized * -gravity, ForceMode.Impulse);
+            rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
         }
     }
 
@@ -134,6 +135,15 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         var startRot = rigidbody.rotation;
         var deegreesRes = degrees * rotationSpeed /** Time.deltaTime*/;
         var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
+
+        var currentAngle = Quaternion.Angle(Quaternion.identity, rigidbody.rotation);
+        Debug.Log($"Current angle {currentAngle}");
+
+        if (rigidbody.rotation.eulerAngles.y > 30 || rigidbody.rotation.eulerAngles.y < -30)
+        {
+            return;
+        }
+
         var newRot = Quaternion.Slerp(startRot, targetRot, smoothRotation * Time.deltaTime);
         rigidbody.MoveRotation(newRot);
 

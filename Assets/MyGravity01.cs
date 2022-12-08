@@ -44,6 +44,16 @@ public class MyGravity01 : MonoBehaviour, IPlayer
             currentSpeed -= acceleration * 2 * Time.deltaTime;
         }
 
+        if (currentSpeed <= 0)
+        {
+            Stop();
+            return;
+        }
+        else
+        {
+            Go();
+        }
+
         var dir = Vector3.forward * currentSpeed;
         rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime);
     }
@@ -76,13 +86,13 @@ public class MyGravity01 : MonoBehaviour, IPlayer
             targetRot *= rigidbody.rotation;
             var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, Time.deltaTime * smoothRotation);
 
-            
+
             //TODO: move all the physics to FixedUpdate
             rigidbody.MoveRotation(newRot);
             rigidbody.AddForce(hit.normal.normalized * gravity);
         }
 
-        
+
 
         if (Input.GetKeyDown("space"))
         {
@@ -98,6 +108,23 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         {
             Rotation2();
         }
+    }
+
+    void Go()
+    {
+        //rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezePosition;
+        rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezeRotationY;
+    }
+
+    void Stop()
+    {
+        rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezeRotationY;
+        //rigidbody.velocity = Vector3.zero;
+        //rigidbody.angularVelocity = Vector3.zero;
+
+
+        //rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezePosition;
+        //TODO freeze position
     }
 
     void Move2()
@@ -139,10 +166,10 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         var currentAngle = Quaternion.Angle(Quaternion.identity, rigidbody.rotation);
         Debug.Log($"Current angle {currentAngle}");
 
-        if (rigidbody.rotation.eulerAngles.y > 30 || rigidbody.rotation.eulerAngles.y < -30)
-        {
-            return;
-        }
+        //if (rigidbody.rotation.eulerAngles.y > 30 || rigidbody.rotation.eulerAngles.y < -30)
+        //{
+        //    return;
+        //}
 
         var newRot = Quaternion.Slerp(startRot, targetRot, smoothRotation * Time.deltaTime);
         rigidbody.MoveRotation(newRot);

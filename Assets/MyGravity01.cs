@@ -23,7 +23,7 @@ public class MyGravity01 : MonoBehaviour, IPlayer
 
     float currentSpeed = 0;
     float minSpeed = 0;
-    float currentAngle;
+
     bool isMoveButtonPressed;
 
     private void Awake()
@@ -68,8 +68,12 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         rigidbody.useGravity = false;
         rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         rigidbody.maxDepenetrationVelocity = 1000;
-    }
 
+        //TODO: for all the obstacles with rigidbody set CollisionDetectionMode.ContinuousDynamic;
+        //
+        rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+    }
+    RaycastHit hit;
     private void Update()
     {
         int layerMask = 1 << groundLayer;
@@ -77,13 +81,13 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         Debug.DrawRay(transform.position, -transform.up * rayLength, Color.green);
 
         //TODO: cast down 3 rays: face, center, back
-        RaycastHit hit;
+
         if (Physics.Raycast(transform.position, -transform.up, out hit, rayLength, layerMask))
         {
             Debug.DrawRay(transform.position, -hit.normal * rayLength, Color.red);
 
             var targetRot = Quaternion.FromToRotation(transform.up, hit.normal.normalized);
-            targetRot *= rigidbody.rotation;
+            targetRot = rigidbody.rotation * targetRot /** newRotInput*/;
             var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, Time.deltaTime * smoothRotation);
 
 
@@ -107,6 +111,7 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         if (isMoveButtonPressed)
         {
             Rotation2();
+            //Rotation();
         }
     }
 
@@ -144,37 +149,34 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         Debug.Log($"inputHorizontal {inputHorizontal}");
 
         var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
-
-        var startRot = rigidbody.rotation;
         var inputAngle = degrees * rotationSpeed * Time.deltaTime;
-        var newAngle = currentAngle + inputAngle;
-        currentAngle = Mathf.Clamp(newAngle, -35, 35);
+        var newAngle = currentAngle2 + inputAngle;
+        currentAngle2 = Mathf.Clamp(newAngle, -35, 35);
+
+        newRotInput = Quaternion.Euler(0, currentAngle2, 0);
+        //targetRot = targetRot * rigidbody.rotation;
+
+        //newRotInput = Quaternion.Slerp(transform.rotation, targetRot, smoothRotation * Time.deltaTime);
 
         Debug.Log($"currentRotation degrees {degrees}");
-
-        rigidbody.rotation = rigidbody.rotation * Quaternion.Euler(0, currentAngle, 0);
+        //rigidbody.MoveRotation(newRot);
+        //transform.rotation = newRotInput;
     }
+
+    Quaternion newRotInput;
+
+    public float currentAngle2 = 0;
 
     private void Rotation2()
     {
-        var degrees = Input.GetAxis("Mouse X");
+        var degrees = Input.GetAxis("Mouse X") * rotationSpeed /** Time.deltaTime*/;
+        var newAngle = currentAngle2 + degrees;
+        currentAngle2 = Mathf.Clamp(newAngle, -35, 35);
 
-        var startRot = rigidbody.rotation;
-        var deegreesRes = degrees * rotationSpeed /** Time.deltaTime*/;
-        var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
+        var targetRot = Quaternion.AngleAxis(degrees, transform.up);
+        //targetRot *= rigidbody.rotation;
 
-        var currentAngle = Quaternion.Angle(Quaternion.identity, rigidbody.rotation);
-        Debug.Log($"Current angle {currentAngle}");
-
-        //if (rigidbody.rotation.eulerAngles.y > 30 || rigidbody.rotation.eulerAngles.y < -30)
-        //{
-        //    return;
-        //}
-
-        var newRot = Quaternion.Slerp(startRot, targetRot, smoothRotation * Time.deltaTime);
+        var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, smoothRotation * Time.deltaTime);
         rigidbody.MoveRotation(newRot);
-
-
     }
-
 }

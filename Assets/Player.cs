@@ -13,6 +13,6 @@ public class Player : MonoBehaviour
 
     public void SetMove(bool isActive)
     {
-        //isMoveButtonPressed = isActive;
+        _movement.SetMove(isActive);
     }
 }

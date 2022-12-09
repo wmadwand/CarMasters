@@ -534,10 +534,9 @@ GameObject:
   m_Component:
   - component: {fileID: 396206035}
   - component: {fileID: 396206037}
-  - component: {fileID: 396206038}
-  - component: {fileID: 396206040}
-  - component: {fileID: 396206039}
   - component: {fileID: 396206041}
+  - component: {fileID: 396206039}
+  - component: {fileID: 396206040}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -578,7 +577,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &396206038
+--- !u!114 &396206039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -587,33 +586,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 396206034}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a412daa23a5ddf44b0bac078e32617b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  smoothRotation: 1
-  gravity: -10
-  moveSpeed: 10
-  groundLayer: 6
-  rayLength: 15
-  jumpPower: 2
---- !u!114 &396206039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396206034}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8d472f51ee26084a9b64142534e4c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _acceleration: 1
   _maxSpeed: 100
   _minSpeed: 0
-  _rotationSpeed: 1
-  _smoothRotation: 10
+  _acceleration: 10
   _moveSpeed: 10
+  _rotationSpeed: 10
+  _smoothRotation: 10
   _jumpPower: 2
 --- !u!114 &396206040
 MonoBehaviour:
@@ -622,7 +603,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396206034}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 383388788ab181d4f8ec135d867ab444, type: 3}
   m_Name: 
@@ -2598,7 +2579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e94ff6fefeababc4893af56f13b0268b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 396206041}
 --- !u!114 &1119969991
 MonoBehaviour:
   m_ObjectHideFlags: 0

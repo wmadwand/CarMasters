@@ -1,24 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _acceleration = 1;
     [SerializeField] private float _maxSpeed = 100;
     [SerializeField] private float _minSpeed = 0;
+    [SerializeField] private float _acceleration = 1;
+    [SerializeField] private float _moveSpeed = 10;
     [SerializeField] private float _rotationSpeed = 1;
     [SerializeField] private float _smoothRotation = 10;
-    [SerializeField] private float _moveSpeed = 10;
     [SerializeField] private float _jumpPower = 2;
 
     private float _currentSpeed = 0;
-
-    private bool _isMoveButtonPressed;
-    private float _currentAngle;
-    private Rigidbody _rigidbody;
+    private bool _isMoveButtonPressed = false;
+    private float _currentAngle = 0;
+    private Rigidbody _rigidbody = null;
 
     //---------------------------------------------------------------
+
+    public void SetMove(bool isActive)
+    {
+        _isMoveButtonPressed = isActive;
+    }
 
     private void Move()
     {

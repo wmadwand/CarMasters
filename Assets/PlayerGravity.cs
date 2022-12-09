@@ -7,8 +7,8 @@ public class PlayerGravity : MonoBehaviour
     [SerializeField] private float _rayLength = 10;
     [SerializeField] private LayerMask _groundLayerMask;
 
-    private Rigidbody _rigidbody;
-    private int _groundLayerIndex;
+    private Rigidbody _rigidbody = null;
+    private int _groundLayerIndex = 0;
 
     //---------------------------------------------------------------
 
@@ -18,8 +18,6 @@ public class PlayerGravity : MonoBehaviour
     }
 
     //---------------------------------------------------------------
-
-
 
     private void Awake()
     {

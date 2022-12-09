@@ -2,12 +2,19 @@
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
     [SerializeField] private float _minSpeed = 0;
     [SerializeField] private float _acceleration = 1;
+    [SerializeField] private float _deceleration = 2;
     [SerializeField] private float _moveSpeed = 10;
+
+    [Header("Rotation")]
     [SerializeField] private float _rotationSpeed = 1;
-    [SerializeField] private float _smoothRotation = 10;
+    [SerializeField] private float _rotationSmooth = 10;
+    [SerializeField] private Transform _limiter;
+
+    [Header("Jump")]
     [SerializeField] private float _jumpPower = 2;
 
     private float _currentSpeed = 0;
@@ -22,22 +29,24 @@ public class PlayerMovement : MonoBehaviour
         _isMoveButtonPressed = isActive;
     }
 
+    //---------------------------------------------------------------
+
     private void Move()
     {
         if (_isMoveButtonPressed)
         {
             _currentSpeed += _acceleration * Time.deltaTime;
-
             _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
         }
         else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
         {
-            _currentSpeed -= _acceleration * 2 * Time.deltaTime;
+            _currentSpeed -= _deceleration * Time.deltaTime;
         }
 
         if (_currentSpeed <= _minSpeed)
         {
             Stop();
+
             return;
         }
         else
@@ -94,8 +103,30 @@ public class PlayerMovement : MonoBehaviour
         var startRot = _rigidbody.rotation;
         var deegreesRes = degrees * _rotationSpeed /** Time.deltaTime*/;
         var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
-        var newRot = Quaternion.Slerp(startRot, targetRot, _smoothRotation * Time.deltaTime);
+        var newRot = Quaternion.Slerp(startRot, targetRot, _rotationSmooth * Time.deltaTime);
         _rigidbody.MoveRotation(newRot);
+    }
+
+    float currentAngle = 0;
+
+    private void Rotation3()
+    {
+        var degrees = Input.GetAxis("Mouse X");
+        var degreesRes = degrees * _rotationSpeed * Time.deltaTime;
+        currentAngle += degreesRes;
+        currentAngle = Mathf.Clamp(currentAngle, -35, 35);
+
+        var targetRot = Quaternion.Euler(0, currentAngle, 0);
+
+        _limiter.rotation =/* _limiter.rotation **/ targetRot;/* Quaternion.Slerp(_limiter.rotation, targetRot, Time.deltaTime * _rotationSmooth);*/
+    }
+
+    private void Rotation3Extra()
+    {
+        //var direction = 
+
+        var resRot = Quaternion.RotateTowards(_rigidbody.rotation, _limiter.rotation, Time.deltaTime * _rotationSmooth);
+            _rigidbody.MoveRotation(resRot);
     }
 
     private void MoveKeyboard()
@@ -123,11 +154,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        //Move();
 
         if (_isMoveButtonPressed)
         {
-            Rotation2();
+            Rotation3();
+            Rotation3Extra();
             //Rotation();
         }
     }

@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayer
-{
-    void PressMoveButton(bool isActive);
-}
-
-public class MyGravity01 : MonoBehaviour, IPlayer
+public class MyGravity01 : MonoBehaviour
 {
     Rigidbody rigidbody;
     public float smoothRotation;
@@ -17,12 +12,12 @@ public class MyGravity01 : MonoBehaviour, IPlayer
     public float rayLength = 10;
     public float jumpPower = 2;
 
-    public float acceleration = 1;
-    public float maxSpeed = 100;
-    public float rotationSpeed = 1;
+    //public float acceleration = 1;
+    //public float maxSpeed = 100;
+    //public float rotationSpeed = 1;
 
-    float currentSpeed = 0;
-    float minSpeed = 0;
+    //float currentSpeed = 0;
+    //float minSpeed = 0;
 
     bool isMoveButtonPressed;
 
@@ -31,152 +26,146 @@ public class MyGravity01 : MonoBehaviour, IPlayer
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    void Move()
-    {
-        if (isMoveButtonPressed)
-        {
-            currentSpeed += acceleration * Time.deltaTime;
+    //void Move()
+    //{
+    //    if (isMoveButtonPressed)
+    //    {
+    //        currentSpeed += acceleration * Time.deltaTime;
 
-            currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-        }
-        else if (!isMoveButtonPressed && currentSpeed > 0)
-        {
-            currentSpeed -= acceleration * 2 * Time.deltaTime;
-        }
+    //        currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
+    //    }
+    //    else if (!isMoveButtonPressed && currentSpeed > 0)
+    //    {
+    //        currentSpeed -= acceleration * 2 * Time.deltaTime;
+    //    }
 
-        if (currentSpeed <= 0)
-        {
-            Stop();
-            return;
-        }
-        else
-        {
-            Go();
-        }
+    //    if (currentSpeed <= 0)
+    //    {
+    //        Stop();
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        Go();
+    //    }
 
-        var dir = Vector3.forward * currentSpeed;
-        rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime);
-    }
+    //    var dir = Vector3.forward * currentSpeed;
+    //    rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime);
+    //}
 
-    public void PressMoveButton(bool isActive)
-    {
-        isMoveButtonPressed = isActive;
-    }
+    //public void PressMoveButton(bool isActive)
+    //{
+    //    isMoveButtonPressed = isActive;
+    //}
 
-    private void Start()
-    {
-        rigidbody.useGravity = false;
-        rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        rigidbody.maxDepenetrationVelocity = 1000;
+    //private void Start()
+    //{
+    //    rigidbody.useGravity = false;
+    //    rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    //    rigidbody.maxDepenetrationVelocity = 1000;
 
-        //TODO: for all the obstacles with rigidbody set CollisionDetectionMode.ContinuousDynamic;
-        //
-        rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-    }
-    RaycastHit hit;
-    private void Update()
-    {
-        int layerMask = 1 << groundLayer;
+    //    //TODO: for all the obstacles with rigidbody set CollisionDetectionMode.ContinuousDynamic;
+    //    //
+    //    rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+    //}
 
-        Debug.DrawRay(transform.position, -transform.up * rayLength, Color.green);
+    //private void Update()
+    //{
+    //    int layerMask = 1 << groundLayer;
 
-        //TODO: cast down 3 rays: face, center, back
+    //    Debug.DrawRay(transform.position, -transform.up * rayLength, Color.green);
 
-        if (Physics.Raycast(transform.position, -transform.up, out hit, rayLength, layerMask))
-        {
-            Debug.DrawRay(transform.position, -hit.normal * rayLength, Color.red);
+    //    //TODO: cast down 3 rays: face, center, back
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(transform.position, -transform.up, out hit, rayLength, layerMask))
+    //    {
+    //        Debug.DrawRay(transform.position, -hit.normal * rayLength, Color.red);
 
-            var targetRot = Quaternion.FromToRotation(transform.up, hit.normal.normalized);
-            targetRot = rigidbody.rotation * targetRot /** newRotInput*/;
-            var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, Time.deltaTime * smoothRotation);
-
-
-            //TODO: move all the physics to FixedUpdate
-            rigidbody.MoveRotation(newRot);
-            rigidbody.AddForce(hit.normal.normalized * gravity);
-        }
+    //        var targetRot = Quaternion.FromToRotation(transform.up, hit.normal.normalized);
+    //        targetRot *= rigidbody.rotation;
+    //        var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, Time.deltaTime * smoothRotation);
 
 
-
-        if (Input.GetKeyDown("space"))
-        {
-            rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        Move();
-
-        if (isMoveButtonPressed)
-        {
-            Rotation2();
-            //Rotation();
-        }
-    }
-
-    void Go()
-    {
-        //rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezePosition;
-        rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezeRotationY;
-    }
-
-    void Stop()
-    {
-        rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezeRotationY;
-        //rigidbody.velocity = Vector3.zero;
-        //rigidbody.angularVelocity = Vector3.zero;
+    //        //TODO: move all the physics to FixedUpdate
+    //        rigidbody.MoveRotation(newRot);
+    //        rigidbody.AddForce(hit.normal.normalized * gravity);
+    //    }
 
 
-        //rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezePosition;
-        //TODO freeze position
-    }
 
-    void Move2()
-    {
-        var yInput = Input.GetAxisRaw("Vertical");
-        var xInput = Input.GetAxisRaw("Horizontal");
+    //    if (Input.GetKeyDown("space"))
+    //    {
+    //        rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
+    //    }
+    //}
 
-        var dir = new Vector3(xInput, 0, yInput).normalized;
+    //private void FixedUpdate()
+    //{
+    //    Move();
 
-        rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime * moveSpeed);
-    }
+    //    if (isMoveButtonPressed)
+    //    {
+    //        Rotation2();
+    //        //Rotation();
+    //    }
+    //}
 
-    private void Rotation()
-    {
-        var inputHorizontal = Input.GetAxis("Mouse X");
+    //void Go()
+    //{
+    //    //rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezePosition;
+    //    rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezeRotationY;
+    //}
 
-        Debug.Log($"inputHorizontal {inputHorizontal}");
+    //void Stop()
+    //{
+    //    rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezeRotationY;
+    //    //rigidbody.velocity = Vector3.zero;
+    //    //rigidbody.angularVelocity = Vector3.zero;
 
-        var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
-        var inputAngle = degrees * rotationSpeed * Time.deltaTime;
-        var newAngle = currentAngle2 + inputAngle;
-        currentAngle2 = Mathf.Clamp(newAngle, -35, 35);
 
-        newRotInput = Quaternion.Euler(0, currentAngle2, 0);
-        //targetRot = targetRot * rigidbody.rotation;
+    //    //rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezePosition;
+    //    //TODO freeze position
+    //}
 
-        //newRotInput = Quaternion.Slerp(transform.rotation, targetRot, smoothRotation * Time.deltaTime);
+    //void Move2()
+    //{
+    //    var yInput = Input.GetAxisRaw("Vertical");
+    //    var xInput = Input.GetAxisRaw("Horizontal");
 
-        Debug.Log($"currentRotation degrees {degrees}");
-        //rigidbody.MoveRotation(newRot);
-        //transform.rotation = newRotInput;
-    }
+    //    var dir = new Vector3(xInput, 0, yInput).normalized;
 
-    Quaternion newRotInput;
+    //    rigidbody.MovePosition(rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime * moveSpeed);
+    //}
 
-    public float currentAngle2 = 0;
+    //private void Rotation()
+    //{
+    //    var inputHorizontal = Input.GetAxis("Mouse X");
 
-    private void Rotation2()
-    {
-        var degrees = Input.GetAxis("Mouse X") * rotationSpeed /** Time.deltaTime*/;
-        var newAngle = currentAngle2 + degrees;
-        currentAngle2 = Mathf.Clamp(newAngle, -35, 35);
+    //    Debug.Log($"inputHorizontal {inputHorizontal}");
 
-        var targetRot = Quaternion.AngleAxis(degrees, transform.up);
-        //targetRot *= rigidbody.rotation;
+    //    var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
+    //    var inputAngle = degrees * rotationSpeed * Time.deltaTime;
+    //    var newAngle = currentAngle + inputAngle;
+    //    currentAngle = Mathf.Clamp(newAngle, -35, 35);
 
-        var newRot = Quaternion.Slerp(rigidbody.rotation, targetRot, smoothRotation * Time.deltaTime);
-        rigidbody.MoveRotation(newRot);
-    }
+    //   var newRotInput = Quaternion.Euler(0, currentAngle, 0);
+    //    //targetRot = targetRot * rigidbody.rotation;
+
+    //    //newRotInput = Quaternion.Slerp(transform.rotation, targetRot, smoothRotation * Time.deltaTime);
+
+    //    Debug.Log($"currentRotation degrees {degrees}");
+    //    //rigidbody.MoveRotation(newRot);
+    //    //transform.rotation = newRotInput;
+    //}
+
+    //private void Rotation2()
+    //{
+    //    var degrees = Input.GetAxis("Mouse X");
+
+    //    var startRot = rigidbody.rotation;
+    //    var deegreesRes = degrees * rotationSpeed /** Time.deltaTime*/;
+    //    var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
+    //    var newRot = Quaternion.Slerp(startRot, targetRot, smoothRotation * Time.deltaTime);
+    //    rigidbody.MoveRotation(newRot);
+    //}
 }

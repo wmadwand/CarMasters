@@ -1,143 +1,132 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float _acceleration = 1;
+    [SerializeField] private float _maxSpeed = 100;
+    [SerializeField] private float _minSpeed = 0;
+    [SerializeField] private float _rotationSpeed = 1;
+    [SerializeField] private float _smoothRotation = 10;
+    [SerializeField] private float _moveSpeed = 10;
+    [SerializeField] private float _jumpPower = 2;
 
-    public float walkAcceleration = 1000;
-    public GameObject cameraObject;
-    public float maxWalkSpeed = 20;
-    Vector3 horizontalMovement;
+    private float _currentSpeed = 0;
 
-    public float jumpVelocity = 600;
-    public float maxSlope = 45;
+    private bool _isMoveButtonPressed;
+    private float _currentAngle;
+    private Rigidbody _rigidbody;
 
-    public float walkDecelleration = 1;
-    public float airAccMod = .5f;
-    float walkDecX;
-    float walkDecY;
-    float walkDecZ;
-    public bool grounded = true;
-    public float grav = 750;
+    //---------------------------------------------------------------
 
-    //MouseLookFpsScript cameraMouseLook;
-
-    public float lookSmoothDamp = .1f;
-
-    public float xLookSensitivity = 320f;
-    float currYRotation = 0;
-    float yRotation;
-    float yRotationVel;
-
-    public float sler = .1f;
-
-    float diffY;
-    public int layerNumber;
-
-
-    void Start()
+    private void Move()
     {
-        //cameraMouseLook = (MouseLookFpsScript)cameraObject.GetComponent("MouseLookFpsScript");
-    }
-
-    Rigidbody rigidbody;
-
-    private void Awake()
-    {
-        rigidbody = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
-        //Setting limit to Rigidbody velocity
-        horizontalMovement = new Vector3(rigidbody.velocity.x, rigidbody.velocity.y,
-                                                                    rigidbody.velocity.z);
-        if (horizontalMovement.magnitude > maxWalkSpeed)
+        if (_isMoveButtonPressed)
         {
-            horizontalMovement = horizontalMovement.normalized;
-            horizontalMovement *= maxWalkSpeed;
-            print("kittens");
+            _currentSpeed += _acceleration * Time.deltaTime;
+
+            _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
         }
-        rigidbody.velocity = new Vector3(horizontalMovement.x, horizontalMovement.y,
-                                                               horizontalMovement.z);
-
-
-
-        //Adding friction
-        if (grounded)
+        else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
         {
-            rigidbody.velocity = new Vector3(Mathf.SmoothDamp(rigidbody.velocity.x, 0, ref
-                                                                                        walkDecX, walkDecelleration),
-             Mathf.SmoothDamp(rigidbody.velocity.y, 0, ref walkDecY, walkDecelleration),
-             Mathf.SmoothDamp(rigidbody.velocity.z, 0, ref walkDecZ, walkDecelleration));
+            _currentSpeed -= _acceleration * 2 * Time.deltaTime;
         }
 
-
-        //Setting up raycast
-        RaycastHit groundRay;
-        Debug.DrawRay(transform.position, transform.up * -50, Color.red);
-        bool hitGround = Physics.Raycast(transform.position, -1 * transform.up, out groundRay);
-
-
-
-        //Rotating player based on grounds normal
-        int gravLayMask = (1 << layerNumber);
-        if (Physics.Raycast(transform.position, -1 * transform.up, out groundRay, 100,
-      gravLayMask))
+        if (_currentSpeed <= _minSpeed)
         {
-            Quaternion temp = Quaternion.FromToRotation(transform.up, groundRay.normal);
-            temp = temp * transform.rotation;
-            transform.rotation = Quaternion.Slerp(transform.rotation, temp, sler);
-        }
-
-
-
-        //Rotate the player to look, change "y" 
-        yRotation += Input.GetAxis("Mouse X") * xLookSensitivity;
-        diffY = yRotation - diffY;
-        currYRotation = Mathf.SmoothDamp(currYRotation, diffY, ref yRotationVel,
-                                                                                   lookSmoothDamp);
-        transform.Rotate(0, currYRotation * Time.deltaTime, 0);
-        diffY = yRotation;
-
-
-
-        //Moving the player
-        if (grounded)
-        {
-            rigidbody.AddRelativeForce(Input.GetAxis("Horizontal") * walkAcceleration * Time.deltaTime, -1 * grav * Time.deltaTime, Input.GetAxis("Vertical") * walkAcceleration * Time.deltaTime);
+            Stop();
+            return;
         }
         else
         {
-            rigidbody.AddRelativeForce(Input.GetAxis("Horizontal") * walkAcceleration * Time.deltaTime * airAccMod, -1 * grav * Time.deltaTime, Input.GetAxis("Vertical") * walkAcceleration * Time.deltaTime * airAccMod);
+            Go();
         }
 
-        //Jump
-        if (Input.GetButtonDown("Jump") && grounded)
-        {
-            rigidbody.AddRelativeForce(0, jumpVelocity, 0);
-        }
-
+        var dir = Vector3.forward * _currentSpeed;
+        _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime);
     }
 
-    //Checks if the collider is touching ground beneath the player. 
-    void OnCollisionStay(Collision collision)
+    private void Go()
     {
-        foreach (ContactPoint contact in collision.contacts)
+        //rigidbody.constraints = rigidbody.constraints ^ RigidbodyConstraints.FreezePosition;
+        _rigidbody.constraints = _rigidbody.constraints ^ RigidbodyConstraints.FreezeRotationY;
+    }
+
+    private void Stop()
+    {
+        _rigidbody.constraints = _rigidbody.constraints | RigidbodyConstraints.FreezeRotationY;
+        //rigidbody.velocity = Vector3.zero;
+        //rigidbody.angularVelocity = Vector3.zero;
+
+
+        //rigidbody.constraints = rigidbody.constraints | RigidbodyConstraints.FreezePosition;
+        //TODO freeze position
+    }
+
+    private void Rotation()
+    {
+        var inputHorizontal = Input.GetAxis("Mouse X");
+
+        Debug.Log($"inputHorizontal {inputHorizontal}");
+
+        var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
+        var inputAngle = degrees * _rotationSpeed * Time.deltaTime;
+        var newAngle = _currentAngle + inputAngle;
+        _currentAngle = Mathf.Clamp(newAngle, -35, 35);
+
+        var newRotInput = Quaternion.Euler(0, _currentAngle, 0);
+        //targetRot = targetRot * rigidbody.rotation;
+
+        //newRotInput = Quaternion.Slerp(transform.rotation, targetRot, smoothRotation * Time.deltaTime);
+
+        Debug.Log($"currentRotation degrees {degrees}");
+        //rigidbody.MoveRotation(newRot);
+        //transform.rotation = newRotInput;
+    }
+
+    private void Rotation2()
+    {
+        var degrees = Input.GetAxis("Mouse X");
+
+        var startRot = _rigidbody.rotation;
+        var deegreesRes = degrees * _rotationSpeed /** Time.deltaTime*/;
+        var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
+        var newRot = Quaternion.Slerp(startRot, targetRot, _smoothRotation * Time.deltaTime);
+        _rigidbody.MoveRotation(newRot);
+    }
+
+    private void MoveKeyboard()
+    {
+        var yInput = Input.GetAxisRaw("Vertical");
+        var xInput = Input.GetAxisRaw("Horizontal");
+
+        var dir = new Vector3(xInput, 0, yInput).normalized;
+
+        _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime * _moveSpeed);
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown("space"))
         {
-            if (Vector3.Angle(contact.normal, transform.up) < maxSlope)
-            {
-                grounded = true;
-            }
+            GetComponent<PlayerGravity>().Jump(_jumpPower);
         }
     }
 
-
-    void OnCollisionExit()
+    private void Awake()
     {
-        grounded = false;
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+
+        if (_isMoveButtonPressed)
+        {
+            Rotation2();
+            //Rotation();
+        }
+    }
 }

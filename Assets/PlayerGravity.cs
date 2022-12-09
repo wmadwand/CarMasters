@@ -17,6 +17,8 @@ public class PlayerGravity : MonoBehaviour
         //_rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
     }
 
+    public Vector3 GetGravityNormal => hitTemp.normal.normalized;
+
     //---------------------------------------------------------------
 
     private void Awake()
@@ -35,6 +37,8 @@ public class PlayerGravity : MonoBehaviour
         //
         _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
+
+    RaycastHit hitTemp;
 
     private void Update()
     {
@@ -56,6 +60,8 @@ public class PlayerGravity : MonoBehaviour
             //TODO: move all the physics to FixedUpdate
             _rigidbody.MoveRotation(newRot);
             _rigidbody.AddForce(hit.normal.normalized * _gravity);
+
+            hitTemp = hit;
         }
 
 

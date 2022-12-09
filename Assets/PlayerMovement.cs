@@ -2,6 +2,8 @@
 
 public class PlayerMovement : MonoBehaviour
 {
+    public RaceCamera raceCamera;
+
     [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
     [SerializeField] private float _minSpeed = 0;
@@ -37,10 +39,13 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentSpeed += _acceleration * Time.deltaTime;
             _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
+
+            raceCamera.Move(_currentSpeed);
         }
         else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
+            raceCamera.Move(_currentSpeed);
         }
 
         if (_currentSpeed <= _minSpeed)
@@ -96,15 +101,28 @@ public class PlayerMovement : MonoBehaviour
         //transform.rotation = newRotInput;
     }
 
-    private void Rotation2()
+    private void Rotation2() // WORKING ONE !!
     {
         var degrees = Input.GetAxis("Mouse X");
 
         var startRot = _rigidbody.rotation;
-        var deegreesRes = degrees * _rotationSpeed /** Time.deltaTime*/;
-        var targetRot = startRot * Quaternion.AngleAxis(deegreesRes, Vector3.up);
-        var newRot = Quaternion.Slerp(startRot, targetRot, _rotationSmooth * Time.deltaTime);
-        _rigidbody.MoveRotation(newRot);
+        var degreesRes = degrees * _rotationSpeed * Time.deltaTime;
+        var targetRot = startRot * Quaternion.AngleAxis(degreesRes, Vector3.up);
+
+        //currentAngle += degreesRes;
+        //currentAngle = Mathf.Clamp(currentAngle, -35, 35);
+
+        //if (_rigidbody.rotation.eulerAngles.y >= 35 )
+        //{
+        //    targetRot = startRot * Quaternion.AngleAxis(-5, Vector3.up);
+        //}
+        //else if (_rigidbody.rotation.eulerAngles.y <= -35)
+        //{
+        //    targetRot = startRot * Quaternion.AngleAxis(5, Vector3.up);
+        //}
+
+        //var newRot = Quaternion.Slerp(startRot, targetRot, _rotationSmooth * Time.deltaTime);
+        _rigidbody.rotation = targetRot;
     }
 
     float currentAngle = 0;
@@ -116,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
         currentAngle += degreesRes;
         currentAngle = Mathf.Clamp(currentAngle, -35, 35);
 
-        var targetRot = Quaternion.Euler(0, currentAngle, 0);
+        var GroundNormalVector = GetComponent<PlayerGravity>().GetGravityNormal;
+        var targetRot = Quaternion.AngleAxis(currentAngle, GroundNormalVector);
 
         _limiter.rotation =/* _limiter.rotation **/ targetRot;/* Quaternion.Slerp(_limiter.rotation, targetRot, Time.deltaTime * _rotationSmooth);*/
     }
@@ -126,7 +145,7 @@ public class PlayerMovement : MonoBehaviour
         //var direction = 
 
         var resRot = Quaternion.RotateTowards(_rigidbody.rotation, _limiter.rotation, Time.deltaTime * _rotationSmooth);
-            _rigidbody.MoveRotation(resRot);
+        _rigidbody.MoveRotation(resRot );
     }
 
     private void MoveKeyboard()
@@ -154,13 +173,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Move();
+        Move();
 
         if (_isMoveButtonPressed)
         {
-            Rotation3();
-            Rotation3Extra();
-            //Rotation();
+            //Rotation3();
+            //Rotation3Extra();
+            Rotation2();
         }
     }
 }

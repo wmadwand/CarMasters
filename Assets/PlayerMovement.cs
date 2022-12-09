@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Dreamteck.Splines;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public RaceCamera raceCamera;
+    public SplineProjector splineProjector;
 
     [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
@@ -59,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             Go();
         }
 
-        var dir = Vector3.forward * _currentSpeed;
+        var dir =  /*-splineProjector.result.forward*/ Vector3.forward * _currentSpeed;
         _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime);
     }
 
@@ -145,7 +147,7 @@ public class PlayerMovement : MonoBehaviour
         //var direction = 
 
         var resRot = Quaternion.RotateTowards(_rigidbody.rotation, _limiter.rotation, Time.deltaTime * _rotationSmooth);
-        _rigidbody.MoveRotation(resRot );
+        _rigidbody.MoveRotation(resRot);
     }
 
     private void MoveKeyboard()
@@ -169,6 +171,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        splineProjector = GetComponent<SplineProjector>();
     }
 
     private void FixedUpdate()

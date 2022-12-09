@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 396206041}
   - component: {fileID: 396206039}
   - component: {fileID: 396206040}
+  - component: {fileID: 396206042}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -551,8 +552,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396206034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.8, y: 2.05, z: -22.44}
+  m_LocalRotation: {x: 0, y: 0.4488314, z: 0, w: 0.89361644}
+  m_LocalPosition: {x: 8.801853, y: 3.307715, z: -22.442463}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -591,6 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceCamera: {fileID: 963194232}
+  splineProjector: {fileID: 0}
   _maxSpeed: 20
   _minSpeed: 0
   _acceleration: 5
@@ -630,6 +632,114 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccfbca8f355c8a4dbaff6c08b84e200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &396206042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396206034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453ef2bcc92003342b9fe6a327abc98c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMethod: 0
+  _spline: {fileID: 1099983983}
+  _autoUpdate: 1
+  _rotationModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _offsetModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _colorModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _sizeModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _clipFromSample:
+    position: {x: 4.1239204, y: 3.307715, z: 24.537682}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0.9507507, y: 0.011733659, z: -0.3097342}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0
+  _clipToSample:
+    position: {x: 4.1239204, y: 3.307715, z: 24.537682}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0.9507507, y: 0.011733659, z: -0.3097342}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 1
+  _loopSamples: 0
+  _clipFrom: 0
+  _clipTo: 1
+  animClipFrom: 0
+  animClipTo: 1
+  multithreaded: 0
+  buildOnAwake: 1
+  buildOnEnable: 0
+  applyDirectionRotation: 1
+  useTriggers: 0
+  triggerGroup: 0
+  _direction: -1
+  _dontLerpDirection: 0
+  _physicsMode: 1
+  _motion:
+    _hasOffset: 0
+    _hasRotationOffset: 0
+    _offset: {x: 0, y: 0}
+    _rotationOffset: {x: 0, y: 0, z: 0}
+    _baseScale: {x: 1, y: 1, z: 1}
+    _2dMode: 0
+    velocityHandleMode: 0
+    applyPositionX: 0
+    applyPositionY: 0
+    applyPositionZ: 0
+    applyPosition2D: 1
+    retainLocalPosition: 0
+    direction: -1
+    applyRotationX: 0
+    applyRotationY: 0
+    applyRotationZ: 0
+    applyRotation2D: 1
+    retainLocalRotation: 0
+    applyScaleX: 0
+    applyScaleY: 0
+    applyScaleZ: 0
+    targetUser: {fileID: 396206042}
+  targetRigidbody: {fileID: 396206037}
+  targetRigidbody2D: {fileID: 0}
+  targetTransform: {fileID: 0}
+  _result:
+    position: {x: 8.801853, y: 3.307715, z: -22.442463}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.80216646, y: 0, z: -0.59710056}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.38966795397393494
+  _finalResult:
+    position: {x: 8.801853, y: 3.307715, z: -22.442463}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.80216646, y: 0, z: -0.59710056}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.38966795397393494
+  _mode: 1
+  _autoProject: 1
+  _subdivide: 4
+  _projectTarget: {fileID: 396206035}
+  applyTarget: {fileID: 0}
+  _targetObject: {fileID: 396206034}
+  _offset: {x: 0, y: 0}
+  _rotationOffset: {x: 0, y: 0, z: 0}
+  lastPosition: {x: 8.801853, y: 3.307715, z: -22.442463}
 --- !u!1 &590661793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +2065,7 @@ MonoBehaviour:
   autoStartPosition: 0
   _follow: 0
   _startPosition: 0.49000000953674316
-  preserveUniformSpeedWithOffset: 0
+  preserveUniformSpeedWithOffset: 1
   _followSpeed: -2.23
   _followDuration: 1
   _speedModifier:
@@ -2247,6 +2357,7 @@ MonoBehaviour:
   - {fileID: 1513290667}
   - {fileID: 2117845068}
   - {fileID: 963194230}
+  - {fileID: 396206042}
   _rawSamples:
   - position: {x: 4.1239204, y: -1.8722849, z: 24.537682}
     up: {x: 0, y: 1, z: 0}

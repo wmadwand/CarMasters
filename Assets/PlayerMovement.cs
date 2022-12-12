@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public RaceCamera raceCamera;
+    public RaceCameraSplineFollower raceCamera;
     public SplineProjector splineProjector;
 
     [Header("Move")]
@@ -42,12 +42,12 @@ public class PlayerMovement : MonoBehaviour
             _currentSpeed += _acceleration * Time.deltaTime;
             _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
 
-            raceCamera.Move(_currentSpeed);
+            //raceCamera.Move(_currentSpeed);
         }
         else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
-            raceCamera.Move(_currentSpeed);
+            //raceCamera.Move(_currentSpeed);
         }
 
         if (_currentSpeed <= _minSpeed)

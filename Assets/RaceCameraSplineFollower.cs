@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaceCamera : MonoBehaviour
+public class RaceCameraSplineFollower : MonoBehaviour
 {
     private SplineFollower splineFollower;
     public float distanceMove = 1;

@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _minSpeed = 0;
     [SerializeField] private float _acceleration = 1;
     [SerializeField] private float _deceleration = 2;
-    [SerializeField] private float _moveSpeed = 10;
+    //[SerializeField] private float _moveSpeed = 10;
 
     [Header("Rotation")]
     [SerializeField] private float _rotationSpeed = 1;
@@ -52,13 +52,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (_currentSpeed <= _minSpeed)
         {
-            //Stop();
+            Stop();
 
             return;
         }
         else
         {
-            //Go();
+            Go();
         }
 
         var direction = transform.TransformDirection(Vector3.forward);
@@ -106,11 +106,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotation2() // WORKING ONE !!
     {
-        var degrees = Input.GetAxis("Mouse X");
-
-        var startRot = _rigidbody.rotation;
-        var degreesRes = degrees * _rotationSpeed * Time.deltaTime;
-        var targetRot = startRot * Quaternion.AngleAxis(degreesRes, Vector3.up);
+        var angle = Input.GetAxis("Mouse X");
+        angle *= Time.deltaTime * _rotationSpeed;
+        var yAxis = transform.TransformDirection(Vector3.up);
+        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, yAxis);
 
         //currentAngle += degreesRes;
         //currentAngle = Mathf.Clamp(currentAngle, -35, 35);
@@ -146,15 +145,15 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.MoveRotation(resRot);
     }
 
-    private void MoveKeyboard()
-    {
-        var yInput = Input.GetAxisRaw("Vertical");
-        var xInput = Input.GetAxisRaw("Horizontal");
+    //private void MoveKeyboard()
+    //{
+    //    var yInput = Input.GetAxisRaw("Vertical");
+    //    var xInput = Input.GetAxisRaw("Horizontal");
 
-        var dir = new Vector3(xInput, 0, yInput).normalized;
+    //    var dir = new Vector3(xInput, 0, yInput).normalized;
 
-        _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime * _moveSpeed);
-    }
+    //    _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime * _moveSpeed);
+    //}
 
     private void Jump()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public RaceCameraSplineFollower raceCamera;
-    public SplineProjector splineProjector;
+    public SplineProjector _splineProjector;
 
     [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
@@ -41,13 +41,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentSpeed += _acceleration * Time.deltaTime;
             _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
-
-            //raceCamera.Move(_currentSpeed);
         }
         else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
-            //raceCamera.Move(_currentSpeed);
+
+            var currentRot = transform.forward;
+            var splineForwardRot = _splineProjector.result.forward;
+            var targetRot = Quaternion.FromToRotation(currentRot, splineForwardRot);
         }
 
         if (_currentSpeed <= _minSpeed)
@@ -61,8 +62,9 @@ public class PlayerMovement : MonoBehaviour
             Go();
         }
 
-        var dir =  /*-splineProjector.result.forward*/ Vector3.forward * _currentSpeed;
-        _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime);
+        var direction = transform.TransformDirection(Vector3.forward);
+        var velocity = direction * Time.deltaTime * _currentSpeed;
+        _rigidbody.MovePosition(_rigidbody.position + velocity);
     }
 
     private void Go()
@@ -171,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        splineProjector = GetComponent<SplineProjector>();
+        _splineProjector = GetComponent<SplineProjector>();
     }
 
     private void FixedUpdate()

@@ -56,15 +56,12 @@ public class PlayerGravity : MonoBehaviour
             targetRot *= _rigidbody.rotation;
             var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _smoothRotation);
 
-
             //TODO: move all the physics to FixedUpdate
             _rigidbody.MoveRotation(newRot);
             _rigidbody.AddForce(hit.normal.normalized * _gravity);
 
             hitTemp = hit;
         }
-
-
 
         //if (Input.GetKeyDown("space"))
         //{

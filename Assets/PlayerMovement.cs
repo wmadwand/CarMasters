@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _rotationSmooth = 10;
     [SerializeField] private Transform _limiter;
     [SerializeField] private float _rotationSpeedToSpline = 5;
+    [SerializeField] private bool _shouldLookAlongSplineForward = true;
 
     [Header("Jump")]
     [SerializeField] private float _jumpPower = 2;
@@ -47,7 +48,10 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
 
-            LookAlongSplineForward();
+            if (_shouldLookAlongSplineForward)
+            {
+                LookAlongSplineForward();
+            }
         }
 
         if (_currentSpeed <= _minSpeed)
@@ -61,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             Go();
         }
 
-        var direction = transform.TransformDirection(Vector3.forward);
+        var direction = transform.forward;
         var velocity = direction * Time.deltaTime * _currentSpeed;
         _rigidbody.MovePosition(_rigidbody.position + velocity);
     }

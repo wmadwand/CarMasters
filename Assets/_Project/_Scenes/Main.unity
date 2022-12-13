@@ -583,7 +583,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396206034}
-  m_LocalRotation: {x: 0.0005395557, y: -0.82702625, z: -0.0007937683, w: -0.56216246}
+  m_LocalRotation: {x: 0.00053955504, y: -0.82702625, z: -0.00079376873, w: -0.56216246}
   m_LocalPosition: {x: 7.0131917, y: 3.3246799, z: 23.503685}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceCamera: {fileID: 0}
-  splineProjector: {fileID: 0}
+  _splineProjector: {fileID: 0}
   _maxSpeed: 20
   _minSpeed: 0
   _acceleration: 5
@@ -632,6 +632,7 @@ MonoBehaviour:
   _rotationSpeed: 100
   _rotationSmooth: 50
   _limiter: {fileID: 670863528}
+  _rotationSpeedToSpline: 5
   _jumpPower: 2
 --- !u!114 &396206040
 MonoBehaviour:
@@ -1936,8 +1937,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.017915983, y: 0.5233165, z: 0.011005941, w: 0.85187894}
-  m_LocalPosition: {x: -0.65125185, y: 3.1343863, z: 24.265974}
+  m_LocalRotation: {x: -0.017915988, y: 0.5233166, z: 0.011005946, w: 0.85187894}
+  m_LocalPosition: {x: -0.6512508, y: 3.1343863, z: 24.265974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2031,19 +2032,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 963194228}
   _result:
-    position: {x: -0.65125185, y: 3.1343863, z: 24.265974}
+    position: {x: -0.6512508, y: 3.1343863, z: 24.265974}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.8912102, y: 0.042043675, z: 0.4516377}
+    forward: {x: 0.8912103, y: 0.042043686, z: 0.45163757}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.9331823403839521
+    percent: 0.9331823587417603
   _finalResult:
-    position: {x: -0.65125185, y: 3.1343863, z: 24.265974}
+    position: {x: -0.6512508, y: 3.1343863, z: 24.265974}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.8912102, y: 0.042043675, z: 0.4516377}
+    forward: {x: 0.8912103, y: 0.042043686, z: 0.45163757}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.9331823403839521
+    percent: 0.9331823587417603
   _targetObject: {fileID: 0}
   _followTarget: {fileID: 396206042}
   _followTargetDistance: 8

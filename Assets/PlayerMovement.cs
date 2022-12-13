@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public RaceCameraSplineFollower raceCamera;
-    public SplineProjector _splineProjector;
+    [SerializeField] private RaceCameraSplineFollower raceCamera;
+    [SerializeField] private SplineProjector _splineProjector;
 
     [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 1;
     [SerializeField] private float _rotationSmooth = 10;
     [SerializeField] private Transform _limiter;
+    [SerializeField] private float _rotationSpeedToSpline = 5;
 
     [Header("Jump")]
     [SerializeField] private float _jumpPower = 2;
@@ -46,20 +47,18 @@ public class PlayerMovement : MonoBehaviour
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
 
-            var currentRot = transform.forward;
-            var splineForwardRot = _splineProjector.result.forward;
-            var targetRot = Quaternion.FromToRotation(currentRot, splineForwardRot);
+            LookAlongSplineForward();
         }
 
         if (_currentSpeed <= _minSpeed)
         {
-            Stop();
+            //Stop();
 
             return;
         }
         else
         {
-            Go();
+            //Go();
         }
 
         var direction = transform.TransformDirection(Vector3.forward);
@@ -129,19 +128,14 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.rotation = targetRot;
     }
 
-    float currentAngle = 0;
-
-    private void Rotation3()
+    private void LookAlongSplineForward()
     {
-        var degrees = Input.GetAxis("Mouse X");
-        var degreesRes = degrees * _rotationSpeed * Time.deltaTime;
-        currentAngle += degreesRes;
-        currentAngle = Mathf.Clamp(currentAngle, -35, 35);
+        var playerForward = transform.forward;
+        var splineForward = _splineProjector.result.forward;
+        var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
+        targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationSpeedToSpline);
 
-        var GroundNormalVector = GetComponent<PlayerGravity>().GetGravityNormal;
-        var targetRot = Quaternion.AngleAxis(currentAngle, GroundNormalVector);
-
-        _limiter.rotation =/* _limiter.rotation **/ targetRot;/* Quaternion.Slerp(_limiter.rotation, targetRot, Time.deltaTime * _rotationSmooth);*/
+        _rigidbody.MoveRotation(targetRot);
     }
 
     private void Rotation3Extra()
@@ -174,6 +168,15 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _splineProjector = GetComponent<SplineProjector>();
+    }
+
+    private void Update()
+    {
+
+        Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
+
+        var currentRot = transform.TransformDirection(Vector3.forward);
+        Debug.DrawRay(transform.position, currentRot * 1000, Color.blue);
     }
 
     private void FixedUpdate()

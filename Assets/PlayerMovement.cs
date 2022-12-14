@@ -110,25 +110,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotation2() // WORKING ONE !!
     {
-        var angle = Input.GetAxis("Mouse X");
+        var angle = Input.GetAxisRaw("Mouse X");
         angle *= Time.deltaTime * _rotationSpeed;
-        var yAxis = transform.TransformDirection(Vector3.up);
-        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, yAxis);
-
-        //currentAngle += degreesRes;
-        //currentAngle = Mathf.Clamp(currentAngle, -35, 35);
-
-        //if (_rigidbody.rotation.eulerAngles.y >= 35 )
-        //{
-        //    targetRot = startRot * Quaternion.AngleAxis(-5, Vector3.up);
-        //}
-        //else if (_rigidbody.rotation.eulerAngles.y <= -35)
-        //{
-        //    targetRot = startRot * Quaternion.AngleAxis(5, Vector3.up);
-        //}
-
-        //var newRot = Quaternion.Slerp(startRot, targetRot, _rotationSmooth * Time.deltaTime);
-        _rigidbody.rotation = targetRot;
+        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
+        _rigidbody.MoveRotation(targetRot);
     }
 
     private void LookAlongSplineForward()
@@ -148,16 +133,6 @@ public class PlayerMovement : MonoBehaviour
         var resRot = Quaternion.RotateTowards(_rigidbody.rotation, _limiter.rotation, Time.deltaTime * _rotationSmooth);
         _rigidbody.MoveRotation(resRot);
     }
-
-    //private void MoveKeyboard()
-    //{
-    //    var yInput = Input.GetAxisRaw("Vertical");
-    //    var xInput = Input.GetAxisRaw("Horizontal");
-
-    //    var dir = new Vector3(xInput, 0, yInput).normalized;
-
-    //    _rigidbody.MovePosition(_rigidbody.position + transform.TransformDirection(dir) * Time.deltaTime * _moveSpeed);
-    //}
 
     private void Jump()
     {

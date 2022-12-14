@@ -129,6 +129,8 @@ public class PlayerMovement : MonoBehaviour
     {
         var inputAngleRotation = xInput * _rotationSpeed;
 
+        Debug.Log($"inputAngleRotation {inputAngleRotation}");
+
         if (_currentSpeed > _minSpeed)
         {
             //var dir = _splineProjector.result.forward;
@@ -137,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
             //    dir = transform.forward;
             //}
 
-           var dir = transform.forward;
+            var dir = transform.forward;
             DoMove(dir);
         }
 
@@ -149,6 +151,9 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                xInput = 0;
+
+
                 if (_shouldLookAlongSplineForward)
                 {
                     LookAlongSplineForward();

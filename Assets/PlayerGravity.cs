@@ -7,6 +7,8 @@ public class PlayerGravity : MonoBehaviour
     [SerializeField] private float _rayLength = 10;
     [SerializeField] private LayerMask _groundLayerMask;
 
+    [SerializeField] private float _jumpPower;
+
     private Rigidbody _rigidbody = null;
     private int _groundLayerIndex = 0;
 
@@ -63,9 +65,9 @@ public class PlayerGravity : MonoBehaviour
             hitTemp = hit;
         }
 
-        //if (Input.GetKeyDown("space"))
-        //{
-        //    rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
-        //}
+        if (Input.GetKeyDown("space"))
+        {
+            _rigidbody.AddForce(hit.normal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
+        }
     }
 }

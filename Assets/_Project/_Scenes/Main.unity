@@ -807,7 +807,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396206034}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
-  m_LocalPosition: {x: 21.62, y: 2.42, z: -20.88}
+  m_LocalPosition: {x: 21.62, y: 2.42, z: -20.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -846,14 +846,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceCamera: {fileID: 0}
-  _maxSpeed: 20
+  _maxSpeed: 15
   _minSpeed: 0
-  _acceleration: 5
-  _deceleration: 5
-  _rotationSpeed: 50
+  _acceleration: 3
+  _deceleration: 3
+  _rotationSpeed: 2
   _rotationSmooth: 10
   _rotationValuableRate: 15
-  _rotationToSplineSpeed: 20
+  _rotationToSplineSpeed: 50
   _shouldLookAlongSplineForward: 1
   _jumpPower: 2
 --- !u!114 &396206040
@@ -972,19 +972,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 0}
   _result:
-    position: {x: 21.622528, y: 6.34, z: -20.603468}
+    position: {x: 21.619146, y: 6.34, z: -20.603437}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.99999994, y: 0, z: -0.00017204507}
+    forward: {x: -0.99999994, y: 0, z: -0.00028224287}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.7106296517490561
+    percent: 0.7106423471488205
   _finalResult:
-    position: {x: 21.622528, y: 6.34, z: -20.603468}
+    position: {x: 21.619146, y: 6.34, z: -20.603437}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.99999994, y: 0, z: -0.00017204507}
+    forward: {x: -0.99999994, y: 0, z: -0.00028224287}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.7106296517490561
+    percent: 0.7106423471488205
   _mode: 1
   _autoProject: 1
   _subdivide: 4
@@ -993,7 +993,7 @@ MonoBehaviour:
   _targetObject: {fileID: 396206034}
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  lastPosition: {x: 21.62, y: 2.42, z: -20.88}
+  lastPosition: {x: 21.62, y: 2.42, z: -20.51}
 --- !u!1 &497261481
 GameObject:
   m_ObjectHideFlags: 0
@@ -2337,14 +2337,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590661793}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &590661795
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2416,7 +2416,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590661793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.57, y: 3.29, z: -23.18}
+  m_LocalPosition: {x: 9.57, y: 3.29, z: -24.45}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3284,14 +3284,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 730561865}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!1 &760828174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3936,8 +3936,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.09530127, y: 0.67746466, z: -0.08919036, w: -0.7238815}
-  m_LocalPosition: {x: 29.606268, y: 6.34, z: -21.074663}
+  m_LocalRotation: {x: -0.095303476, y: 0.6774466, z: -0.08918794, w: -0.7238985}
+  m_LocalPosition: {x: 29.60289, y: 6.34, z: -21.074432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4031,25 +4031,25 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 963194228}
   _result:
-    position: {x: 29.606268, y: 6.34, z: -21.074663}
+    position: {x: 29.60289, y: 6.34, z: -21.074432}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9978082, y: 0, z: 0.06617336}
+    forward: {x: -0.9978049, y: 0, z: 0.066223264}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.6692820191383362
+    percent: 0.6693031191825867
   _finalResult:
-    position: {x: 29.606268, y: 6.34, z: -21.074663}
+    position: {x: 29.60289, y: 6.34, z: -21.074432}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9978082, y: 0, z: 0.06617336}
+    forward: {x: -0.9978049, y: 0, z: 0.066223264}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.6692820191383362
+    percent: 0.6693031191825867
   _targetObject: {fileID: 0}
   _followTarget: {fileID: 396206042}
   _followTargetDistance: 8
   _followLoop: 1
   _followTargetDirection: -1
-  _position: 0.669282
+  _position: 0.6693031
   _mode: 0
 --- !u!1 &971209572
 GameObject:

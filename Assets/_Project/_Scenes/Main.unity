@@ -850,7 +850,7 @@ MonoBehaviour:
   _minSpeed: 0
   _acceleration: 3
   _deceleration: 3
-  _rotationSpeed: 2
+  _rotationSpeed: 150
   _rotationSmooth: 10
   _rotationValuableRate: 15
   _rotationToSplineSpeed: 50
@@ -874,6 +874,7 @@ MonoBehaviour:
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  _jumpPower: 2
 --- !u!114 &396206041
 MonoBehaviour:
   m_ObjectHideFlags: 0

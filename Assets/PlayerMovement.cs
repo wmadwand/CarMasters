@@ -46,11 +46,6 @@ public class PlayerMovement : MonoBehaviour
         else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
-
-            if (_shouldLookAlongSplineForward)
-            {
-                LookAlongSplineForward();
-            }
         }
 
         if (_currentSpeed <= _minSpeed)
@@ -63,9 +58,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void DoMove()
+    void DoMove(Vector3 direction)
     {
-        var direction = transform.forward;
+        //var direction = transform.forward;
+        //direction = _splineProjector.result.forward;
         var velocity = direction * Time.deltaTime * _currentSpeed;
         _rigidbody.MovePosition(_rigidbody.position + velocity);
     }
@@ -131,20 +127,37 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var inputAngleRotation = xInput * _rotationSpeed;
+
         if (_currentSpeed > _minSpeed)
         {
-            DoMove();
+            //var dir = _splineProjector.result.forward;
+            //if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
+            //{
+            //    dir = transform.forward;
+            //}
+
+           var dir = transform.forward;
+            DoMove(dir);
         }
 
         if (_isMoveButtonPressed)
         {
-            var inputAngleRotation = xInput * _rotationSpeed;
-
             if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
             {
                 Rotation(inputAngleRotation);
             }
             else
+            {
+                if (_shouldLookAlongSplineForward)
+                {
+                    LookAlongSplineForward();
+                }
+            }
+        }
+        else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
+        {
+            if (_shouldLookAlongSplineForward)
             {
                 LookAlongSplineForward();
             }

@@ -850,10 +850,10 @@ MonoBehaviour:
   _minSpeed: 0
   _acceleration: 3
   _deceleration: 3
-  _rotationSpeed: 150
+  _rotationSpeed: 2
   _rotationSmooth: 10
   _rotationValuableRate: 15
-  _rotationToSplineSpeed: 50
+  _rotationToSplineSpeed: 2
   _shouldLookAlongSplineForward: 1
   _jumpPower: 2
 --- !u!114 &396206040
@@ -3938,7 +3938,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0.095303476, y: 0.6774466, z: -0.08918794, w: -0.7238985}
-  m_LocalPosition: {x: 29.60289, y: 6.34, z: -21.074432}
+  m_LocalPosition: {x: 29.602888, y: 6.34, z: -21.074432}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4032,19 +4032,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 963194228}
   _result:
-    position: {x: 29.60289, y: 6.34, z: -21.074432}
+    position: {x: 29.602888, y: 6.34, z: -21.074432}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9978049, y: 0, z: 0.066223264}
+    forward: {x: -0.9978049, y: 0, z: 0.06622331}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.6693031191825867
+    percent: 0.6693031376891002
   _finalResult:
-    position: {x: 29.60289, y: 6.34, z: -21.074432}
+    position: {x: 29.602888, y: 6.34, z: -21.074432}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9978049, y: 0, z: 0.066223264}
+    forward: {x: -0.9978049, y: 0, z: 0.06622331}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.6693031191825867
+    percent: 0.6693031376891002
   _targetObject: {fileID: 0}
   _followTarget: {fileID: 396206042}
   _followTargetDistance: 8
@@ -4904,6 +4904,7 @@ GameObject:
   - component: {fileID: 1119969992}
   - component: {fileID: 1119969991}
   - component: {fileID: 1119969990}
+  - component: {fileID: 1119969994}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -5027,6 +5028,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119969988}
   m_CullTransparentMesh: 1
+--- !u!114 &1119969994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119969988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf88c2e13793864d903050c78aff199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test: {fileID: 0}
+  player: {fileID: 396206039}
 --- !u!1 &1272951261
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     float delta;
 
     public RotationHandlerTest test;
+    public PlayerMovement player;
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
@@ -28,6 +29,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
     private void Update()
     {
-        test.SetXInput(delta);
+        test?.SetXInput(delta);
+        player?.SetXInput(delta);
     }
 }

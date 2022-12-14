@@ -115,9 +115,14 @@ public class PlayerMovement : MonoBehaviour
         _splineProjector = GetComponent<SplineProjector>();
     }
 
+    public void SetXInput(float value)
+    {
+        xInput = value;
+    }
+
     private void Update()
     {
-        xInput = Input.GetAxisRaw("Mouse X");
+        //xInput = Input.GetAxisRaw("Mouse X");
 
         CalculateMove();
 

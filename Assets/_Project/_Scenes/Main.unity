@@ -805,7 +805,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396206034}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
   m_LocalPosition: {x: 15, y: 0.29, z: -8.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2621,8 +2621,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.08900617, y: 0.7251854, z: -0.09547249, w: -0.67606884}
-  m_LocalPosition: {x: 22.996723, y: 4.1000004, z: -8.420351}
+  m_LocalRotation: {x: 0.08900613, y: -0.7251854, z: 0.09547244, w: 0.6760689}
+  m_LocalPosition: {x: 22.996717, y: 4.1000004, z: -8.420351}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2716,19 +2716,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 963194228}
   _result:
-    position: {x: 22.996723, y: 4.1000004, z: -8.420351}
+    position: {x: 22.996717, y: 4.1000004, z: -8.420351}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9975457, y: 0, z: -0.07001804}
+    forward: {x: -0.9975457, y: 0, z: -0.070017986}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.7799278323450092
+    percent: 0.7799278497695923
   _finalResult:
-    position: {x: 22.996723, y: 4.1000004, z: -8.420351}
+    position: {x: 22.996717, y: 4.1000004, z: -8.420351}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9975457, y: 0, z: -0.07001804}
+    forward: {x: -0.9975457, y: 0, z: -0.070017986}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.7799278323450092
+    percent: 0.7799278497695923
   _targetObject: {fileID: 0}
   _followTarget: {fileID: 396206042}
   _followTargetDistance: 8
@@ -2863,14 +2863,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055053632}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 963194228}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &1055053634
 CapsuleCollider:
   m_ObjectHideFlags: 0

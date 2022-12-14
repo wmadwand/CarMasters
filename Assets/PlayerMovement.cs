@@ -4,28 +4,27 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private RaceCameraSplineFollower raceCamera;
-    [SerializeField] private SplineProjector _splineProjector;
 
     [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
     [SerializeField] private float _minSpeed = 0;
     [SerializeField] private float _acceleration = 1;
     [SerializeField] private float _deceleration = 2;
-    //[SerializeField] private float _moveSpeed = 10;
 
     [Header("Rotation")]
     [SerializeField] private float _rotationSpeed = 1;
     [SerializeField] private float _rotationSmooth = 10;
-    [SerializeField] private Transform _limiter;
-    [SerializeField] private float _rotationSpeedToSpline = 5;
+    [SerializeField] private float _rotationValuableRate = 3;
+    [SerializeField] private float _rotationToSplineSpeed = 5;
     [SerializeField] private bool _shouldLookAlongSplineForward = true;
 
     [Header("Jump")]
     [SerializeField] private float _jumpPower = 2;
 
+    private SplineProjector _splineProjector;
     private float _currentSpeed = 0;
+    private float xInput = 0;
     private bool _isMoveButtonPressed = false;
-    private float _currentAngle = 0;
     private Rigidbody _rigidbody = null;
 
     //---------------------------------------------------------------
@@ -37,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     //---------------------------------------------------------------
 
-    private void Move()
+    private void CalculateMove()
     {
         if (_isMoveButtonPressed)
         {
@@ -57,14 +56,15 @@ public class PlayerMovement : MonoBehaviour
         if (_currentSpeed <= _minSpeed)
         {
             Stop();
-
-            return;
         }
         else
         {
             Go();
         }
+    }
 
+    void DoMove()
+    {
         var direction = transform.forward;
         var velocity = direction * Time.deltaTime * _currentSpeed;
         _rigidbody.MovePosition(_rigidbody.position + velocity);
@@ -87,32 +87,11 @@ public class PlayerMovement : MonoBehaviour
         //TODO freeze position
     }
 
-    private void Rotation()
+    private void Rotation(float angle)
     {
-        var inputHorizontal = Input.GetAxis("Mouse X");
-
-        Debug.Log($"inputHorizontal {inputHorizontal}");
-
-        var degrees = /*Mathf.Rad2Deg **/ inputHorizontal;
-        var inputAngle = degrees * _rotationSpeed * Time.deltaTime;
-        var newAngle = _currentAngle + inputAngle;
-        _currentAngle = Mathf.Clamp(newAngle, -35, 35);
-
-        var newRotInput = Quaternion.Euler(0, _currentAngle, 0);
-        //targetRot = targetRot * rigidbody.rotation;
-
-        //newRotInput = Quaternion.Slerp(transform.rotation, targetRot, smoothRotation * Time.deltaTime);
-
-        Debug.Log($"currentRotation degrees {degrees}");
-        //rigidbody.MoveRotation(newRot);
-        //transform.rotation = newRotInput;
-    }
-
-    private void Rotation2() // WORKING ONE !!
-    {
-        var angle = Input.GetAxisRaw("Mouse X");
-        angle *= Time.deltaTime * _rotationSpeed;
+        angle *= Time.deltaTime;
         var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
+
         _rigidbody.MoveRotation(targetRot);
     }
 
@@ -121,17 +100,9 @@ public class PlayerMovement : MonoBehaviour
         var playerForward = transform.forward;
         var splineForward = _splineProjector.result.forward;
         var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
-        targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationSpeedToSpline);
+        targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationToSplineSpeed);
 
         _rigidbody.MoveRotation(targetRot);
-    }
-
-    private void Rotation3Extra()
-    {
-        //var direction = 
-
-        var resRot = Quaternion.RotateTowards(_rigidbody.rotation, _limiter.rotation, Time.deltaTime * _rotationSmooth);
-        _rigidbody.MoveRotation(resRot);
     }
 
     private void Jump()
@@ -150,22 +121,33 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        xInput = Input.GetAxisRaw("Mouse X");
+
+        CalculateMove();
 
         Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
-
-        var currentRot = transform.TransformDirection(Vector3.forward);
-        Debug.DrawRay(transform.position, currentRot * 1000, Color.blue);
+        Debug.DrawRay(transform.position, transform.forward * 1000, Color.blue);
     }
 
     private void FixedUpdate()
     {
-        Move();
+        if (_currentSpeed > _minSpeed)
+        {
+            DoMove();
+        }
 
         if (_isMoveButtonPressed)
         {
-            //Rotation3();
-            //Rotation3Extra();
-            Rotation2();
+            var inputAngleRotation = xInput * _rotationSpeed;
+
+            if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
+            {
+                Rotation(inputAngleRotation);
+            }
+            else
+            {
+                LookAlongSplineForward();
+            }
         }
     }
 }

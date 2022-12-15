@@ -8,7 +8,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     float delta;
 
     public RotationHandlerTest test;
-    public PlayerMovement player;
+    public PlayerRotation player;
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {

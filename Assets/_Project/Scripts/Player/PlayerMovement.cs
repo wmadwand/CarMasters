@@ -1,29 +1,15 @@
-﻿using Dreamteck.Splines;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private RaceCameraSplineFollower raceCamera;
-
-    [Header("Move")]
     [SerializeField] private float _maxSpeed = 100;
     [SerializeField] private float _minSpeed = 0;
     [SerializeField] private float _acceleration = 1;
     [SerializeField] private float _deceleration = 2;
 
-    [Header("Rotation")]
-    [SerializeField] private float _rotationSpeed = 1;
-    [SerializeField] private float _rotationSmooth = 10;
-    [SerializeField] private float _rotationValuableRate = 3;
-    [SerializeField] private float _rotationToSplineSpeed = 5;
-    [SerializeField] private bool _shouldLookAlongSplineForward = true;
+    public bool IsMoving => _currentSpeed > _minSpeed;
 
-    [Header("Jump")]
-    [SerializeField] private float _jumpPower = 2;
-
-    private SplineProjector _splineProjector;
     private float _currentSpeed = 0;
-    private float xInput = 0;
     private bool _isMoveButtonPressed = false;
     private Rigidbody _rigidbody = null;
 
@@ -58,10 +44,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void DoMove(Vector3 direction)
+    private void DoMove(Vector3 direction)
     {
-        //var direction = transform.forward;
-        //direction = _splineProjector.result.forward;
         var velocity = direction * Time.deltaTime * _currentSpeed;
         _rigidbody.MovePosition(_rigidbody.position + velocity);
     }
@@ -83,108 +67,24 @@ public class PlayerMovement : MonoBehaviour
         //TODO freeze position
     }
 
-    public void Rotation(float angle)
-    {
-        //if (Mathf.Abs(angle) <= _rotationValuableRate) return;
-
-        angle *= _rotationSpeed;
-        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
-        var res = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationSmooth);
-
-        _rigidbody.MoveRotation(res);
-    }
-
-    private void LookAlongSplineForward()
-    {
-        var playerForward = transform.forward;
-        var splineForward = _splineProjector.result.forward;
-        var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
-        targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationToSplineSpeed);
-
-        _rigidbody.MoveRotation(targetRot);
-    }
-
-    private void Jump()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            GetComponent<PlayerGravity>().Jump(_jumpPower);
-        }
-    }
-
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _splineProjector = GetComponent<SplineProjector>();
-    }
-
-    public void SetXInput(float value)
-    {
-        xInput = value;
     }
 
     private void Update()
     {
-        xInput = Input.GetAxis("Mouse X");
-
-        if (_isMoveButtonPressed)
-        {
-            Rotation(xInput);
-        }
-        
-
-
         CalculateMove();
 
-
-
-
-
-        Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
         Debug.DrawRay(transform.position, transform.forward * 1000, Color.blue);
     }
 
     private void FixedUpdate()
     {
-        var inputAngleRotation = xInput * _rotationSpeed;
-
-        Debug.Log($"inputAngleRotation {inputAngleRotation}");
-
         if (_currentSpeed > _minSpeed)
         {
-            //var dir = _splineProjector.result.forward;
-            //if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
-            //{
-            //    dir = transform.forward;
-            //}
-
             var dir = transform.forward;
             DoMove(dir);
-        }
-
-        if (_isMoveButtonPressed)
-        {
-            if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
-            {
-                //Rotation(inputAngleRotation);
-            }
-            else
-            {
-                xInput = 0;
-
-
-                if (_shouldLookAlongSplineForward)
-                {
-                    LookAlongSplineForward();
-                }
-            }
-        }
-        else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
-        {
-            if (_shouldLookAlongSplineForward)
-            {
-                LookAlongSplineForward();
-            }
-        }
+        }        
     }
 }

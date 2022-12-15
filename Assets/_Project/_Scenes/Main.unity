@@ -790,7 +790,9 @@ GameObject:
   - component: {fileID: 396206037}
   - component: {fileID: 396206041}
   - component: {fileID: 396206039}
+  - component: {fileID: 396206043}
   - component: {fileID: 396206040}
+  - component: {fileID: 396206044}
   - component: {fileID: 396206042}
   m_Layer: 0
   m_Name: Player
@@ -845,17 +847,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8d472f51ee26084a9b64142534e4c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raceCamera: {fileID: 0}
   _maxSpeed: 15
   _minSpeed: 0
   _acceleration: 3
   _deceleration: 3
-  _rotationSpeed: 20
-  _rotationSmooth: 10
-  _rotationValuableRate: 15
-  _rotationToSplineSpeed: 50
-  _shouldLookAlongSplineForward: 1
-  _jumpPower: 2
 --- !u!114 &396206040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,6 +990,36 @@ MonoBehaviour:
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
   lastPosition: {x: 21.62, y: 2.42, z: -20.51}
+--- !u!114 &396206043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396206034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284069e4043792f40b199c17f58f01b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 5
+  _rotationSmooth: 10
+  _rotationValuableRate: 3
+  _rotationToSplineSpeedAutopilot: 50
+  _rotationToSplineSpeedAfterManulaTurn: 10
+  _shouldLookAlongSplineForward: 1
+--- !u!114 &396206044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396206034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0062daf43ed3c5144b333cf887d6fa27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &497261481
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,7 +5066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 0}
-  player: {fileID: 396206039}
+  player: {fileID: 0}
 --- !u!1 &1272951261
 GameObject:
   m_ObjectHideFlags: 0

@@ -850,10 +850,10 @@ MonoBehaviour:
   _minSpeed: 0
   _acceleration: 3
   _deceleration: 3
-  _rotationSpeed: 2
+  _rotationSpeed: 20
   _rotationSmooth: 10
   _rotationValuableRate: 15
-  _rotationToSplineSpeed: 2
+  _rotationToSplineSpeed: 50
   _shouldLookAlongSplineForward: 1
   _jumpPower: 2
 --- !u!114 &396206040

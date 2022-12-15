@@ -83,12 +83,15 @@ public class PlayerMovement : MonoBehaviour
         //TODO freeze position
     }
 
-    private void Rotation(float angle)
+    public void Rotation(float angle)
     {
-        angle *= Time.deltaTime;
-        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
+        //if (Mathf.Abs(angle) <= _rotationValuableRate) return;
 
-        _rigidbody.MoveRotation(targetRot);
+        angle *= _rotationSpeed;
+        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
+        var res = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationSmooth);
+
+        _rigidbody.MoveRotation(res);
     }
 
     private void LookAlongSplineForward()
@@ -122,9 +125,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //xInput = Input.GetAxisRaw("Mouse X");
+        xInput = Input.GetAxis("Mouse X");
+
+        if (_isMoveButtonPressed)
+        {
+            Rotation(xInput);
+        }
+        
+
 
         CalculateMove();
+
+
+
+
 
         Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
         Debug.DrawRay(transform.position, transform.forward * 1000, Color.blue);
@@ -152,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
             {
-                Rotation(inputAngleRotation);
+                //Rotation(inputAngleRotation);
             }
             else
             {

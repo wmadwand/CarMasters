@@ -2,9 +2,12 @@ using Dreamteck.Splines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerRotation : MonoBehaviour
 {
+    public Image rotationDetector;
+
     [SerializeField] private float _rotationSpeed = 1;
     [SerializeField] private float _rotationSmooth = 10;
     [SerializeField] private float _rotationValuableRate = 3;
@@ -23,7 +26,7 @@ public class PlayerRotation : MonoBehaviour
 
     public void SetXInput(float value)
     {
-        //xInput = value;
+        xInput = value;
     }
 
     public void SetMove(bool isActive)
@@ -41,18 +44,20 @@ public class PlayerRotation : MonoBehaviour
 
     private void Update()
     {
-        xInput = Input.GetAxis("Mouse X");
+        //xInput = Input.GetAxis("Mouse X");
         var inputAngleRotation = xInput * _rotationSpeed;
 
-        if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate && _isMoveButtonPressed)
+        if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
         {
             _isRotatingByUser = true;
             _currentSpeed = _rotationToSplineSpeedAfterManulaTurn;
+            rotationDetector.color = Color.green;
         }
-        else if (Mathf.Abs(inputAngleRotation) < _rotationValuableRate && !_isMoveButtonPressed)
+        else if (Mathf.Abs(inputAngleRotation) < _rotationValuableRate /*&& !_isMoveButtonPressed*/)
         {
             _isRotatingByUser = false;
             _currentSpeed = _rotationToSplineSpeedAutopilot;
+            rotationDetector.color = Color.red;
         }
 
         Debug.Log($"inputAngleRotation {inputAngleRotation}");
@@ -72,7 +77,7 @@ public class PlayerRotation : MonoBehaviour
         {
             if (_shouldLookAlongSplineForward)
             {
-                _currentSpeed = _rotationToSplineSpeedAutopilot;
+                //_currentSpeed = _rotationToSplineSpeedAutopilot;
                 AutoRotation(_currentSpeed);
             }
         }

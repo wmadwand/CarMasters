@@ -10,17 +10,24 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public RotationHandlerTest test;
     public PlayerRotation player;
 
+    private Vector2 startPress;
+
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
-        delta = 0;
+        startPress = eventData.pressPosition;
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-        delta = eventData.delta.normalized.x;
-        //test?.Rotate(delta);
+        var currentPosition = eventData.position;
+        var direction = currentPosition - startPress;
+
+        //TODO: sqrMagnitude !!!
+        var delta = direction.magnitude * eventData.delta.normalized.x;
+
+        test?.Rotate(delta);
         player?.SetXInput(delta);
-        //Debug.Log($"delta {delta}");
+        Debug.Log($"delta {delta}");
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)

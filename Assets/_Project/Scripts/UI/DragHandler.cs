@@ -19,8 +19,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         delta = eventData.delta.normalized.x;
         //test?.Rotate(delta);
-
-        Debug.Log($"delta {delta}");
+        player?.SetXInput(delta);
+        //Debug.Log($"delta {delta}");
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
@@ -72,8 +72,8 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         //    }
         //}
 
-        test?.Rotate(x);
-        player?.SetXInput(delta);
+        //test?.Rotate(x);
+        //player?.SetXInput(delta);
 
 
     }

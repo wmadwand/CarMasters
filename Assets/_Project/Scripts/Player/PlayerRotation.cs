@@ -12,28 +12,18 @@ public class PlayerRotation : MonoBehaviour
     [SerializeField] private float _rotationToSplineSpeedAfterManulaTurn = 5;
     [SerializeField] private bool _shouldLookAlongSplineForward = true;
 
-    private float _currentRotationToSplineSpeed = 0;
+    private float _currentSpeed = 0;
     private Rigidbody _rigidbody = null;
     private SplineProjector _splineProjector = null;
     private float xInput = 0;
     private bool _isMoveButtonPressed = false;
+    private bool _isRotatingByUser = false;
 
     //---------------------------------------------------------------
 
-    public void Rotation(float angle)
-    {
-        //if (Mathf.Abs(angle) <= _rotationValuableRate) return;
-
-        angle *= _rotationSpeed;
-        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
-        var res = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationSmooth);
-
-        _rigidbody.MoveRotation(res);
-    }
-
     public void SetXInput(float value)
     {
-        xInput = value;
+        //xInput = value;
     }
 
     public void SetMove(bool isActive)
@@ -54,39 +44,61 @@ public class PlayerRotation : MonoBehaviour
         xInput = Input.GetAxis("Mouse X");
         var inputAngleRotation = xInput * _rotationSpeed;
 
+        if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate && _isMoveButtonPressed)
+        {
+            _isRotatingByUser = true;
+            _currentSpeed = _rotationToSplineSpeedAfterManulaTurn;
+        }
+        else if (Mathf.Abs(inputAngleRotation) < _rotationValuableRate && !_isMoveButtonPressed)
+        {
+            _isRotatingByUser = false;
+            _currentSpeed = _rotationToSplineSpeedAutopilot;
+        }
+
+        Debug.Log($"inputAngleRotation {inputAngleRotation}");
+
         if (_isMoveButtonPressed)
         {
-            if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
+            if (_isRotatingByUser)
             {
-                Rotation(xInput);
-                _currentRotationToSplineSpeed = _rotationToSplineSpeedAfterManulaTurn;
+                ManualRotation(xInput);
             }
             else
             {
-                xInput = 0;
-
-                if (_shouldLookAlongSplineForward)
-                {
-                    _currentRotationToSplineSpeed = _rotationToSplineSpeedAutopilot;
-                    LookAlongSplineForward(_currentRotationToSplineSpeed);
-                }
+                AutoRotation(_currentSpeed);
             }
-
-            Rotation(xInput);
         }
         else if (!_isMoveButtonPressed && GetComponent<PlayerMovement>().IsMoving)
         {
             if (_shouldLookAlongSplineForward)
             {
-                _currentRotationToSplineSpeed = _rotationToSplineSpeedAutopilot;
-                LookAlongSplineForward(_currentRotationToSplineSpeed);
+                _currentSpeed = _rotationToSplineSpeedAutopilot;
+                AutoRotation(_currentSpeed);
             }
         }
 
+        //if (Vector3.Dot(transform.forward, _splineProjector.result.forward) == 1)
+        //{
+        //    _isRotatingByUser = false;
+        //    _currentSpeed = _rotationToSplineSpeedAutopilot;
+        //}
+
+        Debug.Log($"_isRotatingByUser {_isRotatingByUser}");
         Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
     }
 
-    private void LookAlongSplineForward(float speed)
+    private void ManualRotation(float angle)
+    {
+        //if (Mathf.Abs(angle) <= _rotationValuableRate) return;
+
+        angle *= _rotationSpeed;
+        var targetRot = _rigidbody.rotation * Quaternion.AngleAxis(angle, transform.up);
+        var res = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _rotationSmooth);
+
+        _rigidbody.MoveRotation(res);
+    }
+
+    private void AutoRotation(float speed)
     {
         var playerForward = transform.forward;
         var splineForward = _splineProjector.result.forward;

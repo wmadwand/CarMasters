@@ -808,8 +808,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396206034}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
-  m_LocalPosition: {x: 21.62, y: 2.42, z: -20.51}
+  m_LocalRotation: {x: 0, y: 0.70720655, z: 0, w: -0.707007}
+  m_LocalPosition: {x: 67.4, y: 2.42, z: -20.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -948,7 +948,7 @@ MonoBehaviour:
     _rotationOffset: {x: 0, y: 0, z: 0}
     _baseScale: {x: 1, y: 1, z: 1}
     _2dMode: 0
-    velocityHandleMode: 3
+    velocityHandleMode: 0
     applyPositionX: 0
     applyPositionY: 0
     applyPositionZ: 0
@@ -968,19 +968,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 0}
   _result:
-    position: {x: 21.619146, y: 6.34, z: -20.603437}
+    position: {x: 67.382675, y: 6.34, z: -20.033913}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.99999994, y: 0, z: -0.00028224287}
+    forward: {x: -0.9992743, y: 0, z: -0.038089883}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.7106423471488205
+    percent: 0.5380340904192208
   _finalResult:
-    position: {x: 21.619146, y: 6.34, z: -20.603437}
+    position: {x: 67.382675, y: 6.34, z: -20.033913}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.99999994, y: 0, z: -0.00028224287}
+    forward: {x: -0.9992743, y: 0, z: -0.038089883}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.7106423471488205
+    percent: 0.5380340904192208
   _mode: 1
   _autoProject: 1
   _subdivide: 4
@@ -989,7 +989,7 @@ MonoBehaviour:
   _targetObject: {fileID: 396206034}
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  lastPosition: {x: 21.62, y: 2.42, z: -20.51}
+  lastPosition: {x: 67.4, y: 2.42, z: -20.51}
 --- !u!114 &396206043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,9 +1002,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284069e4043792f40b199c17f58f01b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 5
+  _rotationSpeed: 50
   _rotationSmooth: 10
-  _rotationValuableRate: 3
+  _rotationValuableRate: 10
   _rotationToSplineSpeedAutopilot: 50
   _rotationToSplineSpeedAfterManulaTurn: 10
   _shouldLookAlongSplineForward: 1
@@ -3962,8 +3962,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.095303476, y: 0.6774466, z: -0.08918794, w: -0.7238985}
-  m_LocalPosition: {x: 29.602888, y: 6.34, z: -21.074432}
+  m_LocalRotation: {x: -0.0948085, y: 0.6814422, z: -0.08971402, w: -0.7201384}
+  m_LocalPosition: {x: 75.3767, y: 6.34, z: -20.011068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4057,25 +4057,25 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 963194228}
   _result:
-    position: {x: 29.602888, y: 6.34, z: -21.074432}
+    position: {x: 75.3767, y: 6.34, z: -20.011068}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9978049, y: 0, z: 0.06622331}
+    forward: {x: -0.9984766, y: 0, z: 0.055176206}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.6693031376891002
+    percent: 0.5110104270128879
   _finalResult:
-    position: {x: 29.602888, y: 6.34, z: -21.074432}
+    position: {x: 75.3767, y: 6.34, z: -20.011068}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9978049, y: 0, z: 0.06622331}
+    forward: {x: -0.9984766, y: 0, z: 0.055176206}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.6693031376891002
+    percent: 0.5110104270128879
   _targetObject: {fileID: 0}
   _followTarget: {fileID: 396206042}
   _followTargetDistance: 8
   _followLoop: 1
   _followTargetDirection: -1
-  _position: 0.6693031
+  _position: 0.5110104
   _mode: 0
 --- !u!1 &971209572
 GameObject:
@@ -5066,7 +5066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: {fileID: 0}
-  player: {fileID: 0}
+  player: {fileID: 396206043}
 --- !u!1 &1272951261
 GameObject:
   m_ObjectHideFlags: 0

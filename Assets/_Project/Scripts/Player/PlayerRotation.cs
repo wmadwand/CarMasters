@@ -49,13 +49,13 @@ public class PlayerRotation : MonoBehaviour
         //xInput = Input.GetAxis("Mouse X");
         var inputAngleRotation = xInput * _rotationSpeed;
 
-        if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate)
+        if (Mathf.Abs(inputAngleRotation) > _rotationValuableRate && _isMoveButtonPressed)
         {
             _isRotatingByUser = true;
             _currentSpeed = _rotationToSplineSpeedAfterManulaTurn;
             rotationDetector.color = Color.green;
         }
-        else if (Mathf.Abs(inputAngleRotation) < _rotationValuableRate /*&& !_isMoveButtonPressed*/)
+        else if (Mathf.Abs(inputAngleRotation) < _rotationValuableRate || !_isMoveButtonPressed)
         {
             _isRotatingByUser = false;
             _currentSpeed = _rotationToSplineSpeedAutopilot;
@@ -79,7 +79,6 @@ public class PlayerRotation : MonoBehaviour
         {
             if (_shouldLookAlongSplineForward)
             {
-                //_currentSpeed = _rotationToSplineSpeedAutopilot;
                 AutoRotation(_currentSpeed);
             }
         }

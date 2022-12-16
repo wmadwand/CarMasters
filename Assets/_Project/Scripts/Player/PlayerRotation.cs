@@ -24,6 +24,8 @@ public class PlayerRotation : MonoBehaviour
 
     //---------------------------------------------------------------
 
+    public Vector3 SplineForward => _splineProjector.result.forward;
+
     public void SetXInput(float value)
     {
         xInput = value;

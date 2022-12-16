@@ -2,14 +2,14 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float _maxSpeed = 100;
-    [SerializeField] private float _minSpeed = 0;
-    [SerializeField] private float _acceleration = 1;
-    [SerializeField] private float _deceleration = 2;
+    [SerializeField] private float _maxSpeed = 100f;
+    [SerializeField] private float _minSpeed = 0f;
+    [SerializeField] private float _acceleration = 1f;
+    [SerializeField] private float _deceleration = 2f;
 
     public bool IsMoving => _currentSpeed > _minSpeed;
 
-    private float _currentSpeed = 0;
+    private float _currentSpeed = 0f;
     private bool _isMoveButtonPressed = false;
     private Rigidbody _rigidbody = null;
 

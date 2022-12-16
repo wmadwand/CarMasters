@@ -60,9 +60,9 @@ public class PlayerRotation : MonoBehaviour
             _isRotatingByUser = false;
             _currentSpeed = _rotationToSplineSpeedAutopilot;
             rotationDetector.color = Color.red;
-        }
 
-        //Debug.Log($"inputAngleRotation {inputAngleRotation}");
+            xInput = 0;
+        }        
 
         if (_isMoveButtonPressed)
         {

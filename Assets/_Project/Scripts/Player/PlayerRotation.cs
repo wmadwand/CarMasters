@@ -74,6 +74,11 @@ public class PlayerRotation : MonoBehaviour
             xInput = 0;
         }
 
+        if (!_isMoveButtonPressed)
+        {
+            xInput = 0;
+        }
+
         if (_isMoveButtonPressed)
         {
             if (_isRotatingByUser)
@@ -84,7 +89,7 @@ public class PlayerRotation : MonoBehaviour
             {
                 if (_shouldLookAlongSplineForward)
                 {
-                    AutoRotation(_currentSpeed); 
+                    AutoRotation(_currentSpeed);
                 }
             }
         }

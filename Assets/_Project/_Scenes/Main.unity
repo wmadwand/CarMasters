@@ -1167,120 +1167,120 @@ MonoBehaviour:
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: -10.852763, y: 0.00000011920929, z: 52.98138}
-      tangent2: {x: -10.852763, y: 0.00000011920929, z: 52.98138}
+      tangent: {x: -10.852763, y: 0, z: 52.98138}
+      tangent2: {x: -10.852763, y: 0, z: 52.98138}
     - _type: 0
       position: {x: 1.4168916, y: 0, z: 63.62275}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 1.4168916, y: 0.00000011920929, z: 63.62275}
-      tangent2: {x: 1.4168916, y: 0.00000011920929, z: 63.62275}
+      tangent: {x: 1.4168916, y: 0, z: 63.62275}
+      tangent2: {x: 1.4168916, y: 0, z: 63.62275}
     - _type: 0
       position: {x: 24.380196, y: 0, z: 62.742043}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 24.380196, y: 0.00000011920929, z: 62.742043}
-      tangent2: {x: 24.380196, y: 0.00000011920929, z: 62.742043}
+      tangent: {x: 24.380196, y: 0, z: 62.742043}
+      tangent2: {x: 24.380196, y: 0, z: 62.742043}
     - _type: 0
       position: {x: 54.335735, y: 0, z: 62.227436}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 54.335735, y: 0.00000011920929, z: 62.227436}
-      tangent2: {x: 54.335735, y: 0.00000011920929, z: 62.227436}
+      tangent: {x: 54.335735, y: 0, z: 62.227436}
+      tangent2: {x: 54.335735, y: 0, z: 62.227436}
     - _type: 0
       position: {x: 81.646774, y: 0, z: 63.39452}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 81.646774, y: 0.00000011920929, z: 63.39452}
-      tangent2: {x: 81.646774, y: 0.00000011920929, z: 63.39452}
+      tangent: {x: 81.646774, y: 0, z: 63.39452}
+      tangent2: {x: 81.646774, y: 0, z: 63.39452}
     - _type: 0
       position: {x: 99.66141, y: 0, z: 48.256027}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 99.66141, y: 0.00000011920929, z: 48.256027}
-      tangent2: {x: 99.66141, y: 0.00000011920929, z: 48.256027}
+      tangent: {x: 99.66141, y: 0, z: 48.256027}
+      tangent2: {x: 99.66141, y: 0, z: 48.256027}
     - _type: 0
       position: {x: 100.43179, y: 0, z: 19.820278}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 100.43179, y: 0.00000011920929, z: 19.820278}
-      tangent2: {x: 100.43179, y: 0.00000011920929, z: 19.820278}
+      tangent: {x: 100.43179, y: 0, z: 19.820278}
+      tangent2: {x: 100.43179, y: 0, z: 19.820278}
     - _type: 0
       position: {x: 100.801125, y: 0, z: -4.154953}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 100.801125, y: 0.00000011920929, z: -4.154953}
-      tangent2: {x: 100.801125, y: 0.00000011920929, z: -4.154953}
+      tangent: {x: 100.801125, y: 0, z: -4.154953}
+      tangent2: {x: 100.801125, y: 0, z: -4.154953}
     - _type: 0
       position: {x: 85.946236, y: 0, z: -18.632643}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 85.946236, y: 0.00000011920929, z: -18.632643}
-      tangent2: {x: 85.946236, y: 0.00000011920929, z: -18.632643}
+      tangent: {x: 85.946236, y: 0, z: -18.632643}
+      tangent2: {x: 85.946236, y: 0, z: -18.632643}
     - _type: 0
       position: {x: 70.10538, y: 0, z: -19.915157}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 70.10538, y: 0.00000011920929, z: -19.915157}
-      tangent2: {x: 70.10538, y: 0.00000011920929, z: -19.915157}
+      tangent: {x: 70.10538, y: 0, z: -19.915157}
+      tangent2: {x: 70.10538, y: 0, z: -19.915157}
     - _type: 0
       position: {x: 50.382114, y: 0, z: -20.485699}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 50.382114, y: 0.00000011920929, z: -20.485699}
-      tangent2: {x: 50.382114, y: 0.00000011920929, z: -20.485699}
+      tangent: {x: 50.382114, y: 0, z: -20.485699}
+      tangent2: {x: 50.382114, y: 0, z: -20.485699}
     - _type: 0
       position: {x: 33.800735, y: 0, z: -21.200836}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 33.800735, y: 0.00000011920929, z: -21.200836}
-      tangent2: {x: 33.800735, y: 0.00000011920929, z: -21.200836}
+      tangent: {x: 33.800735, y: 0, z: -21.200836}
+      tangent2: {x: 33.800735, y: 0, z: -21.200836}
     - _type: 0
       position: {x: 22.887096, y: 0, z: -20.615028}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 22.887096, y: 0.00000011920929, z: -20.615028}
-      tangent2: {x: 22.887096, y: 0.00000011920929, z: -20.615028}
+      tangent: {x: 22.887096, y: 0, z: -20.615028}
+      tangent2: {x: 22.887096, y: 0, z: -20.615028}
     - _type: 0
       position: {x: 4.3662295, y: 0, z: -19.992275}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: 4.3662295, y: 0.00000011920929, z: -19.992275}
-      tangent2: {x: 4.3662295, y: 0.00000011920929, z: -19.992275}
+      tangent: {x: 4.3662295, y: 0, z: -19.992275}
+      tangent2: {x: 4.3662295, y: 0, z: -19.992275}
     - _type: 0
       position: {x: -11.043306, y: 0, z: -9.954823}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: -11.043306, y: 0.00000011920929, z: -9.954823}
-      tangent2: {x: -11.043306, y: 0.00000011920929, z: -9.954823}
+      tangent: {x: -11.043306, y: 0, z: -9.954823}
+      tangent2: {x: -11.043306, y: 0, z: -9.954823}
     - _type: 0
       position: {x: -15.552606, y: 0, z: 14.238174}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: -15.552606, y: 0.00000011920929, z: 14.238174}
-      tangent2: {x: -15.552606, y: 0.00000011920929, z: 14.238174}
+      tangent: {x: -15.552606, y: 0, z: 14.238174}
+      tangent2: {x: -15.552606, y: 0, z: 14.238174}
     - _type: 0
       position: {x: -14.765991, y: 0, z: 33.439964}
       color: {r: 1, g: 1, b: 1, a: 1}
       normal: {x: 0, y: 1, z: 0}
       size: 1
-      tangent: {x: -14.765991, y: 0.00000011920929, z: 33.439964}
-      tangent2: {x: -14.765991, y: 0.00000011920929, z: 33.439964}
+      tangent: {x: -14.765991, y: 0, z: 33.439964}
+      tangent2: {x: -14.765991, y: 0, z: 33.439964}
     type: 0
     linearAverageDirection: 1
     customValueInterpolation:
@@ -1305,10 +1305,10 @@ MonoBehaviour:
   _space: 1
   _sampleMode: 0
   _subscribers:
-  - {fileID: 963194229}
   - {fileID: 396206042}
   - {fileID: 1738230576}
   - {fileID: 618810417}
+  - {fileID: 1844295178}
   _rawSamples:
   - position: {x: -10.852763, y: 0, z: 52.98138}
     up: {x: 0, y: 1, z: 0}
@@ -4085,7 +4085,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
@@ -4152,121 +4151,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.09229593, y: 0.7010574, z: -0.09229593, w: -0.7010574}
-  m_LocalPosition: {x: 75.37671, y: 6.34, z: -20.011068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1055053633}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1844295179}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 15, y: -90, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0def5156137c6d14082064fa7b5d5247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateMethod: 0
-  _spline: {fileID: 545428216}
-  _autoUpdate: 1
-  _rotationModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _offsetModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _colorModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _sizeModifier:
-    blend: 1
-    useClippedPercent: 0
-    keys: []
-  _clipFromSample:
-    position: {x: -10.852763, y: 6.34, z: 52.98138}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.47252843, y: 0, z: 0.88131547}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0
-  _clipToSample:
-    position: {x: -10.852763, y: 6.34, z: 52.98138}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.47252843, y: 0, z: 0.88131547}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 1
-  _loopSamples: 0
-  _clipFrom: 0
-  _clipTo: 1
-  animClipFrom: 0
-  animClipTo: 1
-  multithreaded: 0
-  buildOnAwake: 1
-  buildOnEnable: 0
-  applyDirectionRotation: 1
-  useTriggers: 0
-  triggerGroup: 0
-  _direction: 1
-  _dontLerpDirection: 0
-  _physicsMode: 0
-  _motion:
-    _hasOffset: 0
-    _hasRotationOffset: 0
-    _offset: {x: 0, y: 0}
-    _rotationOffset: {x: 0, y: 0, z: 0}
-    _baseScale: {x: 1, y: 1, z: 1}
-    _2dMode: 0
-    velocityHandleMode: 0
-    applyPositionX: 0
-    applyPositionY: 1
-    applyPositionZ: 1
-    applyPosition2D: 1
-    retainLocalPosition: 0
-    direction: 1
-    applyRotationX: 0
-    applyRotationY: 0
-    applyRotationZ: 1
-    applyRotation2D: 1
-    retainLocalRotation: 0
-    applyScaleX: 0
-    applyScaleY: 0
-    applyScaleZ: 0
-    targetUser: {fileID: 963194229}
-  targetRigidbody: {fileID: 0}
-  targetRigidbody2D: {fileID: 0}
-  targetTransform: {fileID: 963194228}
-  _result:
-    position: {x: 75.3767, y: 6.34, z: -20.011068}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9984766, y: 0, z: 0.055176206}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0.5110104270128879
-  _finalResult:
-    position: {x: 75.3767, y: 6.34, z: -20.011068}
-    up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9984766, y: 0, z: 0.055176206}
-    color: {r: 1, g: 1, b: 1, a: 1}
-    size: 1
-    percent: 0.5110104270128879
-  _targetObject: {fileID: 0}
-  _followTarget: {fileID: 396206042}
-  _followTargetDistance: 8
-  _followLoop: 1
-  _followTargetDirection: -1
-  _position: 0.5110104
-  _mode: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5902,14 +5795,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412960611}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 98.2}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.1, y: 0, z: 98.2}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1434469848
 GameObject:
   m_ObjectHideFlags: 0
@@ -6356,16 +6249,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 52.981388, y: 6.34, z: 10.852758}
+    position: {x: -10.852763, y: 6.34, z: 52.98138}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.8813155, y: 0, z: -0.47252858}
+    forward: {x: 0.47252843, y: 0, z: 0.88131547}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: 52.981388, y: 6.34, z: 10.852758}
+    position: {x: -10.852763, y: 6.34, z: 52.98138}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: 0.8813155, y: 0, z: -0.47252858}
+    forward: {x: 0.47252843, y: 0, z: 0.88131547}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -6476,6 +6369,145 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 72984e74574473c4d97b0cdbdbf138a9, type: 2}
+--- !u!1 &1844295177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844295179}
+  - component: {fileID: 1844295178}
+  m_Layer: 0
+  m_Name: RaceCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1844295178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844295177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0def5156137c6d14082064fa7b5d5247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateMethod: 0
+  _spline: {fileID: 545428216}
+  _autoUpdate: 1
+  _rotationModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _offsetModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _colorModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _sizeModifier:
+    blend: 1
+    useClippedPercent: 0
+    keys: []
+  _clipFromSample:
+    position: {x: -10.852763, y: 6.34, z: 52.98138}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0.47252843, y: 0, z: 0.88131547}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0
+  _clipToSample:
+    position: {x: -10.852763, y: 6.34, z: 52.98138}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: 0.47252843, y: 0, z: 0.88131547}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 1
+  _loopSamples: 0
+  _clipFrom: 0
+  _clipTo: 1
+  animClipFrom: 0
+  animClipTo: 1
+  multithreaded: 0
+  buildOnAwake: 1
+  buildOnEnable: 0
+  applyDirectionRotation: 1
+  useTriggers: 0
+  triggerGroup: 0
+  _direction: 1
+  _dontLerpDirection: 0
+  _physicsMode: 0
+  _motion:
+    _hasOffset: 0
+    _hasRotationOffset: 0
+    _offset: {x: 0, y: 0}
+    _rotationOffset: {x: 0, y: 0, z: 0}
+    _baseScale: {x: 1, y: 1, z: 1}
+    _2dMode: 0
+    velocityHandleMode: 0
+    applyPositionX: 1
+    applyPositionY: 1
+    applyPositionZ: 1
+    applyPosition2D: 1
+    retainLocalPosition: 0
+    direction: 1
+    applyRotationX: 1
+    applyRotationY: 0
+    applyRotationZ: 1
+    applyRotation2D: 1
+    retainLocalRotation: 0
+    applyScaleX: 0
+    applyScaleY: 0
+    applyScaleZ: 0
+    targetUser: {fileID: 1844295178}
+  targetRigidbody: {fileID: 0}
+  targetRigidbody2D: {fileID: 0}
+  targetTransform: {fileID: 1844295179}
+  _result:
+    position: {x: 75.37671, y: 6.34, z: -20.011068}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.9984766, y: 0, z: 0.055176236}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.5110104084014893
+  _finalResult:
+    position: {x: 75.37671, y: 6.34, z: -20.011068}
+    up: {x: 0, y: 1, z: 0}
+    forward: {x: -0.9984766, y: 0, z: 0.055176236}
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 1
+    percent: 0.5110104084014893
+  _targetObject: {fileID: 0}
+  _followTarget: {fileID: 396206042}
+  _followTargetDistance: 8
+  _followLoop: 0
+  _followTargetDirection: -1
+  _position: 0.5110104
+  _mode: 0
+--- !u!4 &1844295179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844295177}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
+  m_LocalPosition: {x: 75.37671, y: 6.34, z: -20.011068}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 963194228}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1883360804
 GameObject:
   m_ObjectHideFlags: 0
@@ -12457,7 +12489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1420414290395392556, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1420414290395392556, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12465,7 +12497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1420414290395392556, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1420414290395392556, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
       propertyPath: m_LocalRotation.z

@@ -27,7 +27,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
         test?.Rotate(delta);
         player?.SetXInput(delta);
-        Debug.Log($"delta {delta}");
+        //Debug.Log($"delta {delta}");
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)

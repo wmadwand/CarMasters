@@ -62,7 +62,7 @@ public class PlayerRotation : MonoBehaviour
             rotationDetector.color = Color.red;
         }
 
-        Debug.Log($"inputAngleRotation {inputAngleRotation}");
+        //Debug.Log($"inputAngleRotation {inputAngleRotation}");
 
         if (_isMoveButtonPressed)
         {

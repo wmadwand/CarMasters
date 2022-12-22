@@ -1524,12 +1524,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDetector: {fileID: 0}
-  _rotationSpeed: 0.01
-  _rotationSmooth: 10
-  _rotationValuableRate: 1
-  _rotationToSplineSpeedAutopilot: 100
-  _rotationToSplineSpeedAfterManulaTurn: 10
-  _shouldLookAlongSplineForward: 1
+  _speed: 0.01
+  _smooth: 10
+  _sensitivity: 1
+  _autoRotationToSplineSpeed: 100
+  _manualRotationToSplineSpeed: 10
+  _useAutoRotationToSpline: 1
 --- !u!114 &1420414290395392551
 MonoBehaviour:
   m_ObjectHideFlags: 0

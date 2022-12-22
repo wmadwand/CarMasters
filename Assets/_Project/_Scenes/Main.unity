@@ -4175,7 +4175,7 @@ MonoBehaviour:
   playerRotation: {fileID: 396206043}
   _rotationSpeed: 100
   _pitchRotationAngle: 15
-  _followingHorizontalSpeed: 50
+  _followingHorizontalSpeed: 5
 --- !u!1 &971209572
 GameObject:
   m_ObjectHideFlags: 0
@@ -6472,19 +6472,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 1844295179}
   _result:
-    position: {x: 75.3767, y: 6.34, z: -20.011068}
+    position: {x: 75.37671, y: 6.34, z: -20.011068}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9984766, y: 0, z: 0.055176206}
+    forward: {x: -0.9984766, y: 0, z: 0.055176236}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.5110104270128879
+    percent: 0.5110104084014893
   _finalResult:
-    position: {x: 75.3767, y: 6.34, z: -20.011068}
+    position: {x: 75.37671, y: 6.34, z: -20.011068}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9984766, y: 0, z: 0.055176206}
+    forward: {x: -0.9984766, y: 0, z: 0.055176236}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.5110104270128879
+    percent: 0.5110104084014893
   _targetObject: {fileID: 0}
   _followTarget: {fileID: 396206042}
   _followTargetDistance: 8
@@ -6500,7 +6500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844295177}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: -0.7071068}
-  m_LocalPosition: {x: 75.3767, y: 6.34, z: -20.011068}
+  m_LocalPosition: {x: 75.37671, y: 6.34, z: -20.011068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12459,10 +12459,6 @@ PrefabInstance:
       propertyPath: rotationDetector
       value: 
       objectReference: {fileID: 294916732}
-    - target: {fileID: 1420414290395392548, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
-      propertyPath: _rotationToSplineSpeedAutopilot
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 1420414290395392549, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
       propertyPath: _spline
       value: 

@@ -1526,8 +1526,8 @@ MonoBehaviour:
   rotationDetector: {fileID: 0}
   _rotationSpeed: 0.01
   _rotationSmooth: 10
-  _rotationValuableRate: 2
-  _rotationToSplineSpeedAutopilot: 50
+  _rotationValuableRate: 1
+  _rotationToSplineSpeedAutopilot: 100
   _rotationToSplineSpeedAfterManulaTurn: 10
   _shouldLookAlongSplineForward: 1
 --- !u!114 &1420414290395392551

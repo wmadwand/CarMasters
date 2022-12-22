@@ -19,7 +19,7 @@ public class PlayerGravity : MonoBehaviour
         //_rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
     }
 
-    public Vector3 GetGravityNormal => hitTemp.normal.normalized;
+    public Vector3 GetNormalVector => hitTemp.normal.normalized;
 
     //---------------------------------------------------------------
 

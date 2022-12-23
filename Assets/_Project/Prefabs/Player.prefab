@@ -1461,19 +1461,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 0}
   _result:
-    position: {x: 67.382675, y: 6.34, z: -20.033913}
+    position: {x: 67.058235, y: 6.34, z: -20.047892}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9992743, y: 0, z: -0.038089883}
+    forward: {x: -0.9993348, y: 0, z: -0.036469303}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.5380340904192208
+    percent: 0.5390579200000012
   _finalResult:
-    position: {x: 67.382675, y: 6.34, z: -20.033913}
+    position: {x: 67.058235, y: 6.34, z: -20.047892}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9992743, y: 0, z: -0.038089883}
+    forward: {x: -0.9993348, y: 0, z: -0.036469303}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.5380340904192208
+    percent: 0.5390579200000012
   _mode: 0
   _autoProject: 1
   _subdivide: 4
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   _targetObject: {fileID: 1420414290395392557}
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  lastPosition: {x: 67.4, y: 2.42, z: -20.51}
+  lastPosition: {x: 67.07417, y: 2.42, z: -20.51}
 --- !u!114 &1420414290395392550
 MonoBehaviour:
   m_ObjectHideFlags: 0

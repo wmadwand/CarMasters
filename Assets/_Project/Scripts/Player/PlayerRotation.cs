@@ -107,6 +107,7 @@ public class PlayerRotation : MonoBehaviour
 
         Debug.Log($"_isRotatingByUser {_isRotatingByUser}");
         Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
+        Debug.Log($"Current rotation speed {_currentSpeed}");
     }
 
     private void ManualRotation(float angle)

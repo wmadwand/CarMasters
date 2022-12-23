@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dreamteck.Splines;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -79,6 +80,14 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward * 1000, Color.blue);
     }
 
+    private void Start()
+    {
+        var _projector = GetComponent<SplineProjector>();
+        var startPosition = new Vector3(_projector.result.position.x, _rigidbody.position.y, _rigidbody.position.z);
+        
+        _rigidbody.position = _projector.result.position;
+    }
+
     private void FixedUpdate()
     {
         if (_currentSpeed > _minSpeed)
@@ -87,4 +96,8 @@ public class PlayerMovement : MonoBehaviour
             DoMove(dir);
         }        
     }
+}
+
+internal class SplineProjection
+{
 }

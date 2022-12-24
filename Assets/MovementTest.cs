@@ -6,6 +6,7 @@ using UnityEngine;
 public class MovementTest : MonoBehaviour
 {
     public float speed = 10;
+    public float xInputSpeed = 10;
 
     Rigidbody rigidbody;
 
@@ -27,10 +28,12 @@ public class MovementTest : MonoBehaviour
     void Update()
     {
         var yInput = Input.GetAxis("Vertical");
-        var xInput = Input.GetAxis("Vertical");
+        var xInput = Input.GetAxis("Mouse X");
 
         var velocity = splineProjector.result.forward * yInput * speed/* * Time.deltaTime*/;
         rigidbody.AddForce(velocity);
+
+        splineProjector.motion.offset += new Vector2(xInput * xInputSpeed * Time.deltaTime, splineProjector.motion.offset.y);
 
         //rigidbody.MovePosition(rigidbody.position + velocity);
     }

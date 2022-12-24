@@ -50,6 +50,7 @@ public class PlayerRotation02 : MonoBehaviour
     public float offsetLerpSpeed = 10;
     public float offsetMoveSpeed = 10;
     public Vector2 AngleMinMax = new Vector2(-30, 30);
+    public Vector2 roadWidthMinMax = new Vector2(-10, 10);
 
     private void Update()
     {
@@ -65,7 +66,11 @@ public class PlayerRotation02 : MonoBehaviour
         {
             _xInput = Input.GetAxis("Mouse X");
             var inputAngleRotation = _xInput * offsetMoveSpeed;
+
             var targetPos = _splineProjector.motion.offset + new Vector2(inputAngleRotation, _splineProjector.motion.offset.y);
+            var targetPosXClamped = Mathf.Clamp(targetPos.x, roadWidthMinMax.x, roadWidthMinMax.y);
+            targetPos = new Vector2(targetPosXClamped, targetPos.y);
+
             _splineProjector.motion.offset = Vector2.Lerp(_splineProjector.motion.offset, targetPos, offsetLerpSpeed * Time.deltaTime);
 
 

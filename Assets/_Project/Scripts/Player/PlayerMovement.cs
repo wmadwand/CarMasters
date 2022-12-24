@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private float _currentSpeed = 0f;
     private bool _isMoveButtonPressed = false;
     private Rigidbody _rigidbody = null;
+    SplineProjector _projector;
 
     //---------------------------------------------------------------
 
@@ -37,18 +38,20 @@ public class PlayerMovement : MonoBehaviour
 
         if (_currentSpeed <= _minSpeed)
         {
-            Stop();
+            //Stop();
         }
         else
         {
-            Go();
+            //Go();
         }
     }
 
     private void DoMove(Vector3 direction)
     {
-        var velocity = direction * Time.deltaTime * _currentSpeed;
-        _rigidbody.MovePosition(_rigidbody.position + velocity);
+        var velocity = direction /** Time.deltaTime*/ * _currentSpeed;
+        //_rigidbody.MovePosition(_rigidbody.position + velocity);
+
+        _rigidbody.AddForce(velocity);
     }
 
     private void Go()
@@ -71,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _projector = GetComponent<SplineProjector>();
     }
 
     private void Update()
@@ -92,12 +96,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_currentSpeed > _minSpeed)
         {
-            var dir = transform.forward;
+            //var dir = transform.forward;
+
+            var dir = _projector.result.forward;
             DoMove(dir);
         }        
     }
-}
-
-internal class SplineProjection
-{
 }

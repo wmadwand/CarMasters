@@ -92,14 +92,21 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.position = _projector.result.position;
     }
 
+    public void SetDirection(Vector3 value)
+    {
+        _direction = value;
+    }
+
+    private Vector3 _direction;
+
     private void FixedUpdate()
     {
         if (_currentSpeed > _minSpeed)
         {
             //var dir = transform.forward;
 
-            var dir = _projector.result.forward;
-            DoMove(dir);
+            //var dir = _projector.result.forward;
+            DoMove(_direction);
         }        
     }
 }

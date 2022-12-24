@@ -20,6 +20,8 @@ public class PlayerRotation02 : MonoBehaviour
     private bool _isMoveButtonPressed = false;
     private bool _isRotatingByUser = false;
 
+    PlayerMovement playerMovement;
+
     //---------------------------------------------------------------
 
     public Vector3 SplineForward => _splineProjector.result.forward;
@@ -39,12 +41,16 @@ public class PlayerRotation02 : MonoBehaviour
     private void Start()
     {
         _currentSpeed = _autoRotationToSplineSpeed;
+
+        ApplyProjectorPosition(true);
+        playerMovement.SetDirection(_splineProjector.result.forward);
     }
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _splineProjector = GetComponent<SplineProjector>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     public float offsetLerpSpeed = 10;
@@ -54,33 +60,35 @@ public class PlayerRotation02 : MonoBehaviour
 
     private void Update()
     {
-        //if (!_isMoveButtonPressed)
-        //{
-        //    _xInput = 0;
-        //}
-        //else
-        //{
-
-
         if (_isMoveButtonPressed)
         {
-            _xInput = Input.GetAxis("Mouse X");
+            //_xInput = Input.GetAxis("Mouse X");
             var inputAngleRotation = _xInput * offsetMoveSpeed;
 
-            var targetPos = _splineProjector.motion.offset + new Vector2(inputAngleRotation, _splineProjector.motion.offset.y);
-            var targetPosXClamped = Mathf.Clamp(targetPos.x, roadWidthMinMax.x, roadWidthMinMax.y);
-            targetPos = new Vector2(targetPosXClamped, targetPos.y);
+            if (Mathf.Abs(inputAngleRotation) > _sensitivity)
+            {
+                playerMovement.SetDirection(transform.forward);
+                ApplyProjectorPosition(false);
+                //ManualRotation(inputAngleRotation);
 
-            _splineProjector.motion.offset = Vector2.Lerp(_splineProjector.motion.offset, targetPos, offsetLerpSpeed * Time.deltaTime);
+            }
+            else
+            {
+                playerMovement.SetDirection(_splineProjector.result.forward);
+                ApplyProjectorPosition(true);
+            }
+
+            //var targetPos = _splineProjector.motion.offset + new Vector2(inputAngleRotation, _splineProjector.motion.offset.y);
+            //var targetPosXClamped = Mathf.Clamp(targetPos.x, roadWidthMinMax.x, roadWidthMinMax.y);
+            //targetPos = new Vector2(targetPosXClamped, targetPos.y);
+            //_splineProjector.motion.offset = Vector2.Lerp(_splineProjector.motion.offset, targetPos, offsetLerpSpeed * Time.deltaTime);
 
 
-            var targetRot = _splineProjector.motion.rotationOffset + new Vector3(_splineProjector.motion.rotationOffset.x, inputAngleRotation, _splineProjector.motion.rotationOffset.z);
-            var targetRotYClamped = Mathf.Clamp(targetRot.y, AngleMinMax.x, AngleMinMax.y);
-            targetRot = new Vector3(targetRot.x, targetRotYClamped, targetRot.z);
+            //var targetRot = _splineProjector.motion.rotationOffset + new Vector3(_splineProjector.motion.rotationOffset.x, inputAngleRotation, _splineProjector.motion.rotationOffset.z);
+            //var targetRotYClamped = Mathf.Clamp(targetRot.y, AngleMinMax.x, AngleMinMax.y);
+            //targetRot = new Vector3(targetRot.x, targetRotYClamped, targetRot.z);
+            //_splineProjector.motion.rotationOffset = Vector3.Lerp(_splineProjector.motion.rotationOffset, targetRot, _speedRot * Time.deltaTime);
 
-            _splineProjector.motion.rotationOffset = Vector3.Lerp(_splineProjector.motion.rotationOffset, targetRot, _speedRot * Time.deltaTime);
-
-            //ManualRotation(inputAngleRotation);
 
             Debug.Log($"inputAngleRotation {inputAngleRotation}");
         }
@@ -139,6 +147,12 @@ public class PlayerRotation02 : MonoBehaviour
         //Debug.Log($"_isRotatingByUser {_isRotatingByUser}");
         //Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
         //Debug.Log($"Current rotation speed {_currentSpeed}");
+    }
+
+    private void ApplyProjectorPosition(bool value)
+    {
+        _splineProjector.motion.applyPositionX = value;
+        _splineProjector.motion.applyPositionZ = value;
     }
 
     private void ManualRotation(float angle)

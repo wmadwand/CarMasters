@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_currentSpeed > _minSpeed)
         {
-            //var dir = transform.forward;
+            _direction = transform.forward;
 
             //var dir = _projector.result.forward;
             DoMove(_direction);

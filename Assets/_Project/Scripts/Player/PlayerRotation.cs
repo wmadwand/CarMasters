@@ -53,7 +53,7 @@ public class PlayerRotation : MonoBehaviour
 
         if (Mathf.Abs(inputAngleRotation) > _sensitivity)
         {
-            _isRotatingByUser = true;
+             _isRotatingByUser = true;
             _currentSpeed = _manualRotationToSplineSpeed;
             rotationDetector.color = Color.green;
         }

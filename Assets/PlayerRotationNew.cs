@@ -13,6 +13,9 @@ public class PlayerRotationNew : MonoBehaviour
     [SerializeField] private float _manualRotationToSplineSpeed = 5;
     [SerializeField] private bool _useAutoRotationToSpline = true;
 
+    [SerializeField] private float _disatnceAfterManualTurn = 2;
+    [SerializeField] private Transform _helperForward;
+
     private float _currentSpeed = 0;
     private Rigidbody _rigidbody = null;
     private SplineProjector _splineProjector = null;
@@ -47,67 +50,73 @@ public class PlayerRotationNew : MonoBehaviour
         _splineProjector = GetComponent<SplineProjector>();
     }
 
+    float _inputAngleRotation = 0;
+
+    Vector3 startPosAfterManualTurnFinished;
+    bool isManualTurnFinished = false;
+    bool isAutoTurning = false;
+
     private void Update()
     {
-        var inputAngleRotation = _xInput * _speed;
-
-        if (Mathf.Abs(inputAngleRotation) > _sensitivity)
-        {
-            _isRotatingByUser = true;
-            _currentSpeed = _manualRotationToSplineSpeed;
-            rotationDetector.color = Color.green;
-        }
-        else if (Mathf.Abs(inputAngleRotation) < _sensitivity)
-        {
-            _isRotatingByUser = false;
-            rotationDetector.color = Color.red;
-
-            _xInput = 0;
-        }
-        else if (!_isMoveButtonPressed)
-        {
-            _isRotatingByUser = false;
-            _currentSpeed = _autoRotationToSplineSpeed;
-
-            _xInput = 0;
-        }
-
-        if (!_isMoveButtonPressed)
-        {
-            _xInput = 0;
-        }
-
         if (_isMoveButtonPressed)
         {
-            if (_isRotatingByUser)
+            _inputAngleRotation = _inputAngleRotation == 0 ? _xInput * _speed : _inputAngleRotation;
+
+            if (_inputAngleRotation != 0 && !isAutoTurning)
             {
-                ManualRotation(_xInput);
-            }
-            else
-            {
-                if (_useAutoRotationToSpline)
+                isManualTurnFinished = false;
+
+                var angleClamp = Mathf.Clamp(_inputAngleRotation, -45, 45);
+
+                var startRot = _rigidbody.rotation;
+                var targetRot = Quaternion.AngleAxis(angleClamp, transform.up);
+                var resRot = Quaternion.RotateTowards(startRot, targetRot, Time.deltaTime * _smooth);
+
+                _rigidbody.MoveRotation(resRot);
+
+                var checkAngle = Quaternion.Angle(startRot, targetRot);
+                Debug.Log($"checkAngle = {checkAngle}");
+
+                if (checkAngle <= 0)
                 {
-                    AutoRotation(_currentSpeed);
+                    _inputAngleRotation = 0;
+                    _xInput = 0;
+
+                    isManualTurnFinished = true;
+                    startPosAfterManualTurnFinished = transform.position;
+                }
+
+                Debug.Log($"_inputAngleRotation = {angleClamp}");
+            }
+
+            if (isManualTurnFinished)
+            {
+                if (Vector3.Distance(startPosAfterManualTurnFinished, transform.position) >= _disatnceAfterManualTurn)
+                {
+                    isAutoTurning = true;
+
+                    var playerForward = transform.forward;
+                    var splineForward = Vector3.forward;
+                    var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
+
+                    // OR LOOK ROTATION !!!
+                    //targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _manualRotationToSplineSpeed);
+
+                    var resRot = Quaternion.RotateTowards(_rigidbody.rotation, targetRot, Time.deltaTime * _manualRotationToSplineSpeed);
+
+                    _rigidbody.MoveRotation(resRot);
+
+                    var checkThatAngle = Quaternion.Angle(_rigidbody.rotation, targetRot);
+                    Debug.Log($"checkThatAngle = {checkThatAngle}");
+
+                    if (checkThatAngle <= 0)
+                    {
+                        isManualTurnFinished = false;
+                        isAutoTurning = false;
+                    }
                 }
             }
         }
-        else if (!_isMoveButtonPressed && GetComponent<PlayerMovementNew>().IsMoving)
-        {
-            if (_useAutoRotationToSpline)
-            {
-                AutoRotation(_currentSpeed);
-            }
-        }
-
-        if (Vector3.Dot(transform.forward, _splineProjector.result.forward) == 1 && !_isRotatingByUser)
-        {
-            _currentSpeed = _autoRotationToSplineSpeed;
-            rotationDetector.color = Color.red;
-        }
-
-        Debug.Log($"_isRotatingByUser {_isRotatingByUser}");
-        Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
-        Debug.Log($"Current rotation speed {_currentSpeed}");
     }
 
     private void ManualRotation(float angle)
@@ -128,4 +137,67 @@ public class PlayerRotationNew : MonoBehaviour
 
         _rigidbody.MoveRotation(targetRot);
     }
+
+    //private void Update_old()
+    //{
+    //    var inputAngleRotation = _xInput * _speed;
+
+    //    if (Mathf.Abs(inputAngleRotation) > _sensitivity)
+    //    {
+    //        _isRotatingByUser = true;
+    //        _currentSpeed = _manualRotationToSplineSpeed;
+    //        rotationDetector.color = Color.green;
+    //    }
+    //    else if (Mathf.Abs(inputAngleRotation) < _sensitivity)
+    //    {
+    //        _isRotatingByUser = false;
+    //        rotationDetector.color = Color.red;
+
+    //        _xInput = 0;
+    //    }
+    //    else if (!_isMoveButtonPressed)
+    //    {
+    //        _isRotatingByUser = false;
+    //        _currentSpeed = _autoRotationToSplineSpeed;
+
+    //        _xInput = 0;
+    //    }
+
+    //    if (!_isMoveButtonPressed)
+    //    {
+    //        _xInput = 0;
+    //    }
+
+    //    if (_isMoveButtonPressed)
+    //    {
+    //        if (_isRotatingByUser)
+    //        {
+    //            ManualRotation(_xInput);
+    //        }
+    //        else
+    //        {
+    //            if (_useAutoRotationToSpline)
+    //            {
+    //                AutoRotation(_currentSpeed);
+    //            }
+    //        }
+    //    }
+    //    else if (!_isMoveButtonPressed && GetComponent<PlayerMovementNew>().IsMoving)
+    //    {
+    //        if (_useAutoRotationToSpline)
+    //        {
+    //            AutoRotation(_currentSpeed);
+    //        }
+    //    }
+
+    //    if (Vector3.Dot(transform.forward, _splineProjector.result.forward) == 1 && !_isRotatingByUser)
+    //    {
+    //        _currentSpeed = _autoRotationToSplineSpeed;
+    //        rotationDetector.color = Color.red;
+    //    }
+
+    //    Debug.Log($"_isRotatingByUser {_isRotatingByUser}");
+    //    Debug.DrawRay(_splineProjector.result.position, _splineProjector.result.forward * 1000, Color.yellow);
+    //    Debug.Log($"Current rotation speed {_currentSpeed}");
+    //}
 }

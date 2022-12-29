@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerMovement _movement;
-    private PlayerRotation02 _rotation;
+    private PlayerMovementNew _movement;
+    private PlayerRotationNew _rotation;
     private PlayerGravity _gravity;
 
     private void Awake()
     {
-        _movement = GetComponent<PlayerMovement>();
-        _rotation = GetComponent<PlayerRotation02>();
+        _movement = GetComponent<PlayerMovementNew>();
+        _rotation = GetComponent<PlayerRotationNew>();
         _gravity = GetComponent<PlayerGravity>();
     }
 

@@ -110,8 +110,8 @@ GameObject:
   - component: {fileID: 5119980845130937178}
   - component: {fileID: 5119980845130937176}
   - component: {fileID: 5119980845130937180}
-  - component: {fileID: 5119980845130937179}
   - component: {fileID: 5119980845130937181}
+  - component: {fileID: 1714984304054159308}
   m_Layer: 0
   m_Name: PlayerNew
   m_TagString: Untagged
@@ -126,7 +126,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5119980845130937189}
-  m_LocalRotation: {x: 0, y: 0.76309955, z: 0, w: -0.64628106}
+  m_LocalRotation: {x: 0, y: -0.76309705, z: 0, w: 0.6462839}
   m_LocalPosition: {x: 13.940492, y: 0.9, z: -29.25363}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -134,7 +134,7 @@ Transform:
   - {fileID: 5119980844709197364}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -99.476, z: 0}
 --- !u!54 &5119980845130937178
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -275,25 +275,6 @@ MonoBehaviour:
   _minSpeed: 0
   _acceleration: 3
   _deceleration: 3
---- !u!114 &5119980845130937179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119980845130937189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 100e1377782153848a3a21a5afdbad8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationDetector: {fileID: 0}
-  _speed: 0.01
-  _smooth: 10
-  _sensitivity: 3
-  _autoRotationToSplineSpeed: 5
-  _manualRotationToSplineSpeed: 5
-  _useAutoRotationToSpline: 0
 --- !u!114 &5119980845130937181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,3 +287,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccfbca8f355c8a4dbaff6c08b84e200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1714984304054159308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5119980845130937189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100e1377782153848a3a21a5afdbad8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationDetector: {fileID: 0}
+  _speed: 0.1
+  _smooth: 50
+  _sensitivity: 3
+  _autoRotationToSplineSpeed: 5
+  _manualRotationToSplineSpeed: 50
+  _useAutoRotationToSpline: 1
+  _disatnceAfterManualTurn: 1
+  _helperForward: {fileID: 0}

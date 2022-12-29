@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PlayerRotationNew : MonoBehaviour
 {
     public Image rotationDetector;
+    public bool useAutorotationToForward = false;
 
     [SerializeField] private float _speed = 1;
     [SerializeField] private float _smooth = 10;
@@ -14,7 +15,6 @@ public class PlayerRotationNew : MonoBehaviour
     [SerializeField] private bool _useAutoRotationToSpline = true;
 
     [SerializeField] private float _disatnceAfterManualTurn = 2;
-    [SerializeField] private Transform _helperForward;
 
     private float _currentSpeed = 0;
     private Rigidbody _rigidbody = null;
@@ -96,7 +96,13 @@ public class PlayerRotationNew : MonoBehaviour
                     isAutoTurning = true;
 
                     var playerForward = transform.forward;
+
                     var splineForward = Vector3.forward;
+                    if (_splineProjector != null)
+                    {
+                        splineForward = _splineProjector.result.forward;
+                    }
+
                     var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
 
                     // OR LOOK ROTATION !!!

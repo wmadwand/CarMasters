@@ -109,7 +109,7 @@ public class PlayerRotationNew : MonoBehaviour
                 }
             }
 
-            if (_inputAngleRotation == 0 && !isManualTurnFinished && !isAutoTurning)
+            if (_useAutoRotationToSpline && _inputAngleRotation == 0 && !isManualTurnFinished && !isAutoTurning)
             {
                 AutoRotationNew(_autoRotationToSplineSpeed, out Quaternion targetRotation);
             }
@@ -117,7 +117,7 @@ public class PlayerRotationNew : MonoBehaviour
     }
 
 
-    private void AutoRotationNew(float speed,  out Quaternion targetRottt)
+    private void AutoRotationNew(float speed, out Quaternion targetRottt)
     {
         var playerForward = transform.forward;
 

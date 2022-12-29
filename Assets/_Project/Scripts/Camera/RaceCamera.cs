@@ -33,7 +33,7 @@ public class RaceCamera : MonoBehaviour
         transform.rotation = resultRotation;
 
         var playerRelativePosition = playerRotation.transform.InverseTransformPoint(_splineProjector.result.position);
-        var newOffsetPosition = new Vector2(-playerRelativePosition.x, _yOffsetPosition);
+        var newOffsetPosition = new Vector2(-playerRelativePosition.x, _yOffsetPosition + playerRelativePosition.y);
         var newOffsetPositionLerp = Vector2.Lerp(_splinePositioner.motion.offset, newOffsetPosition, Time.deltaTime * _followingHorizontalSpeed);
         _splinePositioner.motion.offset = newOffsetPositionLerp;
 

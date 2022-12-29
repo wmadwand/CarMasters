@@ -95,24 +95,10 @@ public class PlayerRotationNew : MonoBehaviour
                 {
                     isAutoTurning = true;
 
-                    var playerForward = transform.forward;
 
-                    var splineForward = Vector3.forward;
-                    if (_splineProjector != null)
-                    {
-                        splineForward = _splineProjector.result.forward;
-                    }
+                    AutoRotationNew(_manualRotationToSplineSpeed, out Quaternion targetRotation);
 
-                    var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
-
-                    // OR LOOK ROTATION !!!
-                    //targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _manualRotationToSplineSpeed);
-
-                    var resRot = Quaternion.RotateTowards(_rigidbody.rotation, targetRot, Time.deltaTime * _manualRotationToSplineSpeed);
-
-                    _rigidbody.MoveRotation(resRot);
-
-                    var checkThatAngle = Quaternion.Angle(_rigidbody.rotation, targetRot);
+                    var checkThatAngle = Quaternion.Angle(_rigidbody.rotation, targetRotation);
                     Debug.Log($"checkThatAngle = {checkThatAngle}");
 
                     if (checkThatAngle <= 0)
@@ -122,8 +108,37 @@ public class PlayerRotationNew : MonoBehaviour
                     }
                 }
             }
+
+            if (_inputAngleRotation == 0 && !isManualTurnFinished && !isAutoTurning)
+            {
+                AutoRotationNew(_autoRotationToSplineSpeed, out Quaternion targetRotation);
+            }
         }
     }
+
+
+    private void AutoRotationNew(float speed,  out Quaternion targetRottt)
+    {
+        var playerForward = transform.forward;
+
+        var splineForward = Vector3.forward;
+        if (_splineProjector != null)
+        {
+            splineForward = _splineProjector.result.forward;
+        }
+
+        var targetRot = _rigidbody.rotation * Quaternion.FromToRotation(playerForward, splineForward);
+
+        // OR LOOK ROTATION !!!
+        //targetRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _manualRotationToSplineSpeed);
+
+        var resRot = Quaternion.RotateTowards(_rigidbody.rotation, targetRot, Time.deltaTime * speed /*_manualRotationToSplineSpeed*/);
+
+        _rigidbody.MoveRotation(resRot);
+
+        targetRottt = targetRot;
+    }
+
 
     private void ManualRotation(float angle)
     {

@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5119980844709197363}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -183,16 +183,16 @@ MonoBehaviour:
     useClippedPercent: 0
     keys: []
   _clipFromSample:
-    position: {x: 36.762207, y: 0, z: -17.9319}
+    position: {x: -25.289108, y: 0, z: -17.792374}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.3975686, y: 0, z: -0.91757244}
+    forward: {x: -0.3199505, y: 0, z: 0.9474343}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 0
   _clipToSample:
-    position: {x: 36.762207, y: 0, z: -17.9319}
+    position: {x: -25.289108, y: 0, z: -17.792374}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.3975686, y: 0, z: -0.91757244}
+    forward: {x: -0.3199505, y: 0, z: 0.9474343}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
     percent: 1
@@ -237,19 +237,19 @@ MonoBehaviour:
   targetRigidbody2D: {fileID: 0}
   targetTransform: {fileID: 5119980845130937191}
   _result:
-    position: {x: 13.940492, y: 0, z: -29.25363}
+    position: {x: -26.575184, y: -0.00000027041787, z: -10.306514}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9863536, y: 0, z: -0.16464062}
+    forward: {x: -0.04918567, y: -0.000000021115573, z: 0.99878967}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.1412761599999998
+    percent: 0.038886343720505576
   _finalResult:
-    position: {x: 13.940492, y: 0, z: -29.25363}
+    position: {x: -26.575184, y: -0.00000027041787, z: -10.306514}
     up: {x: 0, y: 1, z: 0}
-    forward: {x: -0.9863536, y: 0, z: -0.16464062}
+    forward: {x: -0.04918567, y: -0.000000021115573, z: 0.99878967}
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 1
-    percent: 0.1412761599999998
+    percent: 0.038886343720505576
   _mode: 0
   _autoProject: 1
   _subdivide: 4
@@ -258,7 +258,7 @@ MonoBehaviour:
   _targetObject: {fileID: 5119980845130937189}
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  lastPosition: {x: 13.940492, y: 0.9, z: -29.25363}
+  lastPosition: {x: -26.45, y: 0.9, z: -10.3}
 --- !u!114 &5119980845130937180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,11 +300,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDetector: {fileID: 0}
+  useAutorotationToForward: 0
   _speed: 0.1
   _smooth: 50
   _sensitivity: 3
-  _autoRotationToSplineSpeed: 5
+  _autoRotationToSplineSpeed: 999999
   _manualRotationToSplineSpeed: 50
   _useAutoRotationToSpline: 1
   _disatnceAfterManualTurn: 1
-  _helperForward: {fileID: 0}

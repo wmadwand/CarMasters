@@ -81,7 +81,7 @@ public class PlayerRotationNew : MonoBehaviour
                     _xInput = 0;
                     _inputAngleRotation = 0;
 
-                    _callBackToDragHandler?.Invoke();
+                    //_callBackToDragHandler?.Invoke();
 
                     isManualTurnFinished = true;
                     startPosAfterManualTurnFinished = localRotator.position;

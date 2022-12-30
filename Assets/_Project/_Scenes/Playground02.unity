@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 4112236}
   - component: {fileID: 4112235}
   - component: {fileID: 4112234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ GameObject:
   - component: {fileID: 15298626}
   - component: {fileID: 15298625}
   - component: {fileID: 15298624}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 961611790}
   - component: {fileID: 961611789}
   - component: {fileID: 961611788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 1026094052}
   - component: {fileID: 1026094051}
   - component: {fileID: 1026094050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 1062724216}
   - component: {fileID: 1062724215}
   - component: {fileID: 1062724214}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1334713089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlaneGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -965,7 +965,7 @@ GameObject:
   - component: {fileID: 1537979757}
   - component: {fileID: 1537979756}
   - component: {fileID: 1537979755}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1165,7 +1165,7 @@ GameObject:
   - component: {fileID: 2143089894}
   - component: {fileID: 2143089893}
   - component: {fileID: 2143089892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1388,7 +1388,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1406,6 +1406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationDetector: {fileID: 0}
+  useAutorotationToForward: 0
   _speed: 0.1
   _smooth: 50
   _sensitivity: 3
@@ -1413,7 +1414,6 @@ MonoBehaviour:
   _manualRotationToSplineSpeed: 50
   _useAutoRotationToSpline: 0
   _disatnceAfterManualTurn: 1
-  _helperForward: {fileID: 1087980281}
 --- !u!1 &6444335875094825257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1427,7 @@ GameObject:
   - component: {fileID: 6444335875094825232}
   - component: {fileID: 6444335875094825239}
   - component: {fileID: 6444335875094825233}
+  - component: {fileID: 6444335875094825260}
   m_Layer: 0
   m_Name: PlayerNew
   m_TagString: Untagged
@@ -1450,3 +1451,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6444335875094825260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444335875094825257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383388788ab181d4f8ec135d867ab444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gravity: -10
+  _smoothRotation: 10
+  _rayLength: 10
+  _groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _jumpPower: 1

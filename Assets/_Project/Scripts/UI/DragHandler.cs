@@ -36,7 +36,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     {
         //player?.SetXInput(delta);
         //startPress = eventData.position;
-        //delta = 0;
+        delta = 0;
     }
 
     private void SaveDragPos()

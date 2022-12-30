@@ -9,7 +9,7 @@ public class PlayerInput : MonoBehaviour
     public VariableJoystick variableJoystick;
     public Rigidbody rb;
 
-    public void FixedUpdate()
+    public void Update()
     {
         player.SetXInput(variableJoystick.Horizontal, null);
 

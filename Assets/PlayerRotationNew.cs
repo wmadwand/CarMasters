@@ -1,4 +1,5 @@
 using Dreamteck.Splines;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,15 +9,13 @@ public class PlayerRotationNew : MonoBehaviour
     public Transform localRotator;
 
     [SerializeField] private float _speed = 1;
-    [SerializeField] private float _smooth = 10;
-    [SerializeField] private float _sensitivity = 3;
+    [SerializeField] private float _smooth = 10;    
     [SerializeField] private float _autoRotationToSplineSpeed = 5;
     [SerializeField] private float _manualRotationToSplineSpeed = 5;
     [SerializeField] private bool _useAutoRotationToSpline = true;
 
     [SerializeField] private float _disatnceAfterManualTurn = 2;
-
-    private Rigidbody _rigidbody = null;
+    
     private SplineProjector _splineProjector = null;
     private float _xInput = 0;
     private bool _isMoveButtonPressed = false;
@@ -25,9 +24,13 @@ public class PlayerRotationNew : MonoBehaviour
 
     public Vector3 SplineForward => _splineProjector.result.forward;
 
-    public void SetXInput(float value)
+
+    private Action _callBackToDragHandler;
+
+    public void SetXInput(float value, Action callback)
     {
         _xInput = value;
+        _callBackToDragHandler = callback;
     }
 
     public void SetMove(bool isActive)
@@ -38,8 +41,7 @@ public class PlayerRotationNew : MonoBehaviour
     //---------------------------------------------------------------
 
     private void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody>();
+    {        
         _splineProjector = GetComponent<SplineProjector>();
     }
 
@@ -76,8 +78,10 @@ public class PlayerRotationNew : MonoBehaviour
 
                 if (checkAngle <= 0)
                 {
-                    _inputAngleRotation = 0;
                     _xInput = 0;
+                    _inputAngleRotation = 0;
+
+                    _callBackToDragHandler?.Invoke();
 
                     isManualTurnFinished = true;
                     startPosAfterManualTurnFinished = localRotator.position;

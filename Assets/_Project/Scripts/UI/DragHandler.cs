@@ -24,14 +24,24 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         delta = direction.magnitude * eventData.delta.normalized.x;
 
         test?.Rotate(delta);
-        player?.SetXInput(delta);
+        player?.SetXInput(delta, SaveDragPos);
         //Debug.Log($"delta {delta}");
+
+        currentEventData = eventData;
     }
+
+    PointerEventData currentEventData;
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
         //player?.SetXInput(delta);
+        //startPress = eventData.position;
+        //delta = 0;
+    }
 
+    private void SaveDragPos()
+    {
+        startPress = currentEventData.position;
         delta = 0;
     }
 

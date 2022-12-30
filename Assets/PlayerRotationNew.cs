@@ -106,10 +106,10 @@ public class PlayerRotationNew : MonoBehaviour
                 }
             }
 
-            if (_useAutoRotationToSpline && _inputAngleRotation == 0 && !isManualTurnFinished && !isAutoTurning)
-            {
-                //AutoRotationNew(_autoRotationToSplineSpeed, out Quaternion targetRotation);
-            }
+            //if (_useAutoRotationToSpline && _inputAngleRotation == 0 && !isManualTurnFinished && !isAutoTurning)
+            //{
+            //    //AutoRotationNew(_autoRotationToSplineSpeed, out Quaternion targetRotation);
+            //}
         }
     }
 
@@ -131,7 +131,6 @@ public class PlayerRotationNew : MonoBehaviour
         var targetRot = Quaternion.Euler(0, 0, 0);
         // TODO: Better use RotateTowards
         var resRot = Quaternion.Lerp(localRotator.localRotation, targetRot, Time.deltaTime * speed);
-
 
         localRotator.localRotation = resRot;
         _splineProjector.motion.rotationOffset = localRotator.localRotation.eulerAngles;

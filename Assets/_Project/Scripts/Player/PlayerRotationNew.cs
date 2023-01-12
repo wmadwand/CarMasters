@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerRotationNew : MonoBehaviour
 {
+    public SplineComputer nextSpline;
+    
     public Image rotationDetector;
     public Transform localRotator;
 
@@ -15,7 +17,11 @@ public class PlayerRotationNew : MonoBehaviour
 
     [SerializeField] private float _disatnceAfterManualTurn = 2;
 
+    
+    // TODO: Replace Projector with Follower !!
     private SplineProjector _splineProjector = null;
+
+
     private float _xInput = 0;
     private bool _isMoveButtonPressed = false;
 
@@ -23,13 +29,9 @@ public class PlayerRotationNew : MonoBehaviour
 
     public Vector3 SplineForward => _splineProjector.result.forward;
 
-
-    private Action _callBackToDragHandler;
-
     public void SetXInput(float value, Action callback)
     {
         _xInput = value;
-        _callBackToDragHandler = callback;
     }
 
     public void SetMove(bool isActive)
@@ -39,9 +41,46 @@ public class PlayerRotationNew : MonoBehaviour
 
     //---------------------------------------------------------------
 
+    private void Start()
+    {
+        _splineProjector.onEndReached += _splineProjector_onEndReached;
+        _splineProjector.onBeginningReached += _splineProjector_onBeginningReached;
+    }
+
+
     private void Awake()
     {
         _splineProjector = GetComponent<SplineProjector>();
+
+    }
+
+    private void OnDestroy ()
+    {
+        _splineProjector.onEndReached -= _splineProjector_onEndReached;
+        _splineProjector.onBeginningReached -= _splineProjector_onBeginningReached;
+    }
+
+    private void _splineProjector_onBeginningReached()
+    {
+        Debug.Log("_splineProjector_onBeginningReached");
+    }
+
+
+    private void _splineProjector_onEndReached()
+    {
+        //_splineProjector.spline = nextSpline;
+        //_splineProjector.RebuildImmediate();
+        //_splineProjector.SetPercent(0d, false, false);
+
+        float deltaTime = _splineProjector.updateMethod == SplineUser.UpdateMethod.FixedUpdate ? Time.fixedDeltaTime : Time.deltaTime;
+        //float distance = _splineProjector. * deltaTime;
+        float travelled = _splineProjector.CalculateLength(0, 1d);
+        float remainder = 40 - travelled;
+
+        _splineProjector.spline = nextSpline;
+        _splineProjector.RebuildImmediate();
+        _splineProjector.SetPercent(0d, false, false);
+        _splineProjector.SetDistance(remainder, true, true);
     }
 
     float _inputAngleRotation = 0;
@@ -80,8 +119,6 @@ public class PlayerRotationNew : MonoBehaviour
                 {
                     _xInput = 0;
                     _inputAngleRotation = 0;
-
-                    //_callBackToDragHandler?.Invoke();
 
                     isManualTurnFinished = true;
                     startPosAfterManualTurnFinished = localRotator.position;

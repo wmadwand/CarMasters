@@ -1,12 +1,13 @@
 using Dreamteck.Splines;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerRotationNew : MonoBehaviour
 {
     public SplineComputer nextSpline;
-    
+
     public Image rotationDetector;
     public Transform localRotator;
 
@@ -17,7 +18,7 @@ public class PlayerRotationNew : MonoBehaviour
 
     [SerializeField] private float _disatnceAfterManualTurn = 2;
 
-    
+
     // TODO: Replace Projector with Follower !!
     private SplineProjector _splineProjector = null;
 
@@ -54,7 +55,7 @@ public class PlayerRotationNew : MonoBehaviour
 
     }
 
-    private void OnDestroy ()
+    private void OnDestroy()
     {
         _splineProjector.onEndReached -= _splineProjector_onEndReached;
         _splineProjector.onBeginningReached -= _splineProjector_onBeginningReached;
@@ -68,20 +69,48 @@ public class PlayerRotationNew : MonoBehaviour
 
     private void _splineProjector_onEndReached()
     {
-        //_splineProjector.spline = nextSpline;
-        //_splineProjector.RebuildImmediate();
-        //_splineProjector.SetPercent(0d, false, false);
-
-        float deltaTime = _splineProjector.updateMethod == SplineUser.UpdateMethod.FixedUpdate ? Time.fixedDeltaTime : Time.deltaTime;
-        //float distance = _splineProjector. * deltaTime;
-        float travelled = _splineProjector.CalculateLength(0, 1d);
-        float remainder = 40 - travelled;
-
         _splineProjector.spline = nextSpline;
         _splineProjector.RebuildImmediate();
         _splineProjector.SetPercent(0d, false, false);
-        _splineProjector.SetDistance(remainder, true, true);
+
+        //float deltaTime = _splineProjector.updateMethod == SplineUser.UpdateMethod.FixedUpdate ? Time.fixedDeltaTime : Time.deltaTime;
+        ////float distance = _splineProjector. * deltaTime;
+        //float travelled = _splineProjector.CalculateLength(0, 1d);
+        //float remainder = 40 - travelled;
+
+        //_splineProjector.spline = nextSpline;
+        //_splineProjector.RebuildImmediate();
+        //_splineProjector.SetPercent(0d, false, false);
+        //_splineProjector.SetDistance(remainder, true, true);
     }
+
+    SplineFollower follower;
+
+    void OnEndReached(double last)
+    {
+        //Detect when the wagon has reached the end of the spline
+        List<SplineComputer> computers = new List<SplineComputer>();
+        List<int> connections = new List<int>();
+        List<int> connected = new List<int>();
+        follower.spline.GetConnectedComputers(computers, connections, connected, 1.0, follower.direction, true); //Get the avaiable connected computers at the end of the spline
+        if (computers.Count == 0) return;
+        //Do not select computers that are not connected at the first point so that we don't reverse direction
+        for (int i = 0; i < computers.Count; i++)
+        {
+            if (connected[i] != 0)
+            {
+                computers.RemoveAt(i);
+                connections.RemoveAt(i);
+                connected.RemoveAt(i);
+                i--;
+                continue;
+            }
+        }
+        float distance = follower.CalculateLength(0.0, follower.result.percent); //Get the excess distance after looping
+        follower.spline = computers[UnityEngine.Random.Range(0, computers.Count)]; //Change the spline computer to the new spline
+        follower.SetDistance(distance); //Set the excess distance along the new spline
+    }
+
 
     float _inputAngleRotation = 0;
 

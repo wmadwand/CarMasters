@@ -6,17 +6,19 @@ using UnityEngine.UI;
 
 public class PlayerRotationNew : MonoBehaviour
 {
-    public Transform localRotator;
-
+    [SerializeField] private Transform localRotator;
     [SerializeField] private float _angleRate = 1;
     [SerializeField] private float _smooth = 10;
     [SerializeField] private float _manualRotationToSplineSpeed = 5;
-    [SerializeField] private bool _useAutoRotationToSpline = true;
     [SerializeField] private float _disatnceAfterManualTurn = 2;
 
     private SplineProjector _splineProjector = null;
     private float _xInput = 0;
     private bool _isMoveButtonPressed = false;
+    private float _inputAngleRotation = 0;
+    private Vector3 _startPosAfterManualTurnFinished;
+    private bool _isManualTurnFinished = false;
+    private bool _isAutoTurning = false;
 
     //---------------------------------------------------------------
 
@@ -39,77 +41,15 @@ public class PlayerRotationNew : MonoBehaviour
         _splineProjector = GetComponent<SplineProjector>();
     }
 
-    //SplineFollower follower;
-
-    //void OnEndReached(double last)
-    //{
-    //    //Detect when the wagon has reached the end of the spline
-    //    List<SplineComputer> computers = new List<SplineComputer>();
-    //    List<int> connections = new List<int>();
-    //    List<int> connected = new List<int>();
-    //    follower.spline.GetConnectedComputers(computers, connections, connected, 1.0, follower.direction, true); //Get the avaiable connected computers at the end of the spline
-    //    if (computers.Count == 0) return;
-    //    //Do not select computers that are not connected at the first point so that we don't reverse direction
-    //    for (int i = 0; i < computers.Count; i++)
-    //    {
-    //        if (connected[i] != 0)
-    //        {
-    //            computers.RemoveAt(i);
-    //            connections.RemoveAt(i);
-    //            connected.RemoveAt(i);
-    //            i--;
-    //            continue;
-    //        }
-    //    }
-    //    float distance = follower.CalculateLength(0.0, follower.result.percent); //Get the excess distance after looping
-    //    follower.spline = computers[UnityEngine.Random.Range(0, computers.Count)]; //Change the spline computer to the new spline
-    //    follower.SetDistance(distance); //Set the excess distance along the new spline
-    //}
-
-
-
-
-    private void OnNode(List<SplineTracer.NodeConnection> passed)
-    {
-        Debug.Log("Reached node " + passed[0].node.name + " connected at point " +
-        passed[0].point);
-        Node.Connection[] connections = passed[0].node.GetConnections();
-        if (connections.Length == 1) return;
-        int newConnection = UnityEngine.Random.Range(0, connections.Length);
-        if (connections[newConnection].spline == _splineProjector.spline &&
-        connections[newConnection].pointIndex == passed[0].point)
-        {
-            newConnection++;
-            if (newConnection >= connections.Length) newConnection = 0;
-        }
-        SwitchSplineSimple(connections[newConnection]);
-    }
-    void SwitchSplineSimple(Node.Connection to)
-    {
-        _splineProjector.spline = to.spline;
-        _splineProjector.RebuildImmediate();
-        double startpercent = _splineProjector.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
-        _splineProjector.SetPercent(startpercent);
-    }
-
-
-
-    float _inputAngleRotation = 0;
-
-    Vector3 startPosAfterManualTurnFinished;
-    bool isManualTurnFinished = false;
-    bool isAutoTurning = false;
-
     private void Update()
     {
         if (_isMoveButtonPressed)
         {
-            //_inputAngleRotation = _inputAngleRotation == 0 ? _xInput * _angleRate : _inputAngleRotation;
             _inputAngleRotation = _xInput * _angleRate;
 
-            if (_inputAngleRotation != 0 && !isAutoTurning)
+            if (_inputAngleRotation != 0 && !_isAutoTurning)
             {
-                isManualTurnFinished = false;
+                _isManualTurnFinished = false;
 
                 var angleClamp = Mathf.Clamp(_inputAngleRotation, -45, 45);
                 var startRot = localRotator.localRotation;
@@ -131,18 +71,18 @@ public class PlayerRotationNew : MonoBehaviour
                     _xInput = 0;
                     _inputAngleRotation = 0;
 
-                    isManualTurnFinished = true;
-                    startPosAfterManualTurnFinished = localRotator.position;
+                    _isManualTurnFinished = true;
+                    _startPosAfterManualTurnFinished = localRotator.position;
                 }
 
                 Debug.Log($"_inputAngleRotation = {angleClamp}");
             }
 
-            if (isManualTurnFinished)
+            if (_isManualTurnFinished)
             {
-                if (Vector3.Distance(startPosAfterManualTurnFinished, localRotator.position) >= _disatnceAfterManualTurn)
+                if (Vector3.Distance(_startPosAfterManualTurnFinished, localRotator.position) >= _disatnceAfterManualTurn)
                 {
-                    isAutoTurning = true;
+                    _isAutoTurning = true;
 
                     var startRot = localRotator.localRotation;
                     ResetRotation(_manualRotationToSplineSpeed, out Quaternion targetRotation);
@@ -152,8 +92,8 @@ public class PlayerRotationNew : MonoBehaviour
 
                     if (checkThatAngle <= 0)
                     {
-                        isManualTurnFinished = false;
-                        isAutoTurning = false;
+                        _isManualTurnFinished = false;
+                        _isAutoTurning = false;
                     }
                 }
             }

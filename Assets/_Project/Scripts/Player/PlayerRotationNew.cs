@@ -6,23 +6,16 @@ using UnityEngine.UI;
 
 public class PlayerRotationNew : MonoBehaviour
 {
-    public SplineComputer nextSpline;
-
-    public Image rotationDetector;
+    public TrackController trackController;
     public Transform localRotator;
 
     [SerializeField] private float _angleRate = 1;
     [SerializeField] private float _smooth = 10;
     [SerializeField] private float _manualRotationToSplineSpeed = 5;
     [SerializeField] private bool _useAutoRotationToSpline = true;
-
     [SerializeField] private float _disatnceAfterManualTurn = 2;
 
-
-    // TODO: Replace Projector with Follower !!
     private SplineProjector _splineProjector = null;
-
-
     private float _xInput = 0;
     private bool _isMoveButtonPressed = false;
 
@@ -42,74 +35,75 @@ public class PlayerRotationNew : MonoBehaviour
 
     //---------------------------------------------------------------
 
-    private void Start()
-    {
-        _splineProjector.onEndReached += _splineProjector_onEndReached;
-        _splineProjector.onBeginningReached += _splineProjector_onBeginningReached;
-    }
-
-
     private void Awake()
     {
         _splineProjector = GetComponent<SplineProjector>();
 
     }
 
-    private void OnDestroy()
+    private void Start()
     {
-        _splineProjector.onEndReached -= _splineProjector_onEndReached;
-        _splineProjector.onBeginningReached -= _splineProjector_onBeginningReached;
-    }
-
-    private void _splineProjector_onBeginningReached()
-    {
-        Debug.Log("_splineProjector_onBeginningReached");
-    }
-
-
-    private void _splineProjector_onEndReached()
-    {
-        _splineProjector.spline = nextSpline;
+        var nextTrackPart = trackController.GetCurrentPart();
+        _splineProjector.spline = nextTrackPart.spline;
         _splineProjector.RebuildImmediate();
-        _splineProjector.SetPercent(0d, false, false);
-
-        //float deltaTime = _splineProjector.updateMethod == SplineUser.UpdateMethod.FixedUpdate ? Time.fixedDeltaTime : Time.deltaTime;
-        ////float distance = _splineProjector. * deltaTime;
-        //float travelled = _splineProjector.CalculateLength(0, 1d);
-        //float remainder = 40 - travelled;
-
-        //_splineProjector.spline = nextSpline;
-        //_splineProjector.RebuildImmediate();
         //_splineProjector.SetPercent(0d, false, false);
-        //_splineProjector.SetDistance(remainder, true, true);
+
+        GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
     }
 
-    SplineFollower follower;
+    //SplineFollower follower;
 
-    void OnEndReached(double last)
+    //void OnEndReached(double last)
+    //{
+    //    //Detect when the wagon has reached the end of the spline
+    //    List<SplineComputer> computers = new List<SplineComputer>();
+    //    List<int> connections = new List<int>();
+    //    List<int> connected = new List<int>();
+    //    follower.spline.GetConnectedComputers(computers, connections, connected, 1.0, follower.direction, true); //Get the avaiable connected computers at the end of the spline
+    //    if (computers.Count == 0) return;
+    //    //Do not select computers that are not connected at the first point so that we don't reverse direction
+    //    for (int i = 0; i < computers.Count; i++)
+    //    {
+    //        if (connected[i] != 0)
+    //        {
+    //            computers.RemoveAt(i);
+    //            connections.RemoveAt(i);
+    //            connected.RemoveAt(i);
+    //            i--;
+    //            continue;
+    //        }
+    //    }
+    //    float distance = follower.CalculateLength(0.0, follower.result.percent); //Get the excess distance after looping
+    //    follower.spline = computers[UnityEngine.Random.Range(0, computers.Count)]; //Change the spline computer to the new spline
+    //    follower.SetDistance(distance); //Set the excess distance along the new spline
+    //}
+
+
+
+
+    private void OnNode(List<SplineTracer.NodeConnection> passed)
     {
-        //Detect when the wagon has reached the end of the spline
-        List<SplineComputer> computers = new List<SplineComputer>();
-        List<int> connections = new List<int>();
-        List<int> connected = new List<int>();
-        follower.spline.GetConnectedComputers(computers, connections, connected, 1.0, follower.direction, true); //Get the avaiable connected computers at the end of the spline
-        if (computers.Count == 0) return;
-        //Do not select computers that are not connected at the first point so that we don't reverse direction
-        for (int i = 0; i < computers.Count; i++)
+        Debug.Log("Reached node " + passed[0].node.name + " connected at point " +
+        passed[0].point);
+        Node.Connection[] connections = passed[0].node.GetConnections();
+        if (connections.Length == 1) return;
+        int newConnection = UnityEngine.Random.Range(0, connections.Length);
+        if (connections[newConnection].spline == _splineProjector.spline &&
+        connections[newConnection].pointIndex == passed[0].point)
         {
-            if (connected[i] != 0)
-            {
-                computers.RemoveAt(i);
-                connections.RemoveAt(i);
-                connected.RemoveAt(i);
-                i--;
-                continue;
-            }
+            newConnection++;
+            if (newConnection >= connections.Length) newConnection = 0;
         }
-        float distance = follower.CalculateLength(0.0, follower.result.percent); //Get the excess distance after looping
-        follower.spline = computers[UnityEngine.Random.Range(0, computers.Count)]; //Change the spline computer to the new spline
-        follower.SetDistance(distance); //Set the excess distance along the new spline
+        SwitchSplineSimple(connections[newConnection]);
     }
+    void SwitchSplineSimple(Node.Connection to)
+    {
+        _splineProjector.spline = to.spline;
+        _splineProjector.RebuildImmediate();
+        double startpercent = _splineProjector.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
+        _splineProjector.SetPercent(startpercent);
+    }
+
 
 
     float _inputAngleRotation = 0;
@@ -176,30 +170,39 @@ public class PlayerRotationNew : MonoBehaviour
                 }
             }
         }
+
+        CheckTrackPart();
+    }
+
+    private void CheckTrackPart()
+    {
+        if (_splineProjector.result.percent >= 1)
+        {
+            trackController.OnPartEndReached();
+
+            var nextTrackPart = trackController.GetCurrentPart();
+
+            if (nextTrackPart.spline == _splineProjector.spline)
+            {
+                return;
+            }
+
+            _splineProjector.spline = nextTrackPart.spline;
+            _splineProjector.RebuildImmediate();
+            _splineProjector.SetPercent(0d, false, false);
+
+            GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
+        }
     }
 
     private void ResetRotation(float speed, out Quaternion targetRottt)
     {
-        //var playerForward = transform.forward;
-
-        //var splineForward = Vector3.forward;
-        //if (_splineProjector != null)
-        //{
-        //    splineForward = _splineProjector.result.forward;
-        //}
-
-        //var targetRot = Quaternion. LookRotation(Quaternion.identity.fo, transform.up);
-        //var targetRot = Quaternion.identity;
-
-        //var resRot = Quaternion.RotateTowards(localRotator.rotation, targetRot, Time.deltaTime * speed);
         var targetRot = Quaternion.Euler(0, 0, 0);
         // TODO: Better use RotateTowards
-        var resRot = Quaternion.Lerp(localRotator.localRotation, targetRot, Time.deltaTime * speed);
+        var resRot = Quaternion.Slerp(localRotator.localRotation, targetRot, Time.deltaTime * speed);
 
         localRotator.localRotation = resRot;
         _splineProjector.motion.rotationOffset = localRotator.localRotation.eulerAngles;
-
-        //_rigidbody.MoveRotation(resRot);
 
         targetRottt = targetRot;
     }

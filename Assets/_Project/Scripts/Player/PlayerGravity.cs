@@ -14,6 +14,11 @@ public class PlayerGravity : MonoBehaviour
 
     //---------------------------------------------------------------
 
+    public void SetGravity(float value)
+    {
+        _gravity = value;
+    }
+
     public void Jump(float jumpPower)
     {
         //_rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);

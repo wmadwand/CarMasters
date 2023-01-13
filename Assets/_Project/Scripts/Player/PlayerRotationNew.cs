@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerRotationNew : MonoBehaviour
 {
-    public TrackController trackController;
     public Transform localRotator;
 
     [SerializeField] private float _angleRate = 1;
@@ -38,17 +37,6 @@ public class PlayerRotationNew : MonoBehaviour
     private void Awake()
     {
         _splineProjector = GetComponent<SplineProjector>();
-
-    }
-
-    private void Start()
-    {
-        var nextTrackPart = trackController.GetCurrentPart();
-        _splineProjector.spline = nextTrackPart.spline;
-        _splineProjector.RebuildImmediate();
-        //_splineProjector.SetPercent(0d, false, false);
-
-        GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
     }
 
     //SplineFollower follower;
@@ -169,29 +157,6 @@ public class PlayerRotationNew : MonoBehaviour
                     }
                 }
             }
-        }
-
-        CheckTrackPart();
-    }
-
-    private void CheckTrackPart()
-    {
-        if (_splineProjector.result.percent >= 1)
-        {
-            trackController.OnPartEndReached();
-
-            var nextTrackPart = trackController.GetCurrentPart();
-
-            if (nextTrackPart.spline == _splineProjector.spline)
-            {
-                return;
-            }
-
-            _splineProjector.spline = nextTrackPart.spline;
-            _splineProjector.RebuildImmediate();
-            _splineProjector.SetPercent(0d, false, false);
-
-            GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
         }
     }
 

@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using Dreamteck.Splines;
 
 public class TrackController : MonoBehaviour
 {
     public SplineProjector splineProjector;
-    public TrackPart[] trackParts;
+    public List<TrackPart> trackParts;
 
     private int _trackPartIndex = 0;
 
@@ -16,20 +17,35 @@ public class TrackController : MonoBehaviour
         _trackPartIndex++;
     }
 
-    public TrackPart GetCurrentPart()
+    public TrackPart GetNextPart()
     {
-        var index = Mathf.Clamp(_trackPartIndex, 0, trackParts.Length - 1);
+        var index = Mathf.Clamp(_trackPartIndex, 0, trackParts.Count - 1);
 
         return trackParts[index];
     }
 
+    public TrackPart GetNextPartDebug()
+    {
+        var currentSpline = splineProjector.spline;
+        var currentTrackPart = trackParts.FirstOrDefault(cc => cc.spline == currentSpline);
+        var currentTrackPartIndex = trackParts.IndexOf(currentTrackPart);
+        var nextIndex = currentTrackPartIndex + 1;
+
+        if (nextIndex > trackParts.Count - 1)
+        {
+            nextIndex = 0;
+        }
+
+        return trackParts[nextIndex];
+    }
+
     private void Start()
     {
-        var nextTrackPart = GetCurrentPart();
-        splineProjector.spline = nextTrackPart.spline;
-        splineProjector.RebuildImmediate();
+        //var nextTrackPart = GetNextPart();
+        //splineProjector.spline = nextTrackPart.spline;
+        //splineProjector.RebuildImmediate();
 
-        splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
+        //splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
 
     }
 
@@ -44,7 +60,7 @@ public class TrackController : MonoBehaviour
         {
             OnPartEndReached();
 
-            var nextTrackPart = GetCurrentPart();
+            var nextTrackPart = GetNextPartDebug();
 
             if (nextTrackPart.spline == splineProjector.spline)
             {
@@ -54,6 +70,9 @@ public class TrackController : MonoBehaviour
             splineProjector.spline = nextTrackPart.spline;
             splineProjector.RebuildImmediate();
             splineProjector.SetPercent(0d, false, false);
+
+            float distance = splineProjector.CalculateLength(0.0, splineProjector.result.percent); //Get the excess distance after looping            
+            splineProjector.SetDistance(distance); //Set the excess distance along the new spline
 
             splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
         }

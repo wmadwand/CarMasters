@@ -10,7 +10,7 @@ public class VirtualJoystick02 : MonoBehaviour, IDragHandler, IPointerUpHandler,
     private Image backPanel;
     private Image knob;
 
-    public PlayerRotationNew player;
+    public PlayerRotation player;
 
     public Vector3 InputDirection { get; set; }
 

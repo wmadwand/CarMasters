@@ -1,7 +1,7 @@
 using Dreamteck.Splines;
 using UnityEngine;
 
-public class PlayerMovementNew : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _maxSpeed = 100f;
     [SerializeField] private float _minSpeed = 0f;

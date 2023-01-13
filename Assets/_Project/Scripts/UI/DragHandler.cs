@@ -6,7 +6,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     float delta;
 
     public RotationHandlerTest test;
-    public PlayerRotationNew player;
+    public PlayerRotation player;
 
     private Vector2 startPress;
 

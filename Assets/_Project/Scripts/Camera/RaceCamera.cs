@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RaceCamera : MonoBehaviour
 {
-    public PlayerRotationNew playerRotation;
+    public PlayerRotation playerRotation;
 
     [SerializeField] private float _rotationSpeed = 50f;
     [SerializeField] private float _pitchRotationAngle = 15f;

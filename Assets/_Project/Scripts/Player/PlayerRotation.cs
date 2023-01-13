@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerRotationNew : MonoBehaviour
+public class PlayerRotation : MonoBehaviour
 {
     [SerializeField] private Transform localRotator;
     [SerializeField] private float _angleRate = 1;

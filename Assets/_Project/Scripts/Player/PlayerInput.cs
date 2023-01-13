@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    public PlayerRotationNew player;
+    public PlayerRotation player;
     public float speed;
     public VariableJoystick variableJoystick;
     public Rigidbody rb;

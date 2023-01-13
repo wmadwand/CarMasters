@@ -56,7 +56,7 @@ public class TrackController : MonoBehaviour
 
     private void CheckTrackPart()
     {
-        if (splineProjector.result.percent >= 1)
+        if (splineProjector.result.percent >= .9999999d)
         {
             OnPartEndReached();
 

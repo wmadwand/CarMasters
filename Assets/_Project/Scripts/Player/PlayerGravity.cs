@@ -43,10 +43,7 @@ public class PlayerGravity : MonoBehaviour
         _rigidbody.useGravity = false;
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         _rigidbody.maxDepenetrationVelocity = 1000;
-
-        //TODO: for all the obstacles with rigidbody set CollisionDetectionMode.ContinuousDynamic;
-        //
-        _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        _rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     private void Update()

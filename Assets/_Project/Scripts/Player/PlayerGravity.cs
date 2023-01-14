@@ -8,13 +8,15 @@ public class PlayerGravity : MonoBehaviour
     [SerializeField] private float _rayLength = 10;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float _jumpPower;
-    [SerializeField] private float _heightOffset = 1;
+    [SerializeField] private float _groundedOffset;
+    [SerializeField] private float _groundedRadius;
 
     private Rigidbody _rigidbody = null;
     private int _groundLayerIndex = 0;
     private Vector3 _defaultDownDirection = Vector3.up;
 
-    private bool _isOnGround = true;
+    private bool _isGrounded = true;
+    private Vector3 _averageGravityNormal;
 
     //---------------------------------------------------------------
 
@@ -49,6 +51,23 @@ public class PlayerGravity : MonoBehaviour
 
     private void Update()
     {
+        CheckGrounded();
+    }
+
+    private void FixedUpdate()
+    {
+        _averageGravityNormal = CheckGravity();
+
+#if DEVELOPMENT
+        if (Input.GetKeyDown("space") && _isGrounded)
+        {
+            _rigidbody.AddForce(_averageGravityNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
+        }
+#endif
+    }
+
+    private Vector3 CheckGravity()
+    {
         var averageNormal = Vector3.zero;
         foreach (var item in _gravityRays)
         {
@@ -60,49 +79,33 @@ public class PlayerGravity : MonoBehaviour
 
         var targetRot = Quaternion.FromToRotation(transform.up, averageNormal.normalized);
         targetRot *= _rigidbody.rotation;
-        var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _smoothRotation);
+        var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.fixedDeltaTime  * _smoothRotation);
 
-        //TODO: move all the physics to FixedUpdate
         _rigidbody.MoveRotation(newRot);
         _rigidbody.AddForce(averageNormal.normalized * _gravity);
-        //}
 
-
-        //var checkGroundHit = CastRay(transform.position, -averageNormal.normalized, _rayLength);
-        //_isOnGround = checkGroundHit.collider ? checkGroundHit.distance <= _heightOffset : false;
-
-
-        CheckGrounded();
-        Debug.Log($"_isOnGround {_isOnGround}");
-
-        if (Input.GetKeyDown("space"))
-        {
-            _rigidbody.AddForce(averageNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
-        }
+        return averageNormal;
     }
-
-    public float groundedOffset;
-    public float groundedRadius;
 
     private void CheckGrounded()
     {
+        var spherePos = new Vector3(transform.position.x, transform.position.y - _groundedOffset, transform.position.z);
+        _isGrounded = Physics.CheckSphere(spherePos, _groundedRadius, _groundLayerMask, QueryTriggerInteraction.Ignore);
 
-        var spherePos = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
-        _isOnGround = Physics.CheckSphere(spherePos, groundedRadius, _groundLayerMask, QueryTriggerInteraction.Ignore);
+        Debug.Log($"_isOnGround {_isGrounded}");
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
         Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-        if (_isOnGround) Gizmos.color = transparentGreen;
+        if (_isGrounded) Gizmos.color = transparentGreen;
         else Gizmos.color = transparentRed;
 
-        var spherePos = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
-        Gizmos.DrawSphere(spherePos, groundedRadius);
+        var spherePos = new Vector3(transform.position.x, transform.position.y - _groundedOffset, transform.position.z);
+        Gizmos.DrawSphere(spherePos, _groundedRadius);
     }
-
 
     //TODO: to get the best experience of smoothing rotation to the surface
     //use Physics.BoxCastAll and so on

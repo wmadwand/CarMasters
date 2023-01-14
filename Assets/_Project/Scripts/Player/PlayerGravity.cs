@@ -43,6 +43,34 @@ public class PlayerGravity : MonoBehaviour
         _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
+    private void Update()
+    {
+        var averageNormal = Vector3.zero;
+        foreach (var item in _gravityRays)
+        {
+            var hit = CastRayDown(item.position);
+            averageNormal += hit.normal;
+        }
+
+        Debug.DrawRay(transform.position, averageNormal.normalized * _rayLength, Color.blue);
+
+        var targetRot = Quaternion.FromToRotation(transform.up, averageNormal.normalized);
+        targetRot *= _rigidbody.rotation;
+        var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _smoothRotation);
+
+        //TODO: move all the physics to FixedUpdate
+        _rigidbody.MoveRotation(newRot);
+        _rigidbody.AddForce(averageNormal.normalized * _gravity);
+        //}
+
+        if (Input.GetKeyDown("space"))
+        {
+            _rigidbody.AddForce(averageNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
+        }
+    }
+
+    //TODO: to get the best experience of smoothing rotation to the surface
+    //use Physics.BoxCastAll and so on
     private RaycastHit CastRayDown(Vector3 startPos)
     {
         int layerMask = 1 << _groundLayerIndex;
@@ -70,31 +98,5 @@ public class PlayerGravity : MonoBehaviour
         }
 
         return closestHit;
-    }
-
-    private void Update()
-    {
-        var hit01 = CastRayDown(_gravityRays[0].position);
-        var hit02 = CastRayDown(_gravityRays[1].position);
-
-        var normal01 = hit01.normal;
-        var normal02 = hit02.normal;
-        var avarageNormal = normal01 + normal02;
-
-        Debug.DrawRay(transform.position, avarageNormal * _rayLength, Color.blue);
-
-        var targetRot = Quaternion.FromToRotation(transform.up, avarageNormal.normalized);
-        targetRot *= _rigidbody.rotation;
-        var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _smoothRotation);
-
-        //TODO: move all the physics to FixedUpdate
-        _rigidbody.MoveRotation(newRot);
-        _rigidbody.AddForce(avarageNormal.normalized * _gravity);
-        //}
-
-        if (Input.GetKeyDown("space"))
-        {
-            _rigidbody.AddForce(avarageNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
-        }
     }
 }

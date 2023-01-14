@@ -8,9 +8,13 @@ public class PlayerGravity : MonoBehaviour
     [SerializeField] private float _rayLength = 10;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private float _jumpPower;
+    [SerializeField] private float _heightOffset = 1;
 
     private Rigidbody _rigidbody = null;
     private int _groundLayerIndex = 0;
+    private Vector3 _defaultDownDirection = Vector3.up;
+
+    private bool _isOnGround = true;
 
     //---------------------------------------------------------------
 
@@ -48,11 +52,11 @@ public class PlayerGravity : MonoBehaviour
         var averageNormal = Vector3.zero;
         foreach (var item in _gravityRays)
         {
-            var hit = CastRayDown(item.position);
+            var hit = CastRay(item.position, -transform.up, _rayLength);
             averageNormal += hit.normal;
         }
 
-        Debug.DrawRay(transform.position, averageNormal.normalized * _rayLength, Color.blue);
+        Debug.DrawRay(transform.position, -averageNormal.normalized * _rayLength, Color.cyan);
 
         var targetRot = Quaternion.FromToRotation(transform.up, averageNormal.normalized);
         targetRot *= _rigidbody.rotation;
@@ -63,6 +67,11 @@ public class PlayerGravity : MonoBehaviour
         _rigidbody.AddForce(averageNormal.normalized * _gravity);
         //}
 
+
+        var checkGroundHit = CastRay(transform.position, -averageNormal.normalized, _rayLength);
+        _isOnGround = checkGroundHit.collider ? checkGroundHit.distance <= _heightOffset : false;
+        Debug.Log($"_isOnGround {_isOnGround}");
+
         if (Input.GetKeyDown("space"))
         {
             _rigidbody.AddForce(averageNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
@@ -71,14 +80,14 @@ public class PlayerGravity : MonoBehaviour
 
     //TODO: to get the best experience of smoothing rotation to the surface
     //use Physics.BoxCastAll and so on
-    private RaycastHit CastRayDown(Vector3 startPos)
+    private RaycastHit CastRay(Vector3 startPos, Vector3 direction, float length)
     {
         int layerMask = 1 << _groundLayerIndex;
 
-        Debug.DrawRay(startPos, -transform.up * _rayLength, Color.green);
+        Debug.DrawRay(startPos, direction * length, Color.green);
 
-        var ray = new Ray(startPos, -transform.up);
-        var hits = Physics.RaycastAll(ray, _rayLength, layerMask);
+        var ray = new Ray(startPos, direction);
+        var hits = Physics.RaycastAll(ray, length, layerMask);
 
         RaycastHit closestHit = default;
 

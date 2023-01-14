@@ -68,8 +68,11 @@ public class PlayerGravity : MonoBehaviour
         //}
 
 
-        var checkGroundHit = CastRay(transform.position, -averageNormal.normalized, _rayLength);
-        _isOnGround = checkGroundHit.collider ? checkGroundHit.distance <= _heightOffset : false;
+        //var checkGroundHit = CastRay(transform.position, -averageNormal.normalized, _rayLength);
+        //_isOnGround = checkGroundHit.collider ? checkGroundHit.distance <= _heightOffset : false;
+
+
+        CheckGrounded();
         Debug.Log($"_isOnGround {_isOnGround}");
 
         if (Input.GetKeyDown("space"))
@@ -77,6 +80,29 @@ public class PlayerGravity : MonoBehaviour
             _rigidbody.AddForce(averageNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
         }
     }
+
+    public float groundedOffset;
+    public float groundedRadius;
+
+    private void CheckGrounded()
+    {
+
+        var spherePos = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
+        _isOnGround = Physics.CheckSphere(spherePos, groundedRadius, _groundLayerMask, QueryTriggerInteraction.Ignore);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
+        Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
+
+        if (_isOnGround) Gizmos.color = transparentGreen;
+        else Gizmos.color = transparentRed;
+
+        var spherePos = new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
+        Gizmos.DrawSphere(spherePos, groundedRadius);
+    }
+
 
     //TODO: to get the best experience of smoothing rotation to the surface
     //use Physics.BoxCastAll and so on

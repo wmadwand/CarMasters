@@ -6,7 +6,6 @@ public class PlayerGravity : MonoBehaviour
     [SerializeField] private float _smoothRotation = 10;
     [SerializeField] private float _rayLength = 10;
     [SerializeField] private LayerMask _groundLayerMask;
-
     [SerializeField] private float _jumpPower;
 
     private Rigidbody _rigidbody = null;
@@ -23,8 +22,6 @@ public class PlayerGravity : MonoBehaviour
     {
         //_rigidbody.AddForce(hit.normal.normalized * -gravity * jumpPower, ForceMode.Impulse);
     }
-
-    public Vector3 GetNormalVector => hitTemp.normal.normalized;
 
     //---------------------------------------------------------------
 
@@ -45,34 +42,52 @@ public class PlayerGravity : MonoBehaviour
         _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
     }
 
-    RaycastHit hitTemp;
-
     private void Update()
     {
         int layerMask = 1 << _groundLayerIndex;
 
         Debug.DrawRay(transform.position, -transform.up * _rayLength, Color.green);
 
-        //TODO: cast down 3 rays: face, center, back
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, _rayLength, layerMask))
+        var ray = new Ray(transform.position, -transform.up);
+        var hits = Physics.RaycastAll(ray, _rayLength, layerMask);
+
+        if (hits.Length < 1)
         {
-            Debug.DrawRay(transform.position, -hit.normal * _rayLength, Color.red);
-
-            var targetRot = Quaternion.FromToRotation(transform.up, hit.normal.normalized);
-            targetRot *= _rigidbody.rotation;
-            var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _smoothRotation);
-
-            //TODO: move all the physics to FixedUpdate
-            _rigidbody.MoveRotation(newRot);
-            _rigidbody.AddForce(hit.normal.normalized * _gravity);
-
-            hitTemp = hit;
+            return;
         }
+
+        var closestHit = hits[0];
+
+        foreach (var item in hits)
+        {
+            if (item.distance < closestHit.distance)
+            {
+                closestHit = item;
+            }
+        }
+
+
+
+
+
+        //TODO: cast down 3 rays: face, center, back
+        //RaycastHit hit;
+        //if (Physics.Raycast(transform.position, -transform.up, out hit, _rayLength, layerMask))
+        //{
+        Debug.DrawRay(transform.position, -closestHit.normal * _rayLength, Color.red);
+
+        var targetRot = Quaternion.FromToRotation(transform.up, closestHit.normal.normalized);
+        targetRot *= _rigidbody.rotation;
+        var newRot = Quaternion.Slerp(_rigidbody.rotation, targetRot, Time.deltaTime * _smoothRotation);
+
+        //TODO: move all the physics to FixedUpdate
+        _rigidbody.MoveRotation(newRot);
+        _rigidbody.AddForce(closestHit.normal.normalized * _gravity);
+        //}
 
         if (Input.GetKeyDown("space"))
         {
-            _rigidbody.AddForce(hit.normal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
+            _rigidbody.AddForce(closestHit.normal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
         }
     }
 }

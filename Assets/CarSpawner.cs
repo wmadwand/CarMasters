@@ -9,6 +9,7 @@ public class CarSpawner : MonoBehaviour
     public BallCamera camera;
     public SpeedButton speedButton;
     public DragHandler dragHandler;
+    public Vector3 respawnOffset;
 
     public float respawnDistance;
     public float respawnHeight;
@@ -17,14 +18,15 @@ public class CarSpawner : MonoBehaviour
 
     public void Respawn(Vector3 deadPosition, GameObject prevCar)
     {
-        StartCoroutine(RespawnRoutine(prevCar));
+        StartCoroutine(RespawnRoutine(deadPosition, prevCar));
     }
 
-    IEnumerator RespawnRoutine(GameObject prevCar)
+    IEnumerator RespawnRoutine(Vector3 deadPosition, GameObject prevCar)
     {
         yield return new WaitForSeconds(respawnTime);
 
-        var player = Instantiate(playerPrefab);
+        var spawnPosition = deadPosition - respawnOffset;
+        var player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
 
         camera.projector = player.GetComponent<SplineProjector>();
         camera.rb = player.GetComponent<Rigidbody>();

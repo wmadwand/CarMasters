@@ -26,6 +26,11 @@ public class PlayerRotation : MonoBehaviour
 
     public void SetXInput(float value, Action callback)
     {
+        if (!GetComponent<PlayerHealth>().IsAlive)
+        {
+            return;
+        }
+
         _xInput = value;
     }
 

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.UI.Input;
+using Game.Gameplay.Player;
 
 public class CarSpawner : MonoBehaviour, IController
 {
@@ -50,7 +51,7 @@ public class CarSpawner : MonoBehaviour, IController
         camera.projector = splineProjector;
         camera.rb = player.GetComponent<Rigidbody>();
         speedButton._player = player;
-        dragHandler._player = player.GetComponent<PlayerRotation>();
+        dragHandler._player = player.GetComponent<Player>();
         player.GetComponent<PlayerHealth>().carSpawner = this;
 
         Destroy(prevCar);

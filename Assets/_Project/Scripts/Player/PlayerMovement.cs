@@ -6,31 +6,32 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxSpeed = 100f;
     [SerializeField] private float _minSpeed = 0f;
     [SerializeField] private float _acceleration = 1f;
-    [SerializeField] private float _deceleration = 2f;
-
-    public bool IsMoving => _currentSpeed > _minSpeed;
+    [SerializeField] private float _deceleration = 2f;    
 
     private float _currentSpeed = 0f;
-    private bool _isMoveButtonPressed = false;
+    private bool _isMoving = false;
     private Rigidbody _rigidbody = null;
 
     //---------------------------------------------------------------
 
     public void Move(bool value)
     {
-        _isMoveButtonPressed = value;
+        // But isMoving when _currentSpeed > _minSpeed!!
+        // maybe set isDriving?
+
+        _isMoving = value;
     }
 
     //---------------------------------------------------------------
 
     private void CalculateMove()
     {
-        if (_isMoveButtonPressed)
+        if (_isMoving)
         {
             _currentSpeed += _acceleration * Time.deltaTime;
             _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
         }
-        else if (!_isMoveButtonPressed && _currentSpeed > _minSpeed)
+        else if (!_isMoving && _currentSpeed > _minSpeed)
         {
             _currentSpeed -= _deceleration * Time.deltaTime;
         }

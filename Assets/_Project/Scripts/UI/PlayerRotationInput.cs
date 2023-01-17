@@ -1,3 +1,4 @@
+using Game.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -5,7 +6,7 @@ namespace Game.UI.Input
 {
     public class PlayerRotationInput : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        public PlayerRotation _player;
+        public Player _player;
 
         private Vector2 _startDragPosition;
         private float _delta;

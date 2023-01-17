@@ -14,7 +14,7 @@ public class PlayerRotation : MonoBehaviour
 
     private SplineProjector _splineProjector = null;
     private float _xInput = 0;
-    private bool _isMoveButtonPressed = false;
+    private bool _isMoving = false;
     private float _inputAngleRotation = 0;
     private Vector3 _startPosAfterManualTurnFinished;
     private bool _isManualTurnFinished = false;
@@ -24,6 +24,11 @@ public class PlayerRotation : MonoBehaviour
 
     public Vector3 SplineForward => _splineProjector.result.forward;
 
+    public void Init()
+    {
+
+    }
+
     public void RotateBy(float value)
     {
 
@@ -32,7 +37,7 @@ public class PlayerRotation : MonoBehaviour
 
     public void Move(bool isActive)
     {
-        _isMoveButtonPressed = isActive;
+        _isMoving = isActive;
     }
 
     //---------------------------------------------------------------
@@ -44,7 +49,7 @@ public class PlayerRotation : MonoBehaviour
 
     private void Update()
     {
-        if (_isMoveButtonPressed)
+        if (_isMoving)
         {
             _inputAngleRotation = _xInput * _angleRate;
 

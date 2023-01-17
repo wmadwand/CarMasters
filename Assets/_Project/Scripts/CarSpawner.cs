@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarSpawner : MonoBehaviour
+public class CarSpawner : MonoBehaviour, IController
 {
     public BallCamera camera;
     public SpeedButton speedButton;
@@ -15,6 +15,11 @@ public class CarSpawner : MonoBehaviour
     public float respawnHeight;
     public float respawnTime = 2;
     public Player playerPrefab;
+
+    public IEnumerator Init()
+    {
+        yield return null;
+    }
 
     //---------------------------------------------------------------
 
@@ -27,20 +32,16 @@ public class CarSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(respawnTime);
 
-        //var splineProjector = prevCar.GetComponent<SplineProjector>();
-
-
-
         var spawnPosition = deadPosition - respawnOffset;
         var player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-
-
         var splineProjector = player.GetComponent<SplineProjector>();
+
+        yield return new WaitUntil(() => splineProjector.spline);
 
         SplineSample resSplinePoint = new SplineSample();
         splineProjector.Project(spawnPosition, ref resSplinePoint);
 
-        //player.transform.position = resSplinePoint.position;
+        player.transform.position = resSplinePoint.position;
 
         camera.projector = splineProjector;
         camera.rb = player.GetComponent<Rigidbody>();

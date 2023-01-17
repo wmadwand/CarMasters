@@ -172,8 +172,8 @@ GameObject:
   - component: {fileID: 5623851184983545390}
   - component: {fileID: 2218837055353070262}
   - component: {fileID: 2218837055353070260}
-  - component: {fileID: 5623851184983545384}
   - component: {fileID: 5623851184983545385}
+  - component: {fileID: 5623851184983545384}
   - component: {fileID: 2218837055353070264}
   - component: {fileID: 2218837055353070265}
   - component: {fileID: 2218837055353070267}
@@ -341,7 +341,19 @@ MonoBehaviour:
   _targetObject: {fileID: 5623851184983545361}
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  lastPosition: {x: -15.15, y: 11.4, z: -27.09}
+  lastPosition: {x: -32.4, y: 11.4, z: -9.3}
+--- !u!114 &5623851184983545385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5623851184983545361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccfbca8f355c8a4dbaff6c08b84e200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5623851184983545384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,18 +370,6 @@ MonoBehaviour:
   _minSpeed: 0
   _acceleration: 5
   _deceleration: 5
---- !u!114 &5623851184983545385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5623851184983545361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ccfbca8f355c8a4dbaff6c08b84e200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2218837055353070264
 MonoBehaviour:
   m_ObjectHideFlags: 0

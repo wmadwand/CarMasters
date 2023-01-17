@@ -16,4 +16,10 @@ public class GameController : MonoBehaviour
     {
 
     }
+
+    private IEnumerator StartGameRoutine()
+    {
+        yield return trackController.Init();
+        yield return carSpawner.Init();
+    }
 }

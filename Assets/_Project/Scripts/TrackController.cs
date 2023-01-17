@@ -5,12 +5,15 @@ using System;
 using System.Linq;
 using Dreamteck.Splines;
 
-public class TrackController : MonoBehaviour
+public class TrackController : MonoBehaviour, IController
 {
+    public GameObject trackPrefab;
+    
     public SplineProjector splineProjector;
     public List<TrackPart> trackParts;
 
     private int _trackPartIndex = 0;
+    private GameObject _currentTrack;
 
     //---------------------------------------------------------------
 
@@ -42,6 +45,13 @@ public class TrackController : MonoBehaviour
     }
 
     //---------------------------------------------------------------
+    
+    //TODO: Store every level in separate Scene
+    private void SpawnTrack()
+    {
+        _currentTrack = Instantiate(trackPrefab);
+    }
+
 
     private void SetCurrentSpline()
     {
@@ -85,6 +95,11 @@ public class TrackController : MonoBehaviour
 
             splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
         }
+    }
+
+    public IEnumerator Init()
+    {
+        yield return null;
     }
 }
 

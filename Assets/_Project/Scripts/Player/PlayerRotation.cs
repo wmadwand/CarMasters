@@ -24,17 +24,13 @@ public class PlayerRotation : MonoBehaviour
 
     public Vector3 SplineForward => _splineProjector.result.forward;
 
-    public void SetXInput(float value, Action callback)
+    public void RotateBy(float value)
     {
-        if (!GetComponent<PlayerHealth>().IsAlive)
-        {
-            return;
-        }
 
         _xInput = value;
     }
 
-    public void SetMove(bool isActive)
+    public void Move(bool isActive)
     {
         _isMoveButtonPressed = isActive;
     }

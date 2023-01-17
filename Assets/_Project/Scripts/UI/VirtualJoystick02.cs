@@ -56,7 +56,7 @@ public class VirtualJoystick02 : MonoBehaviour, IDragHandler, IPointerUpHandler,
                 new Vector3(InputDirection.x * (backPanel.rectTransform.sizeDelta.x / 3),
                     InputDirection.z * (backPanel.rectTransform.sizeDelta.y / 3));
 
-            player.SetXInput(InputDirection.x, null);
+            //player.SetXInput(InputDirection.x, null);
         }
     }
 

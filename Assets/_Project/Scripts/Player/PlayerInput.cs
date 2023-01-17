@@ -11,7 +11,7 @@ public class PlayerInput : MonoBehaviour
 
     public void Update()
     {
-        player.SetXInput(variableJoystick.Horizontal, null);
+        //player.SetXInput(variableJoystick.Horizontal, null);
 
         //Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
         //rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);

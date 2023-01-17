@@ -15,14 +15,19 @@ public class Player : MonoBehaviour
         _health = GetComponent<PlayerHealth>();
     }
 
-    public void SetMove(bool isActive)
+    public void Move(bool value)
     {
         if (_health && !_health.IsAlive)
         {
             return;
         }
 
-        _movement?.SetMove(isActive);
-        _rotation?.SetMove(isActive);
+        _movement?.Move(value);
+        _rotation?.Move(value);
+    }
+
+    public void RotateBy(float value)
+    {
+        _rotation?.RotateBy(value);
     }
 }

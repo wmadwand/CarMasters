@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     public void SetMove(bool isActive)
     {
-        if (!_health.IsAlive)
+        if (_health && !_health.IsAlive)
         {
             return;
         }

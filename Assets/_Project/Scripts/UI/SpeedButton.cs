@@ -5,12 +5,12 @@ public class SpeedButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Player player;
 
-    public void OnPointerDown(PointerEventData eventData)
+    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
         player.SetMove(true);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
     {
         player.SetMove(false);
     }

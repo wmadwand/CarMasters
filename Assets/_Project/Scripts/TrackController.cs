@@ -12,6 +12,8 @@ public class TrackController : MonoBehaviour
 
     private int _trackPartIndex = 0;
 
+    //---------------------------------------------------------------
+
     public void OnPartEndReached()
     {
         _trackPartIndex++;
@@ -39,6 +41,13 @@ public class TrackController : MonoBehaviour
         return trackParts[nextIndex];
     }
 
+    //---------------------------------------------------------------
+
+    private void SetCurrentSpline()
+    {
+
+    }
+
     private void Start()
     {
         //var nextTrackPart = GetNextPart();
@@ -56,7 +65,7 @@ public class TrackController : MonoBehaviour
 
     private void CheckTrackPart()
     {
-        if (splineProjector.result.percent >= .9999999d)
+        if (splineProjector?.result.percent >= .9999999d)
         {
             OnPartEndReached();
 

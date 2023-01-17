@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<TrackDeadlyObstacle>())
+        if (other.GetComponent<DeadlyObstacle>())
         {
             _isAlive = false;
 

@@ -49,10 +49,7 @@ public class PlayerGravity : MonoBehaviour
     private void Update()
     {
         CheckGrounded();
-    }
 
-    private void FixedUpdate()
-    {
         _averageGravityNormal = CheckGravity();
 
 #if DEVELOPMENT
@@ -62,6 +59,18 @@ public class PlayerGravity : MonoBehaviour
         }
 #endif
     }
+
+//    private void FixedUpdate()
+//    {
+//        _averageGravityNormal = CheckGravity();
+
+//#if DEVELOPMENT
+//        if (Input.GetKeyDown("space") && _isGrounded)
+//        {
+//            _rigidbody.AddForce(_averageGravityNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
+//        }
+//#endif
+//    }
 
     private Vector3 CheckGravity()
     {

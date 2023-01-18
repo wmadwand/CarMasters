@@ -1,8 +1,8 @@
-using Game.Gameplay.Player;
+using CarMasters.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Game.UI.Input
+namespace CarMasters.UI.Input
 {
     public class PlayerMovementInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {

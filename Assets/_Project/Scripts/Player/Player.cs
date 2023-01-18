@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Gameplay.Player
+namespace CarMasters.Gameplay.Player
 {
     public class Player : MonoBehaviour
     {        

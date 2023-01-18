@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using CarMasters.Gameplay.Player;
 
 /// <summary>
 /// Virtual joystick for mobile joystick control

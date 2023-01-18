@@ -3,8 +3,8 @@ using Dreamteck.Splines.Examples;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.UI.Input;
-using Game.Gameplay.Player;
+using CarMasters.UI.Input;
+using CarMasters.Gameplay.Player;
 
 public class CarSpawner : MonoBehaviour, IController
 {

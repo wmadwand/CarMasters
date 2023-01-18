@@ -19,12 +19,12 @@ namespace CarMasters.UI.Input
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            _player?.Move(true);
+            _player?.SetMove(true);
         }
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
         {
-            _player?.Move(false);
+            _player?.SetMove(false);
         }
     }
 }

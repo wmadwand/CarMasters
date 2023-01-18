@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CarMasters.Gameplay.Player
 {
     public class Player : MonoBehaviour
-    {        
+    {
         //TODO: a couple of dependencies !
         private PlayerMovement _movement;
         private PlayerRotation _rotation;
@@ -15,22 +15,38 @@ namespace CarMasters.Gameplay.Player
 
         public SplineProjector SplineProjector => _rotation.SplineProjector;
 
-        public void Move(bool value)
+        public void SetMove(bool value)
+        {
+            _movement?.SetMove(value);
+            _rotation?.SetMove(value);
+        }
+
+
+        //TODO: Disable PlayerInput + PlayerInputPanel
+        public void Stop()
         {
             if (_health && !_health.IsAlive)
             {
-                value = false;
-            }
+                _movement.StopRightThere();
+                _movement.Stop();
+                _movement.enabled = false;
 
-            _movement?.Move(value);
-            _rotation?.Move(value);
+                _movement?.SetMove(false);
+                _rotation?.SetMove(false);
+
+                return;
+            }
         }
 
         public void RotateBy(float value)
         {
             if (_health && !_health.IsAlive)
             {
-                value = 0f;
+                _rotation?.SetMove(false);
+                _rotation?.RotateBy(0);
+                _rotation.enabled = false;
+
+                return;
             }
 
             _rotation?.RotateBy(value);

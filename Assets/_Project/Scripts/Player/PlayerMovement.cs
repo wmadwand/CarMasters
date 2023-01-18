@@ -16,12 +16,18 @@ namespace CarMasters.Gameplay.Player
 
         //---------------------------------------------------------------
 
-        public void Move(bool value)
+        public void SetMove(bool value)
         {
             // But isMoving when _currentSpeed > _minSpeed!!
             // maybe set isDriving?
 
             _isMoving = value;
+        }
+
+        public void StopRightThere()
+        {
+            _currentSpeed = 0;
+            _isMoving = false;
         }
 
         //---------------------------------------------------------------
@@ -60,7 +66,7 @@ namespace CarMasters.Gameplay.Player
             _rigidbody.constraints = _rigidbody.constraints ^ RigidbodyConstraints.FreezeRotationY;
         }
 
-        private void Stop()
+        public void Stop()
         {
             _rigidbody.constraints = _rigidbody.constraints | RigidbodyConstraints.FreezeRotationY;
             //rigidbody.velocity = Vector3.zero;

@@ -27,6 +27,11 @@ namespace CarMasters.Gameplay.Player
         public Vector3 SplineForward => _splineProjector.result.forward;
         public SplineProjector SplineProjector => _splineProjector;
 
+        public void StopRightThere()
+        {
+            _isManualTurnFinished = false;
+        }
+
         public void Init()
         {
 
@@ -38,7 +43,7 @@ namespace CarMasters.Gameplay.Player
             _xInput = value;
         }
 
-        public void Move(bool isActive)
+        public void SetMove(bool isActive)
         {
             _isMoving = isActive;
         }

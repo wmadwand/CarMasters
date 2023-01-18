@@ -17,6 +17,8 @@ namespace CarMasters.Gameplay.Player
             {
                 _isAlive = false;
 
+                GetComponent<Player>().Stop();
+
                 //1. Disable the car
                 //    2. Call CarSpawner
                 carSpawner.Respawn(other.transform.position, gameObject);

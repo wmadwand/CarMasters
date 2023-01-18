@@ -1,0 +1,26 @@
+Quick Setup
+
+Controls:
+W - Accelerate
+S - Decelerate
+A - Turn left / Shift Rider's Weight to the left
+D - Turn right / Shift Rider's Weight to the right
+R - Reset Bike
+Space - Rear Brake Lever
+Move mouse to look around / Stop mouse movement to re-center
+
+To change the bike, we added an Editor Script (v1.2.5) so you do not have to manually change to the handle system and Rear Mud Guard System.
+From the Menu Bar, Change Bike > Select Bike > Body1/2/3 > Switch Bike
+
+May take a few times to master the controls of the motorcycle (Applying brakes at sharp turns and avoiding the pavement at high speeds). As the motorcycle is simulated with real time physical values it is difficult for us to contain the toppling at high speeds, but we are working towards a middle ground between arcade and physically simulated PID controller.
+We recommend repeatedly pressing turning keys to fine tune the turn instead of holding down turning keys. Makes the riding experience more fun, a little challenging, and adds a dimension of realism.
+
+Active Ragdoll parameters are mentioned in the documentation. To change the behaviour of the ragdoll simulation, please refer to the documentation bundled with the asset.
+
+If you have any queries, suggestions, questions or concerns, please send us an email at alternativemathsthinking@gmail.com. We try implementing all the suggestions we receive. We have released 11 versions of this asset thus far because of the great customer feedback we have received.
+If you find any bugs in the asset pertaining to any of the fields (Motorcycle, rider, ragdoll, animation, sound design) please send us an email.
+
+If you found this motorcycle simulation useful for your Game / Studies / Animations, please consider rating it as it motivates us to add more motorcycle models, wheel types, liveries, script enhancements, fix bugs and make the asset easier for developers to use. The price of this asset was set to a minimal amount only to cover our 3D modelling costs. You are free to use, modify or publish free to play or commercial games with this asset.
+
+
+Happy Riding!

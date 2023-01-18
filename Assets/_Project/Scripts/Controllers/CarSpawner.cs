@@ -20,22 +20,28 @@ public class CarSpawner : MonoBehaviour
 
     private Track _track;
     private Player _player;
+    private RaceCameraGood _raceCamera;
 
     //---------------------------------------------------------------
 
-    public IEnumerator Init(Track track)
+    public IEnumerator Init(Track track, RaceCameraGood raceCamera)
     {
         _track = track;
+        _raceCamera = raceCamera;
         var player = Instantiate(playerPrefab, _track.startPoint.position, Quaternion.identity);
 
         //TODO: freeze the car behaviour
 
         _player = player.GetComponent<Player>();
+        _player.respawnCallback = Respawn;
 
         yield return null;
     }
 
-
+    public void Respawn(Vector3 deadPosition)
+    {
+        StartCoroutine(RespawnRoutine(deadPosition));
+    }
 
     public void Respawn(Vector3 deadPosition, GameObject prevCar)
     {
@@ -43,6 +49,22 @@ public class CarSpawner : MonoBehaviour
     }
 
     //---------------------------------------------------------------
+
+    private IEnumerator RespawnRoutine(Vector3 deadPosition)
+    {
+        _raceCamera.SetActive(false);
+
+        yield return new WaitForSeconds(respawnTime);
+
+        var spawnPosition = deadPosition - respawnOffset;
+        var splinePoint = _track.GetProjectionPosition(spawnPosition);
+
+        spawnPosition = splinePoint.position - new Vector3(0, respawnOffset.y, 0);
+        _player.transform.position = spawnPosition;
+        _player.ActivateMovement();
+
+        _raceCamera.SetActive(true);
+    }
 
     private IEnumerator RespawnRoutine(Vector3 deadPosition, GameObject prevCar)
     {

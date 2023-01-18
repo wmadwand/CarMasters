@@ -9,30 +9,26 @@ namespace CarMasters.Gameplay.Player
         public CarSpawner carSpawner;
         public bool IsAlive => _isAlive;
 
-        public GameObject explosionPrefab;
+
 
         private bool _isAlive = true;
 
         public void Restore()
         {
-            
+
         }
 
+
+        //TODO: run event OnPlayerDead; 
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<DeadlyObstacle>())
             {
                 _isAlive = false;
 
-                GetComponent<Player>().Stop();
-
-                Instantiate(explosionPrefab, transform);
-
-                //1. Disable the car
-                //    2. Call CarSpawner
-                carSpawner.Respawn(other.transform.position, gameObject);
-                //gameObject.SetActive(false);
+                var player = GetComponent<Player>();
+                player.Respawn(other.transform.position);
             }
         }
-    } 
+    }
 }

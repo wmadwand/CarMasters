@@ -4903,7 +4903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d399fe6e94b6f9240aca49a9ba36f6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 5
+  timer: 2
 --- !u!1 &1341057219913508
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,6 +30,11 @@ public class RaceCameraGood : MonoBehaviour
         yield return null;
     }
 
+    public void SetActive(bool value)
+    {
+        _isActive = value;
+    }
+
     private void SetStartSettings()
     {
         trs = transform;

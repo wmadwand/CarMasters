@@ -57,21 +57,6 @@ public class Track : MonoBehaviour
 
     //--------------------------------------------------------------- 
 
-    private void SetCurrentSpline()
-    {
-
-    }
-
-    private void Start()
-    {
-        //var nextTrackPart = GetNextPart();
-        //splineProjector.spline = nextTrackPart.spline;
-        //splineProjector.RebuildImmediate();
-
-        //splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
-
-    }
-
     private void Update()
     {
         CheckTrackPart();

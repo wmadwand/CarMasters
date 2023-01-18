@@ -30,6 +30,7 @@ namespace CarMasters.Gameplay.Player
         public void StopRightThere()
         {
             _isManualTurnFinished = false;
+            _xInput = 0;
         }
 
         public void Init()

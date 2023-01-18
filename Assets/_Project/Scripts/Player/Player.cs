@@ -1,4 +1,5 @@
 using Dreamteck.Splines;
+using System;
 using UnityEngine;
 
 namespace CarMasters.Gameplay.Player
@@ -11,6 +12,9 @@ namespace CarMasters.Gameplay.Player
         private PlayerGravity _gravity;
         private PlayerHealth _health;
 
+        public Action<Vector3> respawnCallback;
+        public GameObject explosionPrefab;
+
         //---------------------------------------------------------------
 
         public SplineProjector SplineProjector => _rotation.SplineProjector;
@@ -21,35 +25,36 @@ namespace CarMasters.Gameplay.Player
             _rotation?.SetMove(value);
         }
 
+        public void ActivateMovement()
+        {
+            _movement.enabled = true;
+            _rotation.enabled = true;
+        }
 
         //TODO: Disable PlayerInput + PlayerInputPanel
         public void Stop()
         {
-            if (_health && !_health.IsAlive)
-            {
-                _movement.StopRightThere();
-                _movement.Stop();
-                _movement.enabled = false;
+            _movement.StopRightThere();
+            _movement.Stop();
+            _movement.enabled = false;
 
-                _movement?.SetMove(false);
-                _rotation?.SetMove(false);
+            _movement?.SetMove(false);
+            _rotation?.SetMove(false);
 
-                return;
-            }
+            _rotation?.RotateBy(0);
+            _rotation.enabled = false;
         }
 
         public void RotateBy(float value)
         {
-            if (_health && !_health.IsAlive)
-            {
-                _rotation?.SetMove(false);
-                _rotation?.RotateBy(0);
-                _rotation.enabled = false;
-
-                return;
-            }
-
             _rotation?.RotateBy(value);
+        }
+
+        public void Respawn(Vector3 deadPosition)
+        {
+            Stop();
+            respawnCallback(deadPosition);
+            Instantiate(explosionPrefab, transform);
         }
 
         //---------------------------------------------------------------

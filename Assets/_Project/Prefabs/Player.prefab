@@ -176,7 +176,6 @@ GameObject:
   - component: {fileID: 5623851184983545384}
   - component: {fileID: 2218837055353070264}
   - component: {fileID: 2218837055353070265}
-  - component: {fileID: 2218837055353070267}
   - component: {fileID: 2218837055353070263}
   m_Layer: 0
   m_Name: Player
@@ -340,7 +339,7 @@ MonoBehaviour:
   _targetObject: {fileID: 5623851184983545361}
   _offset: {x: 0, y: 0}
   _rotationOffset: {x: 0, y: 0, z: 0}
-  lastPosition: {x: -31.995, y: 11.4, z: -13.941}
+  lastPosition: {x: -10.54, y: 11.4, z: -29.33}
 --- !u!114 &5623851184983545385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccfbca8f355c8a4dbaff6c08b84e200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1276244140803500, guid: c5fef76dd4d118e47833e4f5b251d89f, type: 3}
 --- !u!114 &5623851184983545384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,20 +411,6 @@ MonoBehaviour:
   _jumpPower: 1
   _groundedOffset: 0
   _groundedRadius: 1
---- !u!114 &2218837055353070267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5623851184983545361}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0062daf43ed3c5144b333cf887d6fa27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement: {fileID: 0}
-  rotation: {fileID: 0}
 --- !u!114 &2218837055353070263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carSpawner: {fileID: 0}
-  explosionPrefab: {fileID: 1276244140803500, guid: c5fef76dd4d118e47833e4f5b251d89f, type: 3}
 --- !u!1 &5623851185602936899
 GameObject:
   m_ObjectHideFlags: 0

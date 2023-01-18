@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carSpawner: {fileID: 0}
+  explosionPrefab: {fileID: 1276244140803500, guid: c5fef76dd4d118e47833e4f5b251d89f, type: 3}
 --- !u!1 &5623851185602936899
 GameObject:
   m_ObjectHideFlags: 0

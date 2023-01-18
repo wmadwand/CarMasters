@@ -9,7 +9,14 @@ namespace CarMasters.Gameplay.Player
         public CarSpawner carSpawner;
         public bool IsAlive => _isAlive;
 
+        public GameObject explosionPrefab;
+
         private bool _isAlive = true;
+
+        public void Restore()
+        {
+            
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -18,6 +25,8 @@ namespace CarMasters.Gameplay.Player
                 _isAlive = false;
 
                 GetComponent<Player>().Stop();
+
+                Instantiate(explosionPrefab, transform);
 
                 //1. Disable the car
                 //    2. Call CarSpawner

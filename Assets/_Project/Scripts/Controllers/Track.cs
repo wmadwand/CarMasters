@@ -13,6 +13,8 @@ public class Track : MonoBehaviour
     private SplineProjector _splineProjector;
     public List<TrackPart> trackParts;
 
+    public Vector3 offset;
+
     private int _trackPartIndex = 0;
     private GameObject _currentTrack;
 
@@ -99,13 +101,22 @@ public class Track : MonoBehaviour
         }
     }
 
-    public IEnumerator Init(SplineProjector splineProjector)
+    public IEnumerator Init(SplineProjector splineProjector, int splineNumber)
     {
         _splineProjector = splineProjector;
-        _splineProjector.spline = trackParts[_trackPartIndex].spline;
+
+        //_splineProjector.spline = trackParts[_trackPartIndex].spline;
+        _splineProjector.spline = trackParts[splineNumber].spline;
+        _splineProjector.RebuildImmediate();
 
         var playerPos = _splineProjector.GetComponent<Player>().transform.position;
-        _splineProjector.GetComponent<Player>().transform.position = GetProjectionPosition(playerPos).position;
+        var splineSample = GetProjectionPosition(playerPos);
+        _splineProjector.GetComponent<Player>().transform.position = splineSample.position + offset;
+
+        _splineProjector.SetPercent(splineSample.percent, false, false);
+        float distance = _splineProjector.CalculateLength(0.0d, _splineProjector.result.percent); //Get the excess distance after looping            
+        _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
+
 
         yield return null;
     }

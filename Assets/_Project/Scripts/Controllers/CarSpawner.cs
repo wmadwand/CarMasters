@@ -61,8 +61,8 @@ public class CarSpawner : MonoBehaviour
 
         camera.projector = splineProjector;
         camera.rb = player.GetComponent<Rigidbody>();
-        speedButton._player = player;
-        dragHandler._player = player.GetComponent<Player>();
+        //speedButton._player = player;
+        //dragHandler._player = player.GetComponent<Player>();
         player.GetComponent<PlayerHealth>().carSpawner = this;
 
         Destroy(prevCar);

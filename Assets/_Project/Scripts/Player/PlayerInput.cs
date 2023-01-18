@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+namespace CarMasters.UI.Input
 {
-    public PlayerRotation player;
-    public float speed;
-    public VariableJoystick variableJoystick;
-    public Rigidbody rb;
-
-    public void Update()
+    public class PlayerInput : MonoBehaviour
     {
-        //player.SetXInput(variableJoystick.Horizontal, null);
+        public PlayerMovementInput movement;
+        public PlayerRotationInput rotation;
 
-        //Vector3 direction = Vector3.forward * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-        //rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+        public IEnumerator Init(Player player)
+        {
+            movement.Init(player);
+            rotation.Init(player);
+
+            yield return null;
+        }
     }
 }

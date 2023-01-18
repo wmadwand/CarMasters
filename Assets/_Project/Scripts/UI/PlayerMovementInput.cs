@@ -6,16 +6,25 @@ namespace CarMasters.UI.Input
 {
     public class PlayerMovementInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-       public Player _player;
+        private Player _player;
+
+        //---------------------------------------------------------------
+
+        public void Init(Player player)
+        {
+            _player = player;
+        }
+
+        //---------------------------------------------------------------
 
         void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
         {
-            _player.Move(true);
+            _player?.Move(true);
         }
 
         void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
         {
-            _player.Move(false);
+            _player?.Move(false);
         }
     }
 }

@@ -4883,6 +4883,7 @@ MonoBehaviour:
     gravity: -10
   - spline: {fileID: 6117991258898834266}
     gravity: -30
+  offset: {x: 0, y: 5, z: 0}
 --- !u!1 &6117991259767778954
 GameObject:
   m_ObjectHideFlags: 0

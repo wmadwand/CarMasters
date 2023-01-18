@@ -6,10 +6,16 @@ namespace CarMasters.UI.Input
 {
     public class PlayerRotationInput : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        public Player _player;
-
+        private Player _player;
         private Vector2 _startDragPosition;
         private float _delta;
+
+        //---------------------------------------------------------------
+
+        public void Init(Player player)
+        {
+            _player = player;
+        }
 
         //---------------------------------------------------------------
 

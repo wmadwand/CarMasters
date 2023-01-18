@@ -10,8 +10,8 @@ public class LevelCollectionData : ScriptableObject
     public LevelData defaultLevel;
     public List<LevelData> levels;
 
-    public LevelData GetLevel(int number)
+    public LevelData GetLevel(int index)
     {
-        return levels[number - 1];
+        return levels[index];
     }
 }

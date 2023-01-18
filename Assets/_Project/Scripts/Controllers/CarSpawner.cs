@@ -6,20 +6,32 @@ using UnityEngine;
 using CarMasters.UI.Input;
 using CarMasters.Gameplay.Player;
 
-public class CarSpawner : MonoBehaviour, IController
+public class CarSpawner : MonoBehaviour
 {
     public BallCamera camera;
     public PlayerMovementInput speedButton;
     public PlayerRotationInput dragHandler;
     public Vector3 respawnOffset;
 
+    public Player Player => _player;
+
     public float respawnTime = 2;
     public Player playerPrefab;
 
+    private Track _track;
+    private Player _player;
+
     //---------------------------------------------------------------
 
-    public IEnumerator Init()
+    public IEnumerator Init(Track track)
     {
+        _track = track;
+        var player = Instantiate(playerPrefab, _track.startPoint.position, Quaternion.identity);
+
+        //TODO: freeze the car behaviour
+
+        _player = player.GetComponent<Player>();
+
         yield return null;
     }
 
@@ -42,10 +54,9 @@ public class CarSpawner : MonoBehaviour, IController
 
         yield return new WaitUntil(() => splineProjector.spline);
 
-        SplineSample resSplinePoint = new SplineSample();
-        splineProjector.Project(spawnPosition, ref resSplinePoint);
+        var splinePoint = _track.GetProjectionPosition(spawnPosition);
 
-        spawnPosition = resSplinePoint.position - new Vector3(0, respawnOffset.y, 0);
+        spawnPosition = splinePoint.position - new Vector3(0, respawnOffset.y, 0);
         player.transform.position = spawnPosition;
 
         camera.projector = splineProjector;

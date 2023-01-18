@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public TrackController trackController;
+    public Track trackController;
     public CarSpawner carSpawner;
+    public LevelController levelController;
 
     private void Start()
     {
@@ -14,12 +15,14 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-
+        StartCoroutine(StartGameRoutine());
     }
 
     private IEnumerator StartGameRoutine()
     {
-        yield return trackController.Init();
-        yield return carSpawner.Init();
+        //yield return levelController.LoadLevelRoutine();
+        yield return carSpawner.Init(levelController.Track);
+        yield return trackController.Init(carSpawner.Player.SplineProjector);
+
     }
 }

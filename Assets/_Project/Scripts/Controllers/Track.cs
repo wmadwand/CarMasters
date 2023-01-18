@@ -6,11 +6,11 @@ using System.Linq;
 using Dreamteck.Splines;
 using CarMasters.Gameplay.Player;
 
-public class TrackController : MonoBehaviour, IController
+public class Track : MonoBehaviour
 {
-    public GameObject trackPrefab;
-    
-    public SplineProjector splineProjector;
+    public Transform startPoint;
+
+    private SplineProjector _splineProjector;
     public List<TrackPart> trackParts;
 
     private int _trackPartIndex = 0;
@@ -32,7 +32,7 @@ public class TrackController : MonoBehaviour, IController
 
     public TrackPart GetNextPartDebug()
     {
-        var currentSpline = splineProjector.spline;
+        var currentSpline = _splineProjector.spline;
         var currentTrackPart = trackParts.FirstOrDefault(cc => cc.spline == currentSpline);
         var currentTrackPartIndex = trackParts.IndexOf(currentTrackPart);
         var nextIndex = currentTrackPartIndex + 1;
@@ -45,14 +45,15 @@ public class TrackController : MonoBehaviour, IController
         return trackParts[nextIndex];
     }
 
-    //---------------------------------------------------------------
-    
-    //TODO: Store every level in separate Scene
-    private void SpawnTrack()
+    public SplineSample GetProjectionPosition(Vector3 worldPosition)
     {
-        _currentTrack = Instantiate(trackPrefab);
+        SplineSample resSplinePoint = new SplineSample();
+        _splineProjector.Project(worldPosition, ref resSplinePoint);
+
+        return resSplinePoint;
     }
 
+    //--------------------------------------------------------------- 
 
     private void SetCurrentSpline()
     {
@@ -76,30 +77,36 @@ public class TrackController : MonoBehaviour, IController
 
     private void CheckTrackPart()
     {
-        if (splineProjector?.result.percent >= .9999999d)
+        if (_splineProjector?.result.percent >= .9999999d)
         {
             OnPartEndReached();
 
             var nextTrackPart = GetNextPartDebug();
 
-            if (nextTrackPart.spline == splineProjector.spline)
+            if (nextTrackPart.spline == _splineProjector.spline)
             {
                 return;
             }
 
-            splineProjector.spline = nextTrackPart.spline;
-            splineProjector.RebuildImmediate();
-            splineProjector.SetPercent(0d, false, false);
+            _splineProjector.spline = nextTrackPart.spline;
+            _splineProjector.RebuildImmediate();
+            _splineProjector.SetPercent(0d, false, false);
 
-            float distance = splineProjector.CalculateLength(0.0, splineProjector.result.percent); //Get the excess distance after looping            
-            splineProjector.SetDistance(distance); //Set the excess distance along the new spline
+            float distance = _splineProjector.CalculateLength(0.0, _splineProjector.result.percent); //Get the excess distance after looping            
+            _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
 
-            splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
+            _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
         }
     }
 
-    public IEnumerator Init()
+    public IEnumerator Init(SplineProjector splineProjector)
     {
+        _splineProjector = splineProjector;
+        _splineProjector.spline = trackParts[_trackPartIndex].spline;
+
+        var playerPos = _splineProjector.GetComponent<Player>().transform.position;
+        _splineProjector.GetComponent<Player>().transform.position = GetProjectionPosition(playerPos).position;
+
         yield return null;
     }
 }

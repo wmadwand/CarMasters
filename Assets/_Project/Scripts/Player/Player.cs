@@ -1,3 +1,4 @@
+using Dreamteck.Splines;
 using UnityEngine;
 
 namespace CarMasters.Gameplay.Player
@@ -11,6 +12,8 @@ namespace CarMasters.Gameplay.Player
         private PlayerHealth _health;
 
         //---------------------------------------------------------------
+
+        public SplineProjector SplineProjector => _rotation.SplineProjector;
 
         public void Move(bool value)
         {

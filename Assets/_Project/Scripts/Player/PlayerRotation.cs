@@ -25,6 +25,7 @@ namespace CarMasters.Gameplay.Player
         //---------------------------------------------------------------
 
         public Vector3 SplineForward => _splineProjector.result.forward;
+        public SplineProjector SplineProjector => _splineProjector;
 
         public void Init()
         {

@@ -8,7 +8,7 @@ using CarMasters.Gameplay.Player;
 
 public class CarSpawner : MonoBehaviour
 {
-    public BallCamera camera;
+    public RaceCameraGood camera;
     public PlayerMovementInput speedButton;
     public PlayerRotationInput dragHandler;
     public Vector3 respawnOffset;

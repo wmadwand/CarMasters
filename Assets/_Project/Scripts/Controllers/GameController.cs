@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public Track trackController;
+    public RaceCameraGood raceCamera;
     public CarSpawner carSpawner;
     public LevelController levelController;
 
     private void Start()
     {
-        StartGame();
+        //StartGame();
     }
 
     public void StartGame()
@@ -21,8 +21,10 @@ public class GameController : MonoBehaviour
     private IEnumerator StartGameRoutine()
     {
         //yield return levelController.LoadLevelRoutine();
-        yield return carSpawner.Init(levelController.Track);
-        yield return trackController.Init(carSpawner.Player.SplineProjector);
 
+        var trackController = levelController?.Track;
+        yield return carSpawner.Init(trackController);        
+        yield return trackController.Init(carSpawner.Player.SplineProjector);
+        yield return raceCamera.Init(carSpawner.Player);
     }
 }

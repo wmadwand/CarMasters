@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &101100000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rightLeg
+  m_Mask: 01000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: locator19
+    m_Weight: 1
+  - m_Path: root
+    m_Weight: 1
+  - m_Path: root/Hips
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg/lLeg
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg/lLeg/lFoot
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg/lLeg/lFoot/lToe
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg/lLeg/lFoot/pCube28
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg/lLeg/pCube27
+    m_Weight: 1
+  - m_Path: root/Hips/lUpperLeg/pCube26
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg/pCube42
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg/rLeg
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg/rLeg/pCube43
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg/rLeg/rFoot
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg/rLeg/rFoot/pCube44
+    m_Weight: 1
+  - m_Path: root/Hips/rUpperLeg/rLeg/rFoot/rToe
+    m_Weight: 1
+  - m_Path: root/Hips/Spine
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm/lForearm
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm/lForearm/lHand
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm/lForearm/lHand/lFinger
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm/lForearm/lHand/pCube46
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm/lForearm/pCube33
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/lShoulder/lArm/pCube32
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/Neck
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/Neck/Head
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/Neck/Head/pCube25
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/pCube24
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm/pCube41
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm/rForearm
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm/rForearm/pCube40
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm/rForearm/rHand
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm/rForearm/rHand/pCube45
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/Chest/rShoulder/rArm/rForearm/rHand/rFinger
+    m_Weight: 1
+  - m_Path: root/Hips/Spine/pCube38
+    m_Weight: 1

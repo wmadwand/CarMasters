@@ -1,16 +1,9 @@
-using Dreamteck.Splines;
-using Dreamteck.Splines.Examples;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using CarMasters.UI.Input;
 using CarMasters.Gameplay.Player;
+using System.Collections;
+using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
-{
-    public RaceCameraGood camera;
-    public PlayerMovementInput speedButton;
-    public PlayerRotationInput dragHandler;
+{    
     public Vector3 respawnOffset;
 
     public Player Player => _player;
@@ -45,7 +38,7 @@ public class CarSpawner : MonoBehaviour
 
     public void Respawn(Vector3 deadPosition, GameObject prevCar)
     {
-        StartCoroutine(RespawnRoutine(deadPosition, prevCar));
+        //StartCoroutine(RespawnRoutine(deadPosition, prevCar));
     }
 
     //---------------------------------------------------------------
@@ -66,27 +59,27 @@ public class CarSpawner : MonoBehaviour
         _raceCamera.SetActive(true);
     }
 
-    private IEnumerator RespawnRoutine(Vector3 deadPosition, GameObject prevCar)
-    {
-        yield return new WaitForSeconds(respawnTime);
+    //private IEnumerator RespawnRoutine(Vector3 deadPosition, GameObject prevCar)
+    //{
+    //    yield return new WaitForSeconds(respawnTime);
 
-        var spawnPosition = deadPosition - respawnOffset;
-        var player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        var splineProjector = player.GetComponent<SplineProjector>();
+    //    var spawnPosition = deadPosition - respawnOffset;
+    //    var player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+    //    var splineProjector = player.GetComponent<SplineProjector>();
 
-        yield return new WaitUntil(() => splineProjector.spline);
+    //    yield return new WaitUntil(() => splineProjector.spline);
 
-        var splinePoint = _track.GetProjectionPosition(spawnPosition);
+    //    var splinePoint = _track.GetProjectionPosition(spawnPosition);
 
-        spawnPosition = splinePoint.position - new Vector3(0, respawnOffset.y, 0);
-        player.transform.position = spawnPosition;
+    //    spawnPosition = splinePoint.position - new Vector3(0, respawnOffset.y, 0);
+    //    player.transform.position = spawnPosition;
 
-        camera.projector = splineProjector;
-        camera.rb = player.GetComponent<Rigidbody>();
-        //speedButton._player = player;
-        //dragHandler._player = player.GetComponent<Player>();
-        player.GetComponent<PlayerHealth>().carSpawner = this;
+    //    camera.projector = splineProjector;
+    //    camera.rb = player.GetComponent<Rigidbody>();
+    //    //speedButton._player = player;
+    //    //dragHandler._player = player.GetComponent<Player>();
+    //    player.GetComponent<PlayerHealth>().carSpawner = this;
 
-        Destroy(prevCar);
-    }
+    //    Destroy(prevCar);
+    //}
 }

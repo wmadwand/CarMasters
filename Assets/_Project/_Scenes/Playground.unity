@@ -4785,7 +4785,7 @@ MonoBehaviour:
   camera: {fileID: 0}
   speedButton: {fileID: 3284950314790662063}
   dragHandler: {fileID: 3284950314790662051}
-  respawnOffset: {x: 5, y: -5, z: 5}
+  respawnOffset: {x: 15, y: -5, z: 15}
   respawnTime: 2
   playerPrefab: {fileID: 5623851184983545385, guid: 371e72906c155d14db9dab14b56c8853, type: 3}
 --- !u!1 &1833034517
@@ -6702,15 +6702,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868383481958752319}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3868383482051303951}
   m_Father: {fileID: 512964491}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!81 &3868383481958752316
 AudioListener:
   m_ObjectHideFlags: 0

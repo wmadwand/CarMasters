@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CarMasters.Gameplay.Player
+namespace Technoprosper.Gameplay.Player
 {
     public class PlayerRotation : MonoBehaviour
     {

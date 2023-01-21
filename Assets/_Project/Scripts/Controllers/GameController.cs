@@ -1,4 +1,5 @@
-using CarMasters.UI.Input;
+using Technoprosper.Gameplay.Camera;
+using Technoprosper.Input.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public RaceCameraGood raceCamera;
-    public CarSpawner carSpawner;
+    public RaceCamera raceCamera;
+    public PlayerSpawner playerSpawner;
     public LevelController levelController;
     public PlayerInput playerInput;
 
@@ -28,10 +29,10 @@ public class GameController : MonoBehaviour
         //yield return levelController.LoadLevelRoutine();
 
         var trackController = levelController?.Track;
-        yield return carSpawner.Init(trackController, raceCamera);
-        yield return trackController.Init(carSpawner.Player.SplineProjector, splineNumberDebug);
-        yield return raceCamera.Init(carSpawner.Player);
-        yield return playerInput.Init(carSpawner.Player);
+        yield return playerSpawner.Init(trackController, raceCamera);
+        yield return trackController.Init(playerSpawner.Player.SplineProjector, splineNumberDebug);
+        yield return raceCamera.Init(playerSpawner.Player);
+        yield return playerInput.Init(playerSpawner.Player); 
 
         callBack?.Invoke();
     }

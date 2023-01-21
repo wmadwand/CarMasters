@@ -2,7 +2,7 @@ using Dreamteck.Splines;
 using System;
 using UnityEngine;
 
-namespace CarMasters.Gameplay.Player
+namespace Technoprosper.Gameplay.Player
 {
     public class Player : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace CarMasters.Gameplay.Player
         private PlayerGravity _gravity;
         private PlayerHealth _health;
 
-        public Action<Vector3> respawnCallback;
+        public Action<Vector3> callToRespawn;
         public GameObject explosionPrefab;
 
         //---------------------------------------------------------------
@@ -53,7 +53,7 @@ namespace CarMasters.Gameplay.Player
         public void Respawn(Vector3 deadPosition)
         {
             Stop();
-            respawnCallback(deadPosition);
+            callToRespawn(deadPosition);
             Instantiate(explosionPrefab, transform);
         }
 

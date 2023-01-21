@@ -1,8 +1,8 @@
-using CarMasters.Gameplay.Player;
+using Technoprosper.Gameplay.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace CarMasters.UI.Input
+namespace Technoprosper.Input.UI
 {
     public class PlayerMovementInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {

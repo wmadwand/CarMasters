@@ -1,7 +1,7 @@
 using Dreamteck.Splines;
 using UnityEngine;
 
-namespace CarMasters.Gameplay.Player
+namespace Technoprosper.Gameplay.Player
 {
     public class PlayerMovement : MonoBehaviour
     {

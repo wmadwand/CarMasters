@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CarMasters.Gameplay.Player
+namespace Technoprosper.Gameplay.Player
 {
     public class PlayerHealth : MonoBehaviour
     {
-        public CarSpawner carSpawner;
+        public PlayerSpawner carSpawner;
         public bool IsAlive => _isAlive;
 
 

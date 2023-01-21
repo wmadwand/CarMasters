@@ -1,9 +1,9 @@
-using CarMasters.Gameplay.Player;
+using Technoprosper.Gameplay.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CarMasters.UI.Input
+namespace Technoprosper.Input.UI
 {
     public class PlayerInput : MonoBehaviour
     {

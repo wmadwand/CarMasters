@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarMasters.Gameplay.Player
+namespace Technoprosper.Gameplay.Player
 {
     public class PlayerGravity : MonoBehaviour
     {
@@ -55,7 +55,7 @@ namespace CarMasters.Gameplay.Player
             _averageGravityNormal = CheckGravity();
 
 #if DEVELOPMENT
-            if (Input.GetKeyDown("space") && _isGrounded)
+            if (UnityEngine.Input.GetKeyDown("space") && _isGrounded)
             {
                 _rigidbody.AddForce(_averageGravityNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
             }

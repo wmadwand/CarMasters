@@ -1,8 +1,8 @@
-using CarMasters.Gameplay.Player;
+using Technoprosper.Gameplay.Player;
 using Dreamteck.Splines;
 using UnityEngine;
 
-public class RaceCamera : MonoBehaviour
+public class RaceCameraDebug : MonoBehaviour
 {
     public PlayerRotation playerRotation;
 

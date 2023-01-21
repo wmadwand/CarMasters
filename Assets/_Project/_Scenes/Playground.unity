@@ -3748,7 +3748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raceCamera: {fileID: 3868383481958752320}
-  carSpawner: {fileID: 1664058670}
+  playerSpawner: {fileID: 1664058670}
   levelController: {fileID: 7302136318343933300}
   playerInput: {fileID: 3284950314790662064}
   splineNumberDebug: 3

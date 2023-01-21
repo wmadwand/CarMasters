@@ -69,13 +69,17 @@ public class Track : MonoBehaviour
             //var sss = nextTrackPart.spline.Evaluate(0d);
             var playerPos = _splineProjector.transform.position;
 
-            var normal = new Vector3(1, 0, 0);
+            var direction = startPointOfNextPart.position - _splineProjector.spline.EvaluatePosition(1d);
+            var normal = direction.normalized;
+            //var normal = _splineProjector.result.forward;
             var plane = new Plane(normal, startPointOfNextPart.position);
             var side = plane.GetSide(playerPos);
 
+
+
             DrawPlane(startPointOfNextPart.position, normal);
 
-            if (!side) { return; }
+            if (!side /*&& offset.y < offsetToCheck.y !!!! */) { return; }
 
             OnPartEndReached();
 

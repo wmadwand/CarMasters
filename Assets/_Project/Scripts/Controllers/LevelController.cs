@@ -36,6 +36,6 @@ public class LevelController : MonoBehaviour
         var currentLevelObject = Instantiate(level.data.prefab);
         track = currentLevelObject.GetComponent<Track>();
 
-        yield return null;
+        yield return new WaitUntil(() => track);
     }
 }

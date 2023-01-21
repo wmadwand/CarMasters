@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator StartGameRoutine(Action callBack)
     {
-        //yield return levelController.LoadLevelRoutine();
+        yield return levelController.LoadLevelRoutine();
 
         var trackController = levelController?.Track;
         yield return playerSpawner.Spawn(trackController, raceCamera);

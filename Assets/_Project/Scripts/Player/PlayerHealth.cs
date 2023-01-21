@@ -6,25 +6,19 @@ namespace Technoprosper.Gameplay.Player
 {
     public class PlayerHealth : MonoBehaviour
     {
-        public PlayerSpawner carSpawner;
-        public bool IsAlive => _isAlive;
-
-
-
-        private bool _isAlive = true;
+        public bool IsAlive { get; private set; } = true;
 
         public void Restore()
         {
 
         }
 
-
         //TODO: run event OnPlayerDead; 
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<DeadlyObstacle>())
             {
-                _isAlive = false;
+                IsAlive = false;
 
                 var player = GetComponent<Player>();
                 player.Respawn(other.transform.position);

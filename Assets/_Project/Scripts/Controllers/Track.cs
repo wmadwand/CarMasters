@@ -9,12 +9,10 @@ using Technoprosper.Gameplay.Player;
 public class Track : MonoBehaviour
 {
     public Transform startPoint;
-
-    private SplineProjector _splineProjector;
+    public Vector3 offset;
     public List<TrackPart> trackParts;
 
-    public Vector3 offset;
-
+    private SplineProjector _splineProjector;
     private int _trackPartIndex = 0;
     private GameObject _currentTrack;
 

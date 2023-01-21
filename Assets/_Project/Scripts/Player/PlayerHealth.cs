@@ -59,7 +59,6 @@ namespace Technoprosper.Gameplay.Player
                         _player.Respawn(deadPostion, false);
                     }
                 }
-
             }
         }
     }

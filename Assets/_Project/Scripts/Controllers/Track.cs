@@ -64,9 +64,20 @@ public class Track : MonoBehaviour
     {
         if (_splineProjector?.result.percent >= .9999999d)
         {
-            OnPartEndReached();
-
             var nextTrackPart = GetNextPartDebug();
+            var startPointOfNextPart = nextTrackPart.spline.GetPoint(0);
+            //var sss = nextTrackPart.spline.Evaluate(0d);
+            var playerPos = _splineProjector.transform.position;
+
+            var normal = new Vector3(1, 0, 0);
+            var plane = new Plane(normal, startPointOfNextPart.position);
+            var side = plane.GetSide(playerPos);
+
+            DrawPlane(startPointOfNextPart.position, normal);
+
+            if (!side) { return; }
+
+            OnPartEndReached();
 
             if (nextTrackPart.spline == _splineProjector.spline)
             {
@@ -81,7 +92,31 @@ public class Track : MonoBehaviour
             _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
 
             _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
+
+
         }
+    }
+
+    public void DrawPlane(Vector3 position, Vector3 normal)
+    {
+        Vector3 v3;
+        if (normal.normalized != Vector3.forward)
+            v3 = Vector3.Cross(normal, Vector3.forward).normalized * normal.magnitude;
+        else
+            v3 = Vector3.Cross(normal, Vector3.up).normalized * normal.magnitude; ;
+        var corner0 = position + v3;
+        var corner2 = position - v3;
+        var q = Quaternion.AngleAxis(90.0f, normal);
+        v3 = q * v3;
+        var corner1 = position + v3;
+        var corner3 = position - v3;
+        Debug.DrawLine(corner0, corner2, Color.green);
+        Debug.DrawLine(corner1, corner3, Color.green);
+        Debug.DrawLine(corner0, corner1, Color.green);
+        Debug.DrawLine(corner1, corner2, Color.green);
+        Debug.DrawLine(corner2, corner3, Color.green);
+        Debug.DrawLine(corner3, corner0, Color.green);
+        Debug.DrawRay(position, normal, Color.red);
     }
 
     public IEnumerator Init(Player player, int splineNumber)

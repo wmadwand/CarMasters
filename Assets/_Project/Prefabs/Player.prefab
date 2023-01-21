@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offsetToCheck: {x: 5, y: -2, z: 5}
-  waitforFallingTimer: 1
+  waitforFallingTimer: 0.5
 --- !u!1 &5623851185602936899
 GameObject:
   m_ObjectHideFlags: 0

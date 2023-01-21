@@ -4,6 +4,7 @@ namespace Technoprosper.Gameplay.Player
 {
     public class PlayerGravity : MonoBehaviour
     {
+        //TODO: create separate class PlayerGravityProperties
         [SerializeField] private float _gravity = -10;
         [SerializeField] private float _smoothRotation = 10;
         [SerializeField] Transform[] _gravityRays;
@@ -17,7 +18,7 @@ namespace Technoprosper.Gameplay.Player
         private int _groundLayerIndex = 0;
         private Vector3 _defaultDownDirection = Vector3.up;
 
-        private bool _isGrounded = true;
+        public bool IsGrounded { get; private set; } = true;
         private Vector3 _averageGravityNormal;
 
         //---------------------------------------------------------------
@@ -55,7 +56,7 @@ namespace Technoprosper.Gameplay.Player
             _averageGravityNormal = CheckGravity();
 
 #if DEVELOPMENT
-            if (UnityEngine.Input.GetKeyDown("space") && _isGrounded)
+            if (UnityEngine.Input.GetKeyDown("space") && IsGrounded)
             {
                 _rigidbody.AddForce(_averageGravityNormal.normalized * -_gravity * _jumpPower, ForceMode.Impulse);
             }
@@ -98,9 +99,9 @@ namespace Technoprosper.Gameplay.Player
         private void CheckGrounded()
         {
             var spherePos = new Vector3(transform.position.x, transform.position.y - _groundedOffset, transform.position.z);
-            _isGrounded = Physics.CheckSphere(spherePos, _groundedRadius, _groundLayerMask, QueryTriggerInteraction.Ignore);
+            IsGrounded = Physics.CheckSphere(spherePos, _groundedRadius, _groundLayerMask, QueryTriggerInteraction.Ignore);
 
-            Debug.Log($"_isOnGround {_isGrounded}");
+            Debug.Log($"_isOnGround {IsGrounded}");
         }
 
         private void OnDrawGizmosSelected()
@@ -108,7 +109,7 @@ namespace Technoprosper.Gameplay.Player
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
             Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-            if (_isGrounded) Gizmos.color = transparentGreen;
+            if (IsGrounded) Gizmos.color = transparentGreen;
             else Gizmos.color = transparentRed;
 
             var spherePos = new Vector3(transform.position.x, transform.position.y - _groundedOffset, transform.position.z);
@@ -145,5 +146,5 @@ namespace Technoprosper.Gameplay.Player
 
             return closestHit;
         }
-    } 
+    }
 }

@@ -29,6 +29,7 @@ namespace Technoprosper.Gameplay.Player
         {
             _movement.enabled = true;
             _rotation.enabled = true;
+            _health.Restore();
         }
 
         //TODO: Disable PlayerInput + PlayerInputPanel
@@ -46,11 +47,15 @@ namespace Technoprosper.Gameplay.Player
             _rotation?.RotateBy(value);
         }
 
-        public void Respawn(Vector3 deadPosition)
+        public void Respawn(Vector3 deadPosition, bool withExplosion = true)
         {
             Stop();
             callToRespawn(deadPosition);
-            Instantiate(explosionPrefab, transform);
+
+            if (withExplosion)
+            {
+                Instantiate(explosionPrefab, transform);
+            }
         }
 
         //---------------------------------------------------------------

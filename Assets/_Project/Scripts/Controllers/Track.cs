@@ -84,9 +84,9 @@ public class Track : MonoBehaviour
         }
     }
 
-    public IEnumerator Init(SplineProjector splineProjector, int splineNumber)
+    public IEnumerator Init(Player player, int splineNumber)
     {
-        _splineProjector = splineProjector;
+        _splineProjector = player.SplineProjector;
 
         //_splineProjector.spline = trackParts[_trackPartIndex].spline;
         _splineProjector.spline = trackParts[splineNumber].spline;
@@ -94,7 +94,7 @@ public class Track : MonoBehaviour
 
         var playerPos = _splineProjector.GetComponent<Player>().transform.position;
         var splineSample = GetProjectionPosition(playerPos);
-        _splineProjector.GetComponent<Player>().transform.position = splineSample.position + offset;
+        player.transform.position = splineSample.position + offset;
 
         _splineProjector.motion.rotationOffset = Vector3.zero;
 

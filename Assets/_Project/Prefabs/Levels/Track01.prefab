@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: StartPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594219619160261416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.27, y: 12.53, z: -14.95}
+  m_LocalPosition: {x: -13.81, y: 12.53, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3796,7 +3796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6117991259348340100
 Transform:
   m_ObjectHideFlags: 0
@@ -4759,6 +4759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {fileID: 5064402135283435254}
+  offset: {x: 0, y: 5, z: 0}
   trackParts:
   - spline: {fileID: 6117991258612632319}
     gravity: -10
@@ -4768,7 +4769,6 @@ MonoBehaviour:
     gravity: -10
   - spline: {fileID: 6117991258898834266}
     gravity: -30
-  offset: {x: 0, y: 5, z: 0}
 --- !u!1 &6117991259767778954
 GameObject:
   m_ObjectHideFlags: 0

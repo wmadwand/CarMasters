@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
         var trackController = levelController?.Track;
         yield return playerSpawner.Spawn(trackController, raceCamera);
-        yield return trackController.Init(playerSpawner.Player.SplineProjector, splineNumberDebug);
+        yield return trackController.Init(playerSpawner.Player, splineNumberDebug);
         yield return raceCamera.Init(playerSpawner.Player);
         yield return playerInput.Init(playerSpawner.Player); 
 

@@ -5,10 +5,14 @@ using Technoprosper.Gameplay.Camera;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    public Vector3 respawnOffset;
     public Player Player => _player;
+
+    [SerializeField] private Vector3 _respawnOffset;
+
     public float respawnTime = 2;
     public Player playerPrefab;
+
+
 
     private Track _track;
     private Player _player;
@@ -43,13 +47,14 @@ public class PlayerSpawner : MonoBehaviour
 
         yield return new WaitForSeconds(respawnTime);
 
-        var spawnPosition = deadPosition - respawnOffset;
+        var spawnPosition = deadPosition - _respawnOffset;
         var splinePoint = _track.GetProjectionPosition(spawnPosition);
 
-        spawnPosition = splinePoint.position - new Vector3(0, respawnOffset.y, 0);
+        spawnPosition = splinePoint.position - new Vector3(0, _respawnOffset.y, 0);
         _player.transform.position = spawnPosition;
         _player.SplineProjector.motion.rotationOffset = Vector3.zero;
         _player.ActivateMovement();
+
 
         _raceCamera.SetActive(true);
     }

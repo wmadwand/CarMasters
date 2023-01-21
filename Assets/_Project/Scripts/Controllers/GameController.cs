@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
         //yield return levelController.LoadLevelRoutine();
 
         var trackController = levelController?.Track;
-        yield return playerSpawner.Init(trackController, raceCamera);
+        yield return playerSpawner.Spawn(trackController, raceCamera);
         yield return trackController.Init(playerSpawner.Player.SplineProjector, splineNumberDebug);
         yield return raceCamera.Init(playerSpawner.Player);
         yield return playerInput.Init(playerSpawner.Player); 

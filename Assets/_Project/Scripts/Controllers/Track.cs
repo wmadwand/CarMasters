@@ -98,6 +98,8 @@ public class Track : MonoBehaviour
         var splineSample = GetProjectionPosition(playerPos);
         _splineProjector.GetComponent<Player>().transform.position = splineSample.position + offset;
 
+        _splineProjector.motion.rotationOffset = Vector3.zero;
+
         _splineProjector.SetPercent(splineSample.percent, false, false);
         float distance = _splineProjector.CalculateLength(0.0d, _splineProjector.result.percent); //Get the excess distance after looping            
         _splineProjector.SetDistance(distance); //Set the excess distance along the new spline

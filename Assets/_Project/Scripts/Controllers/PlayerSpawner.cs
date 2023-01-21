@@ -4,7 +4,7 @@ using UnityEngine;
 using Technoprosper.Gameplay.Camera;
 
 public class PlayerSpawner : MonoBehaviour
-{    
+{
     public Vector3 respawnOffset;
     public Player Player => _player;
 
@@ -17,7 +17,7 @@ public class PlayerSpawner : MonoBehaviour
 
     //---------------------------------------------------------------
 
-    public IEnumerator Init(Track track, RaceCamera raceCamera)
+    public IEnumerator Spawn(Track track, RaceCamera raceCamera)
     {
         _track = track;
         _raceCamera = raceCamera;
@@ -54,6 +54,7 @@ public class PlayerSpawner : MonoBehaviour
 
         spawnPosition = splinePoint.position - new Vector3(0, respawnOffset.y, 0);
         _player.transform.position = spawnPosition;
+        _player.SplineProjector.motion.rotationOffset = Vector3.zero;
         _player.ActivateMovement();
 
         _raceCamera.SetActive(true);

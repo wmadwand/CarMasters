@@ -28,6 +28,7 @@ namespace Technoprosper.Gameplay.Player
         {
             _currentSpeed = 0;
             _isMoving = false;
+            Stop();
         }
 
         //---------------------------------------------------------------

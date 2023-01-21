@@ -35,13 +35,9 @@ namespace Technoprosper.Gameplay.Player
         public void Stop()
         {
             _movement.StopRightThere();
-            _movement.Stop();
             _movement.enabled = false;
 
-            _movement?.SetMove(false);
-            _rotation?.SetMove(false);
-
-            _rotation?.RotateBy(0);
+            _rotation?.StopRightThere();
             _rotation.enabled = false;
         }
 

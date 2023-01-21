@@ -30,7 +30,12 @@ namespace Technoprosper.Gameplay.Player
         public void StopRightThere()
         {
             _isManualTurnFinished = false;
+            _isAutoTurning = false;
             _xInput = 0;
+            _inputAngleRotation = 0;
+            _isMoving = false;
+            localRotator.localRotation = Quaternion.identity;
+
         }
 
         public void Init()
@@ -126,5 +131,5 @@ namespace Technoprosper.Gameplay.Player
 
             targetRottt = targetRot;
         }
-    } 
+    }
 }

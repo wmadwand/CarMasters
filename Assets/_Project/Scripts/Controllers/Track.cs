@@ -8,6 +8,8 @@ using Technoprosper.Gameplay.Player;
 
 public class Track : MonoBehaviour
 {
+    public static event Action OnFinish;
+
     public Transform startPoint;
     public Vector3 offset;
     public List<TrackPart> trackParts;
@@ -17,11 +19,6 @@ public class Track : MonoBehaviour
     private GameObject _currentTrack;
 
     //---------------------------------------------------------------
-
-    public void OnPartEndReached()
-    {
-        _trackPartIndex++;
-    }
 
     public TrackPart GetNextPart()
     {
@@ -60,46 +57,44 @@ public class Track : MonoBehaviour
         //CheckTrackPart();
     }
 
-    private void CheckTrackPart()
+    private void OnPartEndReached()
     {
         //if (_splineProjector?.result.percent >= .9999999d)
         //{
-            //var nextTrackPart = GetNextPartDebug();
-            //var startPointOfNextPart = nextTrackPart.spline.GetPoint(0);
-            ////var sss = nextTrackPart.spline.Evaluate(0d);
-            //var playerPos = _splineProjector.transform.position;
+        //var nextTrackPart = GetNextPartDebug();
+        //var startPointOfNextPart = nextTrackPart.spline.GetPoint(0);
+        ////var sss = nextTrackPart.spline.Evaluate(0d);
+        //var playerPos = _splineProjector.transform.position;
 
-            //var direction = startPointOfNextPart.position - _splineProjector.spline.EvaluatePosition(1d);
-            //var normal = direction.normalized;
-            ////var normal = _splineProjector.result.forward;
-            //var plane = new Plane(normal, startPointOfNextPart.position);
-            //var side = plane.GetSide(playerPos);
+        //var direction = startPointOfNextPart.position - _splineProjector.spline.EvaluatePosition(1d);
+        //var normal = direction.normalized;
+        ////var normal = _splineProjector.result.forward;
+        //var plane = new Plane(normal, startPointOfNextPart.position);
+        //var side = plane.GetSide(playerPos);
 
 
 
-            //DrawPlane(startPointOfNextPart.position, normal);
+        //DrawPlane(startPointOfNextPart.position, normal);
 
-            //if (!side /*&& offset.y < offsetToCheck.y !!!! */) { return; }
+        //if (!side /*&& offset.y < offsetToCheck.y !!!! */) { return; }
 
-            OnPartEndReached();
+        _trackPartIndex++;
+        var nextTrackPart = GetNextPart();
 
-            var nextTrackPart = GetNextPart();
+        _splineProjector.spline = nextTrackPart.spline;
+        _splineProjector.RebuildImmediate();
+        _splineProjector.SetPercent(0d, false, false);
 
-            if (nextTrackPart.spline == _splineProjector.spline)
-            {
-                Debug.LogWarning("Finish level");
+        float distance = _splineProjector.CalculateLength(0.0, _splineProjector.result.percent); //Get the excess distance after looping            
+        _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
+        _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
 
-                return;
-            }
 
-            _splineProjector.spline = nextTrackPart.spline;
-            _splineProjector.RebuildImmediate();
-            _splineProjector.SetPercent(0d, false, false);
-
-            float distance = _splineProjector.CalculateLength(0.0, _splineProjector.result.percent); //Get the excess distance after looping            
-            _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
-
-            _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
+        if (_trackPartIndex == trackParts.Count - 1)
+        {
+            Debug.LogWarning("Finish level");
+            OnFinish?.Invoke();
+        }
         //}
     }
 
@@ -115,7 +110,7 @@ public class Track : MonoBehaviour
 
     private void FinishTrackPartZone_OnPlayerEnter()
     {
-        CheckTrackPart();
+        OnPartEndReached();
     }
 
     public void DrawPlane(Vector3 position, Vector3 normal)
@@ -140,17 +135,19 @@ public class Track : MonoBehaviour
         Debug.DrawRay(position, normal, Color.red);
     }
 
-    public IEnumerator Init(Player player, int splineNumber)
+    public IEnumerator Init(Player player, int splineNumber = 0)
     {
+        _trackPartIndex = splineNumber;
         _splineProjector = player.SplineProjector;
 
         //_splineProjector.spline = trackParts[_trackPartIndex].spline;
-        _splineProjector.spline = trackParts[splineNumber].spline;
+        _splineProjector.spline = trackParts[_trackPartIndex].spline;
         _splineProjector.RebuildImmediate();
 
         var playerPos = _splineProjector.GetComponent<Player>().transform.position;
         var splineSample = GetProjectionPosition(playerPos);
         player.transform.position = splineSample.position + offset;
+        _splineProjector.GetComponent<PlayerGravity>().SetGravity(trackParts[_trackPartIndex].gravity);
 
         _splineProjector.motion.rotationOffset = Vector3.zero;
 

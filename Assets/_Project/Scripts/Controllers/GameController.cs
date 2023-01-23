@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         //StartGame();
+        Track.OnFinish += Track_OnFinish;
     }
 
     public void StartGame(Action callBack)
@@ -32,8 +33,18 @@ public class GameController : MonoBehaviour
         yield return playerSpawner.Spawn(trackController, raceCamera);
         yield return trackController.Init(playerSpawner.Player, splineNumberDebug);
         yield return raceCamera.Init(playerSpawner.Player);
-        yield return playerInput.Init(playerSpawner.Player); 
+        yield return playerInput.Init(playerSpawner.Player);
 
         callBack?.Invoke();
+    }
+
+    private void Track_OnFinish()
+    {
+        levelController.SaveNextLevel();
+    }
+
+    private void OnDestroy()
+    {
+        Track.OnFinish -= Track_OnFinish;
     }
 }

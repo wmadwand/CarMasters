@@ -55,7 +55,6 @@ public class PlayerSpawner : MonoBehaviour
         _player.SplineProjector.motion.rotationOffset = Vector3.zero;
         _player.ActivateMovement();
 
-
         _raceCamera.SetActive(true);
     }
 }

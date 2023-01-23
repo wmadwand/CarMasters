@@ -13,9 +13,16 @@ public class LevelController : MonoBehaviour
     private const string LevelIndexKey = "LevelIndexKey";
     private Track track;
 
-    public void SaveLevelIndex()
+    public void SaveNextLevel()
     {
+        _currentLevelIndex = PlayerPrefs.GetInt(LevelIndexKey, 0);
+        _currentLevelIndex++;
         PlayerPrefs.SetInt(LevelIndexKey, _currentLevelIndex);
+    }
+
+    public void ResetGame()
+    {
+        PlayerPrefs.SetInt(LevelIndexKey, 0);
     }
 
     //private void LoadLevelIndex()

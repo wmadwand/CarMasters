@@ -57,34 +57,38 @@ public class Track : MonoBehaviour
 
     private void Update()
     {
-        CheckTrackPart();
+        //CheckTrackPart();
     }
 
     private void CheckTrackPart()
     {
-        if (_splineProjector?.result.percent >= .9999999d)
-        {
-            var nextTrackPart = GetNextPartDebug();
-            var startPointOfNextPart = nextTrackPart.spline.GetPoint(0);
-            //var sss = nextTrackPart.spline.Evaluate(0d);
-            var playerPos = _splineProjector.transform.position;
+        //if (_splineProjector?.result.percent >= .9999999d)
+        //{
+            //var nextTrackPart = GetNextPartDebug();
+            //var startPointOfNextPart = nextTrackPart.spline.GetPoint(0);
+            ////var sss = nextTrackPart.spline.Evaluate(0d);
+            //var playerPos = _splineProjector.transform.position;
 
-            var direction = startPointOfNextPart.position - _splineProjector.spline.EvaluatePosition(1d);
-            var normal = direction.normalized;
-            //var normal = _splineProjector.result.forward;
-            var plane = new Plane(normal, startPointOfNextPart.position);
-            var side = plane.GetSide(playerPos);
+            //var direction = startPointOfNextPart.position - _splineProjector.spline.EvaluatePosition(1d);
+            //var normal = direction.normalized;
+            ////var normal = _splineProjector.result.forward;
+            //var plane = new Plane(normal, startPointOfNextPart.position);
+            //var side = plane.GetSide(playerPos);
 
 
 
-            DrawPlane(startPointOfNextPart.position, normal);
+            //DrawPlane(startPointOfNextPart.position, normal);
 
-            if (!side /*&& offset.y < offsetToCheck.y !!!! */) { return; }
+            //if (!side /*&& offset.y < offsetToCheck.y !!!! */) { return; }
 
             OnPartEndReached();
 
+            var nextTrackPart = GetNextPart();
+
             if (nextTrackPart.spline == _splineProjector.spline)
             {
+                Debug.LogWarning("Finish level");
+
                 return;
             }
 
@@ -96,9 +100,22 @@ public class Track : MonoBehaviour
             _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
 
             _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
+        //}
+    }
 
+    private void Awake()
+    {
+        TrackPartFinishZone.OnPlayerEnter += FinishTrackPartZone_OnPlayerEnter;
+    }
 
-        }
+    private void OnDestroy()
+    {
+        TrackPartFinishZone.OnPlayerEnter -= FinishTrackPartZone_OnPlayerEnter;
+    }
+
+    private void FinishTrackPartZone_OnPlayerEnter()
+    {
+        CheckTrackPart();
     }
 
     public void DrawPlane(Vector3 position, Vector3 normal)

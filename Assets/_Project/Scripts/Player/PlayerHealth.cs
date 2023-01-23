@@ -53,6 +53,7 @@ namespace Technoprosper.Gameplay.Player
                     if (timer >= waitforFallingTimer)
                     {
                         hasFallenDown = true;
+                        IsAlive = false;
                         //_player.SplineProjector.spline.
                         timer = 0;
                         var deadPostion = _player.SplineProjector.result.position;

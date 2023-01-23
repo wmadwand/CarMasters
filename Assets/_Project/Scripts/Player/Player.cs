@@ -18,6 +18,7 @@ namespace Technoprosper.Gameplay.Player
         //---------------------------------------------------------------
 
         public SplineProjector SplineProjector => _rotation.SplineProjector;
+        public bool IsAlive => _health.IsAlive;
 
         public void SetMove(bool value)
         {

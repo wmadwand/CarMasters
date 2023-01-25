@@ -4,20 +4,28 @@ using UnityEngine;
 
 namespace Technoprosper.Gameplay.Player
 {
+    public enum DeathCause
+    {
+        Crash,
+        FallDown
+    }
+
     public class PlayerHealth : MonoBehaviour
     {
         public bool IsAlive { get; private set; } = true;
-        public Vector3 offsetToCheck = new Vector3(5, -5, 5);
+        public Vector3 fallDownOffset = new Vector3(5, -5, 5);
         public float waitforFallingTimer = 2;
 
         private Player _player;
+        private bool _hasFallenDown = false;
+        private float _timer = 0.0f;
 
         //---------------------------------------------------------------
 
         public void Restore()
         {
             IsAlive = true;
-            hasFallenDown = false;
+            _hasFallenDown = false;
         }
 
         //TODO: run event OnPlayerDead; 
@@ -26,7 +34,7 @@ namespace Technoprosper.Gameplay.Player
             if (other.GetComponent<DeadlyObstacle>())
             {
                 IsAlive = false;
-                _player.Respawn(other.transform.position);
+                _player.Respawn(other.transform.position, DeathCause.Crash);
             }
         }
 
@@ -35,29 +43,26 @@ namespace Technoprosper.Gameplay.Player
             _player = GetComponent<Player>();
         }
 
-        bool hasFallenDown = false;
-        float timer = 0.0f;
-
         private void Update()
         {
-            if (!_player.GetComponent<PlayerGravity>().IsGrounded && !hasFallenDown)
+            if (!_player.GetComponent<PlayerGravity>().IsGrounded && !_hasFallenDown)
             {
                 var playerPos = _player.transform.position;
                 var splinePos = _player.SplineProjector.result.position;
                 var offset = playerPos - splinePos;
 
-                if (offset.y < offsetToCheck.y)
+                if (offset.y < fallDownOffset.y)
                 {
-                    timer += Time.deltaTime;
+                    _timer += Time.deltaTime;
 
-                    if (timer >= waitforFallingTimer)
+                    if (_timer >= waitforFallingTimer)
                     {
-                        hasFallenDown = true;
+                        _hasFallenDown = true;
                         IsAlive = false;
                         //_player.SplineProjector.spline.
-                        timer = 0;
+                        _timer = 0;
                         var deadPostion = _player.SplineProjector.result.position;
-                        _player.Respawn(deadPostion, false);
+                        _player.Respawn(deadPostion, DeathCause.FallDown);
                     }
                 }
             }

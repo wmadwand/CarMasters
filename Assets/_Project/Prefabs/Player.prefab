@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7219080eb7582429c240d6f2e2d06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetToCheck: {x: 5, y: -2, z: 5}
+  fallDownOffset: {x: 5, y: -2, z: 5}
   waitforFallingTimer: 0.5
 --- !u!1 &5623851185602936899
 GameObject:

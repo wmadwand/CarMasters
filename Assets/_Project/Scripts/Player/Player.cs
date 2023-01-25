@@ -12,7 +12,7 @@ namespace Technoprosper.Gameplay.Player
         private PlayerGravity _gravity;
         private PlayerHealth _health;
 
-        public Action<Vector3> callToRespawn;
+        public Action<Vector3, DeathCause> callToRespawn;
         public GameObject explosionPrefab;
 
         //---------------------------------------------------------------
@@ -48,12 +48,12 @@ namespace Technoprosper.Gameplay.Player
             _rotation?.RotateBy(value);
         }
 
-        public void Respawn(Vector3 deadPosition, bool withExplosion = true)
+        public void Respawn(Vector3 deathPosition, DeathCause deathCause)
         {
             Stop();
-            callToRespawn(deadPosition);
+            callToRespawn(deathPosition, deathCause);
 
-            if (withExplosion)
+            if (deathCause == DeathCause.Crash)
             {
                 Instantiate(explosionPrefab, transform);
             }

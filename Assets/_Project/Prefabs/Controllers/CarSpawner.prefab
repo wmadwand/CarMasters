@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301331202360949073}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c113789caeeca0143ab3fd6ec81aeeab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _respawnOffset: {x: 10, y: -5, z: 10}
+  _crashRespawnOffset: {x: 10, y: -5, z: 10}
+  _fallDownRespawnOffset: {x: 20, y: -5, z: 20}
   respawnTime: 2
   playerPrefab: {fileID: 5623851184983545385, guid: 371e72906c155d14db9dab14b56c8853, type: 3}

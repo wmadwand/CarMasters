@@ -7,12 +7,11 @@ public class PlayerSpawner : MonoBehaviour
 {
     public Player Player => _player;
 
-    [SerializeField] private Vector3 _respawnOffset;
+    [SerializeField] private Vector3 _crashRespawnOffset;
+    [SerializeField] private Vector3 _fallDownRespawnOffset;
 
     public float respawnTime = 2;
     public Player playerPrefab;
-
-
 
     private Track _track;
     private Player _player;
@@ -34,23 +33,24 @@ public class PlayerSpawner : MonoBehaviour
         yield return null;
     }
 
-    public void Respawn(Vector3 deadPosition)
+    public void Respawn(Vector3 deadPosition, DeathCause deathCause)
     {
-        StartCoroutine(RespawnRoutine(deadPosition));
+        StartCoroutine(RespawnRoutine(deadPosition, deathCause));
     }
 
     //---------------------------------------------------------------
 
-    private IEnumerator RespawnRoutine(Vector3 deadPosition)
+    private IEnumerator RespawnRoutine(Vector3 deadPosition, DeathCause deathCause)
     {
         _raceCamera.SetActive(false);
 
         yield return new WaitForSeconds(respawnTime);
 
-        var spawnPosition = deadPosition - _respawnOffset;
+        var offset = deathCause == DeathCause.Crash ? _crashRespawnOffset : _fallDownRespawnOffset;
+        var spawnPosition = deadPosition - offset;
         var splinePoint = _track.GetProjectionPosition(spawnPosition);
 
-        spawnPosition = splinePoint.position - new Vector3(0, _respawnOffset.y, 0);
+        spawnPosition = splinePoint.position - new Vector3(0, offset.y, 0);
         _player.transform.position = spawnPosition;
         _player.SplineProjector.motion.rotationOffset = Vector3.zero;
         _player.ActivateMovement();

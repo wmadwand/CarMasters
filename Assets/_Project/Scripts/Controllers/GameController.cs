@@ -16,11 +16,11 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        //StartGame();
+        StartGame();
         Track.OnFinish += Track_OnFinish;
     }
 
-    public void StartGame(Action callBack)
+    private void StartGame(Action callBack = null)
     {
         StartCoroutine(StartGameRoutine(callBack));
     }

@@ -25,11 +25,6 @@ public class LevelController : MonoBehaviour
         PlayerPrefs.SetInt(LevelIndexKey, 0);
     }
 
-    //private void LoadLevelIndex()
-    //{
-    //    _currentLevelIndex = PlayerPrefs.GetInt(LevelIndexKey, 0);
-    //}
-
     public void LoadLevel()
     {
         StartCoroutine(LoadLevelRoutine());

@@ -13,6 +13,7 @@ public class StartGamePanel : MonoBehaviour
 
     public Button loadLevelButton;
     public Button startLevelButton;
+    public Button startDriveButton;
     public Button resetGame;
 
     private Action _callback;
@@ -20,8 +21,9 @@ public class StartGamePanel : MonoBehaviour
     private void Awake()
     {
         loadLevelButton.onClick.AddListener(() => levelController.LoadLevel());
-        startLevelButton.onClick.AddListener(() => gameController.StartGame(AfterStart));
+        //startLevelButton.onClick.AddListener(() => gameController.StartGame(AfterStart));
         resetGame.onClick.AddListener(() => levelController.ResetGame());
+        startDriveButton.onClick.AddListener(() => AfterStart());
     }
 
     private void OnDestroy()

@@ -11,6 +11,8 @@ public class FinishGamePanel : MonoBehaviour
     public LevelController levelController;
     public Button nextLevelButton;
 
+    //---------------------------------------------------------------
+
     private void Awake()
     {
         //loadLevelButton.onClick.AddListener(() => levelController.LoadLevel());
@@ -22,5 +24,10 @@ public class FinishGamePanel : MonoBehaviour
     private void OnDestroy()
     {
         nextLevelButton.onClick.RemoveAllListeners();
+    }
+
+    public void SetActive(bool value)
+    {
+        gameObject.SetActive(value);
     }
 }

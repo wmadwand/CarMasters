@@ -4714,6 +4714,7 @@ Transform:
   - {fileID: 5064402135283435254}
   - {fileID: 1674384600362282811}
   - {fileID: 3239049480889971441}
+  - {fileID: 5737158955283932234}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4957,6 +4958,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6662688021196528938, guid: 5f7cd884f8153b545b70a17600caf4e6, type: 3}
   m_PrefabInstance: {fileID: 1891161771749137372}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2259270872111773785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6117991259615762756}
+    m_Modifications:
+    - target: {fileID: 342581507224374130, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_Name
+      value: LevelFinishTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 96.37573
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.36531258
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+--- !u!4 &5737158955283932234 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5820041940514479123, guid: afa586e73245cc041a6d4409fa1a464e, type: 3}
+  m_PrefabInstance: {fileID: 2259270872111773785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6302301783205019704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4966,7 +5029,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3062951848448798566, guid: 47c031c7f0309b645af5b1055c432e8e, type: 3}
       propertyPath: m_Name
-      value: FinishTrackPartZone
+      value: TrackPartFinishTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 4632759226455125763, guid: 47c031c7f0309b645af5b1055c432e8e, type: 3}
       propertyPath: m_RootOrder
@@ -5098,7 +5161,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2630249188200296164, guid: c4e4146240949104896e212d8dcfa083, type: 3}
       propertyPath: m_Name
-      value: TrackFinish
+      value: TrackFinishSpline
       objectReference: {fileID: 0}
     - target: {fileID: 3555230895069822912, guid: c4e4146240949104896e212d8dcfa083, type: 3}
       propertyPath: _clipToSample.forward.z

@@ -8,8 +8,6 @@ using Technoprosper.Gameplay.Player;
 
 public class Track : MonoBehaviour
 {
-    public static event Action OnFinish;
-
     public Transform startPoint;
     public Vector3 offset;
     public List<TrackPart> trackParts;
@@ -90,11 +88,11 @@ public class Track : MonoBehaviour
         _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
 
 
-        if (_trackPartIndex == trackParts.Count - 1)
-        {
-            Debug.LogWarning("Finish level");
-            OnFinish?.Invoke();
-        }
+        //if (_trackPartIndex == trackParts.Count - 1)
+        //{
+        //    Debug.LogWarning("Finish level");
+        //    OnFinish?.Invoke();
+        //}
         //}
     }
 

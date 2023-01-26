@@ -10,6 +10,8 @@ public class SceneLoader : MonoSingleton<SceneLoader>
     public string levelSceneName = "Main";
     public string loaderSceneName = "Loader";
 
+    //---------------------------------------------------------------
+
     private void Start()
     {
         LoadNextLevel();

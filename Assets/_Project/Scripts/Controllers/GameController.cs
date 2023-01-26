@@ -16,6 +16,8 @@ public class GameController : MonoSingleton<GameController>
 
     public int splineNumberDebug = 0;
 
+    //---------------------------------------------------------------
+
     private void Start()
     {
         //StartGame();
@@ -29,7 +31,7 @@ public class GameController : MonoSingleton<GameController>
 
     public IEnumerator StartGameRoutine(Action callBack = null)
     {
-        Track.OnFinish += Track_OnFinish;
+        LevelFinishTrigger.OnFinish += Track_OnFinish;
 
         yield return levelController.LoadLevelRoutine(levelParent);
         var trackController = levelController?.Track;
@@ -48,6 +50,6 @@ public class GameController : MonoSingleton<GameController>
 
     private void OnDestroy()
     {
-        Track.OnFinish -= Track_OnFinish;
+        LevelFinishTrigger.OnFinish -= Track_OnFinish;
     }
 }

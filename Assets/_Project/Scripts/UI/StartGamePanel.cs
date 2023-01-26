@@ -20,17 +20,18 @@ public class StartGamePanel : MonoBehaviour
 
     private void Awake()
     {
-        //loadLevelButton.onClick.AddListener(() => levelController.LoadLevel());
-        //startLevelButton.onClick.AddListener(() => gameController.StartGame(AfterStart));
-        resetGame.onClick.AddListener(() => levelController.ResetGame());
-        //startDriveButton.onClick.AddListener(() => AfterStart());
+        resetGame.onClick.AddListener(() => OnResetGame());
     }
 
     private void OnDestroy()
     {
-        loadLevelButton.onClick.RemoveAllListeners();
-        startLevelButton.onClick.RemoveAllListeners();
         resetGame.onClick.RemoveAllListeners();
+    }
+
+    private void OnResetGame()
+    {
+        levelController.ResetGame();
+        SceneLoader.Instance.LoadNextLevel();
     }
 
     public void SetActive(bool value)

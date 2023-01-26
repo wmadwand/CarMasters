@@ -4,37 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartGamePanel : MonoBehaviour
+public class FinishGamePanel : MonoBehaviour
 {
     public GameController gameController;
-
     //TODO: remove from here and use only gameController
     public LevelController levelController;
-
-    public Button loadLevelButton;
-    public Button startLevelButton;
-    public Button startDriveButton;
-    public Button resetGame;
-
-    private Action _callback;
+    public Button nextLevelButton;
 
     private void Awake()
     {
         //loadLevelButton.onClick.AddListener(() => levelController.LoadLevel());
         //startLevelButton.onClick.AddListener(() => gameController.StartGame(AfterStart));
-        resetGame.onClick.AddListener(() => levelController.ResetGame());
+        nextLevelButton.onClick.AddListener(() => levelController.ResetGame());
         //startDriveButton.onClick.AddListener(() => AfterStart());
     }
 
     private void OnDestroy()
     {
-        loadLevelButton.onClick.RemoveAllListeners();
-        startLevelButton.onClick.RemoveAllListeners();
-        resetGame.onClick.RemoveAllListeners();
-    }
-
-    public void SetActive(bool value)
-    {
-        gameObject.SetActive(value);
+        nextLevelButton.onClick.RemoveAllListeners();
     }
 }

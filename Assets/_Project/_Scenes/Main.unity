@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 1597892539}
   levelController: {fileID: 7302136318343933300}
-  nextLevelButton: {fileID: 0}
+  nextLevelButton: {fileID: 345516659}
 --- !u!43 &992422047
 Mesh:
   m_ObjectHideFlags: 0
@@ -4875,6 +4875,7 @@ MonoBehaviour:
   playerSpawner: {fileID: 1664058670}
   levelController: {fileID: 7302136318343933300}
   playerInput: {fileID: 3284950314790662064}
+  levelParent: {fileID: 2101114805}
   splineNumberDebug: 0
 --- !u!4 &1597892540
 Transform:
@@ -6600,6 +6601,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021985808}
   m_Mesh: {fileID: 1907637736}
+--- !u!1 &2101114804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2101114805}
+  m_Layer: 0
+  m_Name: LevelParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2101114805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101114804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2130430400
 GameObject:
   m_ObjectHideFlags: 0
@@ -6632,7 +6664,7 @@ Transform:
   - {fileID: 1664058669}
   - {fileID: 7302136318343933299}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1301331200701676669
 PrefabInstance:

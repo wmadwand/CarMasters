@@ -44,7 +44,12 @@ public class SceneLoader : MonoSingleton<SceneLoader>
 
         yield return new WaitUntil(() => asyncLoad.isDone);
 
+        //TODO: use SetActiveScene
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelSceneName));
+        yield return GameController.Instance.StartGameRoutine();
+
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName("Scene2"));
+        //SceneManager.MoveGameObjectToScene
 
         loadingPanel.SetActive(false);
     }

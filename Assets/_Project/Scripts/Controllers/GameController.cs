@@ -4,20 +4,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Technoprosper.Common;
 
-public class GameController : MonoBehaviour
+public class GameController : MonoSingleton<GameController>
 {
     public RaceCamera raceCamera;
     public PlayerSpawner playerSpawner;
     public LevelController levelController;
     public PlayerInput playerInput;
+    public Transform levelParent;
 
     public int splineNumberDebug = 0;
 
     private void Start()
     {
-        StartGame();
-        Track.OnFinish += Track_OnFinish;
+        //StartGame();
+        //Track.OnFinish += Track_OnFinish;
     }
 
     private void StartGame(Action callBack = null)
@@ -25,17 +27,18 @@ public class GameController : MonoBehaviour
         StartCoroutine(StartGameRoutine(callBack));
     }
 
-    private IEnumerator StartGameRoutine(Action callBack)
+    public IEnumerator StartGameRoutine(Action callBack = null)
     {
-        yield return levelController.LoadLevelRoutine();
+        Track.OnFinish += Track_OnFinish;
 
+        yield return levelController.LoadLevelRoutine(levelParent);
         var trackController = levelController?.Track;
-        yield return playerSpawner.Spawn(trackController, raceCamera);
+        yield return playerSpawner.Spawn(trackController, raceCamera, levelParent);
         yield return trackController.Init(playerSpawner.Player, splineNumberDebug);
         yield return raceCamera.Init(playerSpawner.Player);
         yield return playerInput.Init(playerSpawner.Player);
 
-        callBack?.Invoke();
+        //callBack?.Invoke();
     }
 
     private void Track_OnFinish()

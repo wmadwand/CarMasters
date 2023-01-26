@@ -19,11 +19,11 @@ public class PlayerSpawner : MonoBehaviour
 
     //---------------------------------------------------------------
 
-    public IEnumerator Spawn(Track track, RaceCamera raceCamera)
+    public IEnumerator Spawn(Track track, RaceCamera raceCamera, Transform levelParent)
     {
         _track = track;
         _raceCamera = raceCamera;
-        var player = Instantiate(playerPrefab, _track.startPoint.position, Quaternion.identity);
+        var player = Instantiate(playerPrefab, _track.startPoint.position, Quaternion.identity, levelParent);
 
         //TODO: freeze the car behaviour
 

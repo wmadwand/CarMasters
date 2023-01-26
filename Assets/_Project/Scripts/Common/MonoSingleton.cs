@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Sponsord
+namespace Technoprosper.Common
 {
     public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
     {

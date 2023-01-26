@@ -15,7 +15,7 @@ public class FinishGamePanel : MonoBehaviour
     {
         //loadLevelButton.onClick.AddListener(() => levelController.LoadLevel());
         //startLevelButton.onClick.AddListener(() => gameController.StartGame(AfterStart));
-        nextLevelButton.onClick.AddListener(() => levelController.ResetGame());
+        nextLevelButton.onClick.AddListener(() => SceneLoader.Instance.LoadNextLevel());
         //startDriveButton.onClick.AddListener(() => AfterStart());
     }
 

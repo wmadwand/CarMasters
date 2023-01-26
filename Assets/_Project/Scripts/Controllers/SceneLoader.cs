@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Technoprosper.Common;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader : MonoSingleton<SceneLoader>
 {
     public GameObject loadingPanel;
+    public string levelSceneName = "Main";
+    public string loaderSceneName = "Loader";
 
     private void Start()
     {
@@ -25,7 +28,19 @@ public class SceneLoader : MonoBehaviour
         // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
         // a sceneBuildIndex of 1 as shown in Build Settings.
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main", LoadSceneMode.Additive);
+        var levelScene = SceneManager.GetSceneByName(levelSceneName);
+        AsyncOperation asyncUnload = null;
+        if (levelScene.isLoaded)
+        {
+            asyncUnload = SceneManager.UnloadSceneAsync(levelSceneName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+        }
+
+        if (asyncUnload != null)
+        {
+            yield return new WaitUntil(() => asyncUnload.isDone);
+        }
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Additive);
 
         yield return new WaitUntil(() => asyncLoad.isDone);
 

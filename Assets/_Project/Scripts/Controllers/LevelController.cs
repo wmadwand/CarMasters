@@ -28,7 +28,7 @@ public class LevelController : MonoBehaviour
     public IEnumerator LoadLevelRoutine(Transform levelParent)
     {
         _currentLevelIndex = PlayerPrefs.GetInt(LevelIndexKey, 0);
-        var level = levelCollection.GetLevel(_currentLevelIndex);
+        var level = levelCollection.GetLevelSafe(_currentLevelIndex);
 
         var currentLevelObject = Instantiate(level.data.prefab, levelParent);
         track = currentLevelObject.GetComponent<Track>();

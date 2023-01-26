@@ -10,8 +10,9 @@ public class LevelCollectionData : ScriptableObject
     public LevelData defaultLevel;
     public List<LevelData> levels;
 
-    public LevelData GetLevel(int index)
+    public LevelData GetLevelSafe(int index)
     {
+        index = Math.Clamp(index, 0, levels.Count - 1);
         return levels[index];
     }
 }

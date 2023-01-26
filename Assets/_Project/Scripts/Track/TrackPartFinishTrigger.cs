@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Technoprosper.Gameplay.Player;
 using UnityEngine;
 
-public class TrackPartFinishZone : MonoBehaviour
+public class TrackPartFinishTrigger : MonoBehaviour
 {
     public static event Action OnPlayerEnter;
 

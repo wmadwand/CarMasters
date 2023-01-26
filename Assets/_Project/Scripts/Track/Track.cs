@@ -100,12 +100,12 @@ public class Track : MonoBehaviour
 
     private void Awake()
     {
-        TrackPartFinishZone.OnPlayerEnter += FinishTrackPartZone_OnPlayerEnter;
+        TrackPartFinishTrigger.OnPlayerEnter += FinishTrackPartZone_OnPlayerEnter;
     }
 
     private void OnDestroy()
     {
-        TrackPartFinishZone.OnPlayerEnter -= FinishTrackPartZone_OnPlayerEnter;
+        TrackPartFinishTrigger.OnPlayerEnter -= FinishTrackPartZone_OnPlayerEnter;
     }
 
     private void FinishTrackPartZone_OnPlayerEnter()

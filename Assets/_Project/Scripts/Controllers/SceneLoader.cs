@@ -39,12 +39,14 @@ public class SceneLoader : MonoSingleton<SceneLoader>
 
         if (asyncUnload != null)
         {
-            yield return new WaitUntil(() => asyncUnload.isDone);
+            //yield return new WaitUntil(() => asyncUnload.isDone);
+            yield return asyncUnload;
         }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelSceneName, LoadSceneMode.Additive);
 
-        yield return new WaitUntil(() => asyncLoad.isDone);
+        //yield return new WaitUntil(() => asyncLoad.isDone);
+        yield return asyncLoad;
 
         //TODO: use SetActiveScene
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelSceneName));

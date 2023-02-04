@@ -1,10 +1,9 @@
-using Technoprosper.Gameplay.Camera;
-using Technoprosper.Input.UI;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Technoprosper.Common;
+using Technoprosper.Gameplay.Camera;
+using Technoprosper.Input.UI;
+using UnityEngine;
 
 public class GameController : MonoSingleton<GameController>
 {
@@ -17,17 +16,6 @@ public class GameController : MonoSingleton<GameController>
     public int splineNumberDebug = 0;
 
     //---------------------------------------------------------------
-
-    private void Start()
-    {
-        //StartGame();
-        //Track.OnFinish += Track_OnFinish;
-    }
-
-    private void StartGame(Action callBack = null)
-    {
-        StartCoroutine(StartGameRoutine(callBack));
-    }
 
     public IEnumerator StartGameRoutine(Action callBack = null)
     {
@@ -43,8 +31,23 @@ public class GameController : MonoSingleton<GameController>
         //callBack?.Invoke();
     }
 
+    //---------------------------------------------------------------
+
+    private void Start()
+    {
+        // For Debuggin
+        //StartGame();        
+    }
+
+    private void StartGame(Action callBack = null)
+    {
+        StartCoroutine(StartGameRoutine(callBack));
+    }
+
     private void Track_OnFinish()
     {
+        playerInput.SetActive(false);
+        playerSpawner.Player.SetFinishSpeed();
         levelController.SaveNextLevel();
     }
 

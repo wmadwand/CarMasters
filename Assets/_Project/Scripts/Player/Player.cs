@@ -43,6 +43,11 @@ namespace Technoprosper.Gameplay.Player
             _rotation.enabled = false;
         }
 
+        public void SetFinishSpeed()
+        {
+            _movement.SetFinishSpeed();
+        }
+
         public void RotateBy(float value)
         {
             _rotation?.RotateBy(value);

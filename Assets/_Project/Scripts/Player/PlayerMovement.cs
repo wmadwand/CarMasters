@@ -9,9 +9,10 @@ namespace Technoprosper.Gameplay.Player
         [SerializeField] private float _minSpeed = 0f;
         [SerializeField] private float _acceleration = 1f;
         [SerializeField] private float _deceleration = 2f;
+        [SerializeField] private float _finishSpeed = 2f;
 
         private float _currentSpeed = 0f;
-        private bool _isMoving = false;
+        private bool _isDriving = false;
         private Rigidbody _rigidbody = null;
 
         //---------------------------------------------------------------
@@ -21,13 +22,19 @@ namespace Technoprosper.Gameplay.Player
             // But isMoving when _currentSpeed > _minSpeed!!
             // maybe set isDriving?
 
-            _isMoving = value;
+            _isDriving = value;
+        }
+
+        public void SetFinishSpeed()
+        {
+            _isDriving = false;
+            _currentSpeed = _finishSpeed;
         }
 
         public void StopRightThere()
         {
             _currentSpeed = 0;
-            _isMoving = false;
+            _isDriving = false;
             Stop();
         }
 
@@ -35,12 +42,12 @@ namespace Technoprosper.Gameplay.Player
 
         private void CalculateMove()
         {
-            if (_isMoving)
+            if (_isDriving)
             {
                 _currentSpeed += _acceleration * Time.deltaTime;
                 _currentSpeed = Mathf.Clamp(_currentSpeed, _minSpeed, _maxSpeed);
             }
-            else if (!_isMoving && _currentSpeed > _minSpeed)
+            else if (!_isDriving && _currentSpeed > _minSpeed)
             {
                 _currentSpeed -= _deceleration * Time.deltaTime;
             }

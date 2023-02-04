@@ -13,8 +13,7 @@ public class Track : MonoBehaviour
     public List<TrackPart> trackParts;
 
     private SplineProjector _splineProjector;
-    private int _trackPartIndex = 0;
-    private GameObject _currentTrack;
+    private int _trackPartIndex = 0;    
 
     //---------------------------------------------------------------
 
@@ -50,11 +49,6 @@ public class Track : MonoBehaviour
 
     //--------------------------------------------------------------- 
 
-    private void Update()
-    {
-        //CheckTrackPart();
-    }
-
     private void OnPartEndReached()
     {
         //if (_splineProjector?.result.percent >= .9999999d)
@@ -86,14 +80,6 @@ public class Track : MonoBehaviour
         float distance = _splineProjector.CalculateLength(0.0, _splineProjector.result.percent); //Get the excess distance after looping            
         _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
         _splineProjector.GetComponent<PlayerGravity>().SetGravity(nextTrackPart.gravity);
-
-
-        //if (_trackPartIndex == trackParts.Count - 1)
-        //{
-        //    Debug.LogWarning("Finish level");
-        //    OnFinish?.Invoke();
-        //}
-        //}
     }
 
     private void Awake()
@@ -152,7 +138,6 @@ public class Track : MonoBehaviour
         _splineProjector.SetPercent(splineSample.percent, false, false);
         float distance = _splineProjector.CalculateLength(0.0d, _splineProjector.result.percent); //Get the excess distance after looping            
         _splineProjector.SetDistance(distance); //Set the excess distance along the new spline
-
 
         yield return null;
     }

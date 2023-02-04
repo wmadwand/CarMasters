@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
     private IEnumerator LevelFinishTrigger_OnFinishRoutine()
     {
         yield return new WaitForSeconds(beforeShowFinishTimer);
+
         finishGamePanel.SetActive(true);
     }
 

@@ -369,6 +369,7 @@ MonoBehaviour:
   _minSpeed: 0
   _acceleration: 5
   _deceleration: 5
+  _finishSpeed: 15
 --- !u!114 &2218837055353070264
 MonoBehaviour:
   m_ObjectHideFlags: 0

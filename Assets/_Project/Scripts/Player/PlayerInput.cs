@@ -17,5 +17,11 @@ namespace Technoprosper.Input.UI
 
             yield return null;
         }
+
+        public void SetActive(bool value)
+        {
+            movement.enabled = value;
+            rotation.enabled = value;
+        }
     }
 }

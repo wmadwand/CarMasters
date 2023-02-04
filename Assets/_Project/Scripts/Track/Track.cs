@@ -9,11 +9,11 @@ using Technoprosper.Gameplay.Player;
 public class Track : MonoBehaviour
 {
     public Transform startPoint;
-    public Vector3 offset;
+    public Vector3 startOffset;
     public List<TrackPart> trackParts;
 
     private SplineProjector _splineProjector;
-    private int _trackPartIndex = 0;    
+    private int _trackPartIndex = 0;
 
     //---------------------------------------------------------------
 
@@ -128,9 +128,8 @@ public class Track : MonoBehaviour
         _splineProjector.spline = trackParts[_trackPartIndex].spline;
         _splineProjector.RebuildImmediate();
 
-        var playerPos = _splineProjector.GetComponent<Player>().transform.position;
-        var splineSample = GetProjectionPosition(playerPos);
-        player.transform.position = splineSample.position + offset;
+        var splineSample = GetProjectionPosition(player.transform.position);
+        player.transform.position = splineSample.position + startOffset;
         _splineProjector.GetComponent<PlayerGravity>().SetGravity(trackParts[_trackPartIndex].gravity);
 
         _splineProjector.motion.rotationOffset = Vector3.zero;

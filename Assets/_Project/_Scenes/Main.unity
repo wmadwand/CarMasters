@@ -5208,6 +5208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startGamePanel: {fileID: 1849475295}
   finishGamePanel: {fileID: 902795061}
+  beforeShowFinishTimer: 2
 --- !u!4 &1664058669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1301331202360949072, guid: 1e2e330123304a94c953f270600784a9, type: 3}

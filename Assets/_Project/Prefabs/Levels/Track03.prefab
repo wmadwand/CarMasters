@@ -4734,7 +4734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {fileID: 359011211163636403}
-  offset: {x: 0, y: 5, z: 0}
+  startOffset: {x: 0, y: 5, z: 0}
   trackParts:
   - spline: {fileID: 6117991258612632319}
     gravity: -5
@@ -5381,6 +5381,10 @@ PrefabInstance:
     - target: {fileID: 2630249188200296164, guid: c4e4146240949104896e212d8dcfa083, type: 3}
       propertyPath: m_Name
       value: TrackFinish
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630249188200296164, guid: c4e4146240949104896e212d8dcfa083, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3555230895069822912, guid: c4e4146240949104896e212d8dcfa083, type: 3}
       propertyPath: _clipToSample.forward.x

@@ -4859,7 +4859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startPoint: {fileID: 359011211163636403}
-  offset: {x: 0, y: 5, z: 0}
+  startOffset: {x: 0, y: 5, z: 0}
   trackParts:
   - spline: {fileID: 6117991258612632319}
     gravity: -5

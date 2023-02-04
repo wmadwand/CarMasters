@@ -6,6 +6,7 @@ public class UIController : MonoBehaviour
 {
     public StartGamePanel startGamePanel;
     public FinishGamePanel finishGamePanel;
+    public float beforeShowFinishTimer = 2;
 
     private void Start()
     {
@@ -14,6 +15,12 @@ public class UIController : MonoBehaviour
 
     private void LevelFinishTrigger_OnFinish()
     {
+        StartCoroutine(LevelFinishTrigger_OnFinishRoutine());
+    }
+
+    private IEnumerator LevelFinishTrigger_OnFinishRoutine()
+    {
+        yield return new WaitForSeconds(beforeShowFinishTimer);
         finishGamePanel.SetActive(true);
     }
 

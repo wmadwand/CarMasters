@@ -6626,7 +6626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2101114805}
   m_Layer: 0
-  m_Name: LevelParent
+  m_Name: LevelStuffParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
